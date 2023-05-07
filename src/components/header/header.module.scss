@@ -1,0 +1,70 @@
+.root {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  h1 {
+    text-align: center;
+  }
+  .blockLanguage {
+    position: relative;
+    display: flex;
+    width: 100px;
+    justify-content: space-between;
+  }
+
+  .popup {
+    position: absolute;
+    top: 20px;
+    left: -40px;
+    li {
+      cursor: pointer;
+      &:hover {
+        font-weight: 500;
+      }
+    }
+  }
+  .blockArrow {
+    display: flex;
+    align-items: center;
+
+    p {
+      cursor: pointer;
+    }
+    img {
+      margin-left: 3px;
+    }
+  }
+
+  .blockTools {
+    display: flex;
+    .basket,
+    .favorite {
+      cursor: pointer;
+      position: relative;
+      .circle {
+        position: absolute;
+        top: 10px;
+        left: 30px;
+        height: 18px;
+        width: 18px;
+        border-radius: 100%;
+        background-color: red;
+        font-size: 10px;
+        line-height: 18px;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+
+    svg {
+      margin-left: 20px;
+      path {
+        cursor: pointer;
+      }
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+}
