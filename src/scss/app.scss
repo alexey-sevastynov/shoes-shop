@@ -15,7 +15,13 @@
 
   .container {
     margin: 0 auto;
-    padding: 10px 5px;
+    padding: 20px 5px;
     max-width: 1200px;
+
+    .main {
+      margin-top: 60px;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }

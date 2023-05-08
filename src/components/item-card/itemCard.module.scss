@@ -1,0 +1,42 @@
+.root {
+  position: relative;
+  width: 300px;
+
+  img {
+    width: 300px;
+  }
+  .changePhotos {
+    position: relative;
+    cursor: pointer;
+
+    .changePhoto1 {
+      position: absolute;
+      opacity: 1;
+      transition: opacity 1s ease;
+
+      &:hover {
+        opacity: 0;
+      }
+    }
+  }
+
+  svg {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+  }
+
+  .footer {
+    margin: 5px 10px 0px 5px;
+  }
+
+  span {
+    font-size: 14px;
+  }
+
+  p {
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+}
