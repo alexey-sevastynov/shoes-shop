@@ -1,0 +1,11 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 5px;
+  width: 610px;
+
+  img {
+    max-width: 300px;
+  }
+}
