@@ -33,4 +33,19 @@
       box-shadow: 0px 0px 1px black;
     }
   }
+
+  .checkbox {
+    margin-bottom: 5px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+
+    input {
+      margin-right: 10px;
+    }
+  }
+
+  .sizesForm {
+    display: flex;
+  }
 }
