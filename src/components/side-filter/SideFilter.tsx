@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./sideFilter.module.scss";
+import PriceSlider from "./PriceSlider";
 
 interface SideFilterProps {}
 
@@ -17,23 +18,8 @@ const SideFilter: React.FC<SideFilterProps> = () => {
         <span></span>
       </div>
       <div>
-        <div className={styles.price}>
-          <input type="number" value={input} onChange={onChange} />
-          <p>uah</p>
-          <span>-</span>
-          <input type="number" />
-          <p>uah</p>
-        </div>
-        <input
-          type="range"
-          id="cowbell"
-          name="cowbell"
-          min={"100"}
-          max={"5000"}
-          onChange={onChange}
-          value={input}
-          step="1"
-        />
+        <PriceSlider />
+        <button className={styles.btn}>Переглянути</button>
       </div>
       <div className={styles.filterGroup}>
         <p>ЦІНА</p>
