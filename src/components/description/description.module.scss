@@ -1,0 +1,124 @@
+@import "../../scss/variable.scss";
+.root {
+  max-width: 300px;
+  .title {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    margin-bottom: 18px;
+  }
+
+  p {
+    font-size: 13px;
+    color: $grey;
+
+    &:not(:first-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  .price {
+    margin-top: 24px;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 30px;
+    color: $black;
+
+    span {
+      font-size: 16px;
+    }
+  }
+
+  .size {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    color: $black;
+
+    button {
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      text-decoration-line: underline;
+      color: $grey;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+
+  .possibleSizes {
+    margin-top: 8px;
+    display: flex;
+
+    button {
+      cursor: pointer;
+      margin-right: 4px;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 25px;
+      color: $black;
+      padding: 8.5px 17px;
+      border: 1px solid $grey;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $black;
+        color: $white;
+      }
+    }
+  }
+
+  .btnToBasket {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 24px;
+    padding: 10px;
+    background: $black;
+
+    p {
+      padding-left: 12px;
+      margin: 0;
+      color: $white;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 22px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+  }
+
+  .btnToFavorite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    P {
+      cursor: pointer;
+      margin: 0;
+      padding-left: 12px;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 21px;
+      text-decoration: underline;
+      color: $grey;
+      text-align: center;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+}

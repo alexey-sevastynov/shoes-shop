@@ -1,3 +1,4 @@
+@import "../../scss/variable.scss";
 .root {
   display: flex;
   align-items: flex-start;
@@ -52,7 +53,7 @@
         height: 18px;
         width: 18px;
         border-radius: 100%;
-        background-color: red;
+        background-color: $red;
         font-size: 10px;
         line-height: 18px;
         color: white;
