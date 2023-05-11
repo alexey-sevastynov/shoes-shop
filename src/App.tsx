@@ -7,6 +7,7 @@ import SideFilter from "./components/side-filter/SideFilter";
 import Items from "./components/items/Items";
 import FotoBlock from "./components/foto-block/FotoBlock";
 import Descrption from "./components/description/Descrption";
+import Sort from "./components/sort/Sort";
 
 const fotoShoes = [
   "https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-1-515x687.jpg",
@@ -26,8 +27,9 @@ function App() {
         <Items />
       </div> */}
       <div className="main">
-        <FotoBlock image={fotoShoes} />
-        <Descrption />
+        {/* <FotoBlock image={fotoShoes} />
+        <Descrption /> */}
+        <Sort />
       </div>
     </div>
   );
