@@ -1,0 +1,67 @@
+@import "../../scss/variable.scss";
+
+.root {
+  border-top: 1px solid $light-grey;
+
+  img {
+    display: block;
+  }
+
+  .title {
+    margin: 20px 0;
+    font-size: 25px;
+    color: $grey;
+    margin: 20px 0 25px 0;
+    text-align: center;
+  }
+
+  .listItem {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .item {
+      margin: 0px 30px;
+      margin-bottom: 20px;
+
+      .itemIcon {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+
+        img {
+          cursor: pointer;
+          opacity: 0.4;
+          transition: all 0.3s ease;
+          &:not(:last-child) {
+            margin-right: 20px;
+          }
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  .itemName {
+    margin: 15px 0px;
+  }
+
+  .itemPrice {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    span {
+      display: block;
+      font-size: 14px;
+      color: $grey;
+      text-decoration: line-through;
+    }
+    p {
+      font-size: 16px;
+      font-weight: 600;
+      color: $red;
+    }
+  }
+}

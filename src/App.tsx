@@ -9,6 +9,7 @@ import FotoBlock from "./components/foto-block/FotoBlock";
 import Descrption from "./components/description/Descrption";
 import Sort from "./components/sort/Sort";
 import Basket from "./components/basket/Basket";
+import Favorite from "./components/favorite/Favorite";
 
 const fotoShoes = [
   "https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-1-515x687.jpg",
@@ -23,7 +24,8 @@ function App() {
     <div className="container">
       <Header />
       <Filter />
-      <Basket />
+      <Favorite />
+      {/* <Basket /> */}
 
       {/* <div className="main">
         <SideFilter />
