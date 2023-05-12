@@ -9,6 +9,16 @@
     margin-top: 60px;
     display: flex;
     justify-content: space-between;
+
+    .main-col-2 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+
+  .description {
+    display: flex;
   }
 }
 

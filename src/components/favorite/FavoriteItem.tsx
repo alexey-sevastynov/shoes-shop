@@ -16,6 +16,8 @@ const FavoriteItem: React.FC<FavoriteItemProps> = () => {
       <div className={styles.itemIcon}>
         <img src={toCart} alt="cart" width={30} height={30} />
         <img src={del} alt="del" width={30} height={30} />
+        {/* <span className={styles.showDel}>Видалити</span>
+        <span className={styles.showCart}>До кошика</span> */}
       </div>
       <p className={styles.itemName}>Артикул: 02422 - 220 BLACK</p>
       <div className={styles.itemPrice}>

@@ -10,6 +10,12 @@ import Descrption from "./components/description/Descrption";
 import Sort from "./components/sort/Sort";
 import Basket from "./components/basket/Basket";
 import Favorite from "./components/favorite/Favorite";
+import { Route, Routes } from "react-router-dom";
+import Layout from "./pages/Layout";
+import HomePage from "./pages/HomePage";
+import BasketPage from "./pages/BasketPage";
+import FavoritePage from "./pages/FavoritePage";
+import DescriptionPage from "./pages/DescriptionPage";
 
 const fotoShoes = [
   "https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-1-515x687.jpg",
@@ -21,20 +27,14 @@ const fotoShoes = [
 
 function App() {
   return (
-    <div className="container">
-      <Header />
-      <Filter />
-      <Favorite />
-      {/* <Basket /> */}
-
-      {/* <div className="main">
-        <SideFilter />
-        <Items />
-      </div> */}
-      {/* <div className="main">
-      
-      </div> */}
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="cart" element={<BasketPage />} />
+        <Route path="favorite" element={<FavoritePage />} />
+        <Route path="description" element={<DescriptionPage />} />
+      </Route>
+    </Routes>
   );
 }
 

@@ -1,19 +1,22 @@
 import React from "react";
 import styles from "./itemCard.module.scss";
+import { Link } from "react-router-dom";
 
 interface ItemCardProps {}
 
 const ItemCard: React.FC<ItemCardProps> = () => {
   return (
     <div className={styles.root}>
-      <div className={styles.changePhotos}>
-        <div className={styles.changePhoto1}>
-          <img src="https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-1-386x515.jpg" />
+      <Link to="/description">
+        <div className={styles.changePhotos}>
+          <div className={styles.changePhoto1}>
+            <img src="https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-1-386x515.jpg" />
+          </div>
+          <div className={styles.changePhoto2}>
+            <img src="https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-3-386x515.jpg" />
+          </div>
         </div>
-        <div className={styles.changePhoto2}>
-          <img src="https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-3-386x515.jpg" />
-        </div>
-      </div>
+      </Link>
 
       <svg
         width="20"
