@@ -20,6 +20,99 @@
   .description {
     display: flex;
   }
+
+  .karusel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $white;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+
+    .karusel-main {
+      display: flex;
+      align-items: center;
+      position: relative;
+      background-repeat: cover;
+      figure {
+        margin: 0px 20px;
+        width: 360px;
+        height: 480px;
+        background-size: 200%;
+        background-repeat: no-repeat;
+
+        &:hover {
+          cursor: crosshair;
+          img {
+            opacity: 0;
+          }
+        }
+
+        .karusel-foto {
+          // margin: 0px 20px;
+          width: 360px;
+          height: 480px;
+          img {
+            display: block;
+            pointer-events: none;
+          }
+        }
+      }
+
+      height: 480px;
+      .arrow {
+        cursor: pointer;
+      }
+
+      .close {
+        cursor: pointer;
+        position: absolute;
+        top: 40px;
+        right: 24px;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          width: 24px;
+          height: 2px;
+          background: $black;
+        }
+
+        &::before {
+          transform: rotate(45deg);
+        }
+        &::after {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+    .karusel-futer {
+      display: flex;
+      gap: 5px;
+
+      margin: 10px 0px 16px 0px;
+      .futer-foto {
+        img {
+          cursor: pointer;
+          display: block;
+        }
+        .active-foto {
+          border: 1px solid $black;
+        }
+
+        .active {
+          margin-top: 4px;
+          height: 3px;
+          background-color: $black;
+        }
+      }
+    }
+  }
 }
 
 * {

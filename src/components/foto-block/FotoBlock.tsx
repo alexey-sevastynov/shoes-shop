@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./fotoBlock.module.scss";
+import { Link } from "react-router-dom";
 
 interface FotoBlockProps {
   image: string[];
@@ -11,11 +12,22 @@ const FotoBlock: React.FC<FotoBlockProps> = ({ image }) => {
       {image.map((foto, id) => {
         if (id >= 2) {
           return (
-            <img key={foto} src={foto} alt="shoe" style={{ width: "200px" }} />
+            <Link to="/karusel">
+              <img
+                key={foto}
+                src={foto}
+                alt="shoe"
+                style={{ width: "200px" }}
+              />
+            </Link>
           );
         }
 
-        return <img key={foto} src={foto} alt="shoe" />;
+        return (
+          <Link to="/karusel">
+            <img key={foto} src={foto} alt="shoe" />
+          </Link>
+        );
       })}
     </div>
   );
