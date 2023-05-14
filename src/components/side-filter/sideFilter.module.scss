@@ -50,3 +50,22 @@
     display: flex;
   }
 }
+
+@media (max-width: 1200px) {
+  .root {
+    display: none;
+  }
+}
+@media (max-width: 780px) {
+  .root {
+    display: block;
+    height: 100%;
+    width: 100vw;
+    overflow-x: scroll;
+    padding: 0px 10px;
+
+    .btn {
+      display: none;
+    }
+  }
+}

@@ -10,10 +10,11 @@ const src: string =
 
 interface FotoKaruselProps {}
 
-const KaruselPage = () => {
+const KaruselPage: React.FC<FotoKaruselProps> = () => {
   const [backgroundImage, setBackgroundImage] = React.useState(`url(${src})`);
   const [backgroundPosition, setBackgroundPosition] = React.useState("0% 0%");
 
+  //_____find out the type funktion handleMouseMove  (any?????????)
   const handleMouseMove = (e: any) => {
     const { left, top, width, height } = e.target.getBoundingClientRect();
     const x = ((e.pageX - left) / width) * 100;

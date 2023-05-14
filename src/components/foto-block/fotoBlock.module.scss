@@ -4,9 +4,63 @@
   justify-content: space-between;
   row-gap: 5px;
   width: 610px;
-  background-color: red;
 
   img {
     max-width: 300px;
+  }
+  .imageFooter {
+    width: 200px;
+  }
+}
+
+.FotoBlockMobile {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .root {
+    width: 510px;
+    img {
+      max-width: 250px;
+    }
+    .imageFooter {
+      width: 165px;
+    }
+  }
+}
+@media (max-width: 830px) {
+  .root {
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+    img {
+      max-width: 300px;
+    }
+    .imageFooter {
+      width: 200px;
+    }
+  }
+}
+@media (max-width: 640px) {
+  .root {
+    img {
+      max-width: 250px;
+    }
+    .imageFooter {
+      width: 165px;
+    }
+  }
+}
+@media (max-width: 540px) {
+  .root {
+    display: none;
+  }
+  .FotoBlockMobile {
+    display: flex;
+    width: calc(100vw - 20px);
+    overflow-x: scroll;
+    img {
+      width: 100vw;
+    }
   }
 }

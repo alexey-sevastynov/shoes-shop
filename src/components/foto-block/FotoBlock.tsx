@@ -12,20 +12,15 @@ const FotoBlock: React.FC<FotoBlockProps> = ({ image }) => {
       {image.map((foto, id) => {
         if (id >= 2) {
           return (
-            <Link to="/karusel">
-              <img
-                key={foto}
-                src={foto}
-                alt="shoe"
-                style={{ width: "200px" }}
-              />
+            <Link to="/karusel" key={id}>
+              <img className={styles.imageFooter} src={foto} alt="shoe" />
             </Link>
           );
         }
 
         return (
-          <Link to="/karusel">
-            <img key={foto} src={foto} alt="shoe" />
+          <Link to="/karusel" key={id}>
+            <img src={foto} alt="shoe" />
           </Link>
         );
       })}

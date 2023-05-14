@@ -1,0 +1,25 @@
+@import "../../scss/variable.scss";
+.root {
+  display: none;
+}
+
+@media (max-width: 780px) {
+  .root {
+    width: 48%;
+
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 18px 6px 10px;
+
+    border: 1px solid $light-grey;
+
+    p {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      color: $black;
+    }
+  }
+}

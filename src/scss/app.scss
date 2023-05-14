@@ -2,7 +2,7 @@
 
 .container {
   margin: 0 auto;
-  padding: 20px 5px;
+  padding: 20px 10px;
   max-width: 1200px;
 
   .main {
@@ -15,10 +15,19 @@
       flex-direction: column;
       align-items: flex-end;
     }
+
+    .main-col-2-mobile {
+      display: none;
+    }
+  }
+
+  .filter-mobile {
+    display: none;
   }
 
   .description {
     display: flex;
+    justify-content: space-between;
   }
 
   .karusel {
@@ -128,5 +137,192 @@
 
   li {
     list-style-type: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    .main {
+      justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .container {
+    .main {
+      .main-col-2 {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  .container {
+    .main {
+      .main-col-2 {
+        display: none;
+      }
+
+      .main-col-2-mobile {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .main-col-2-mobile-header {
+          display: flex;
+          justify-content: center;
+          gap: 5px;
+          width: 100%;
+        }
+      }
+    }
+
+    .filter-mobile,
+    .menu-mobile {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      background-color: white;
+
+      .filter-mobile-header,
+      .menu-mobile-header {
+        display: flex;
+
+        width: 100vw;
+        height: 60px;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          font-size: 16px;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+
+        .header-close {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          right: 34px;
+          transform: translateX(-50%);
+
+          &::before,
+          &::after {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: $black;
+          }
+
+          &::before {
+            transform: rotate(45deg);
+          }
+          &::after {
+            transform: rotate(-45deg);
+          }
+        }
+      }
+
+      .menu-mobile-header {
+        padding-left: 10px;
+        justify-content: flex-start;
+      }
+
+      .filter-mobile-footer {
+        padding: 29px 10px 16px 10px;
+        button {
+          font-size: 12px;
+          display: block;
+          padding: 13px;
+          width: 100%;
+          &:nth-child(1) {
+            background-color: $black;
+            color: $white;
+            margin-bottom: 8px;
+          }
+          &:nth-child(2) {
+            border: 1px solid $black;
+          }
+        }
+      }
+    }
+    .menu-mobile {
+      justify-content: start;
+    }
+    .menu-mobile-search {
+      position: relative;
+      margin: 0px 10px;
+
+      input {
+        font-size: 14px;
+        font-weight: 400;
+        width: 100%;
+        padding: 9px 40px 7px 8px;
+        border: 1px solid $light-grey;
+      }
+
+      svg {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .menu-mobile-sale {
+      padding: 15px 10px;
+      border-bottom: 1px solid $light-grey;
+      p {
+        font-size: 14px;
+        font-weight: bold;
+        color: $red;
+      }
+    }
+
+    .menu-mobile-language {
+      padding: 15px 10px;
+      p {
+        font-size: 14px;
+        font-weight: bold;
+        color: $black;
+      }
+      span {
+        display: block;
+        padding: 10px;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 830px) {
+  .container {
+    .description {
+      flex-direction: column;
+    }
+  }
+}
+@media (max-width: 780px) {
+  .container {
+    .description {
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 60px;
+    }
   }
 }

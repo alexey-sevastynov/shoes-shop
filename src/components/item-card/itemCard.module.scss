@@ -40,3 +40,37 @@
     font-size: 20px;
   }
 }
+
+@media (max-width: 620px) {
+  .root {
+    width: 48%;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+// @media (max-width: 520px) {
+//   .root {
+//     max-width: 200px;
+//     img {
+//       max-width: 200px;
+//     }
+//   }
+// }
+// @media (max-width: 470px) {
+//   .root {
+//     max-width: 175px;
+//     img {
+//       max-width: 175px;
+//     }
+//   }
+// }
+// @media (max-width: 420px) {
+//   .root {
+//     max-width: 150px;
+//     img {
+//       max-width: 150px;
+//     }
+//   }
+// }

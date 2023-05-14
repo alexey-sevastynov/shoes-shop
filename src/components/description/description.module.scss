@@ -1,6 +1,6 @@
 @import "../../scss/variable.scss";
 .root {
-  max-width: 300px;
+  width: 45%;
   .title {
     font-weight: 600;
     font-size: 22px;
@@ -120,5 +120,21 @@
         color: $black;
       }
     }
+  }
+}
+
+@media (max-width: 1150px) {
+  .root {
+    width: 40%;
+  }
+}
+@media (max-width: 1050px) {
+  .root {
+    width: 35%;
+  }
+}
+@media (max-width: 830px) {
+  .root {
+    width: 100%;
   }
 }

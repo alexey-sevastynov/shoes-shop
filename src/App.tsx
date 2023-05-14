@@ -17,6 +17,8 @@ import BasketPage from "./pages/BasketPage";
 import FavoritePage from "./pages/FavoritePage";
 import DescriptionPage from "./pages/DescriptionPage";
 import KaruselPage from "./pages/KaruselPage";
+import FilterMobilePage from "./pages/FilterMobilePage";
+import MenuMobilePage from "./pages/MenuMobilePage";
 
 const fotoShoes = [
   "https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-1-515x687.jpg",
@@ -35,6 +37,8 @@ function App() {
         <Route path="favorite" element={<FavoritePage />} />
         <Route path="description" element={<DescriptionPage />} />
         <Route path="karusel" element={<KaruselPage />} />
+        <Route path="filter" element={<FilterMobilePage />} />
+        <Route path="menu" element={<MenuMobilePage />} />
       </Route>
     </Routes>
   );

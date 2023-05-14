@@ -8,6 +8,19 @@ type LabelType = {
   checked: boolean;
 };
 
+const allTypes = [
+  { name: "ТУФЛІ", checked: false },
+  { name: "БАЛЕТКИ", checked: false },
+  { name: "КРОСІВКИ", checked: false },
+  { name: "КЕДИ", checked: false },
+  { name: "БОСОНІЖКИ", checked: false },
+  { name: "САНДАЛІ", checked: false },
+  { name: "ЧЕРЕВИКИ", checked: false },
+  { name: "БОТИЛЬЙОНИ", checked: false },
+  { name: "ЧОБОТИ", checked: false },
+  { name: "БОТФОРТИ", checked: false },
+];
+
 const allColors = [
   { name: "Білий", checked: false },
   { name: "Бежевий", checked: false },
@@ -43,10 +56,20 @@ const allSeason = [
 interface SideFilterProps {}
 
 const SideFilter: React.FC<SideFilterProps> = () => {
+  const [types, setType] = React.useState(allTypes);
   const [colors, setColors] = React.useState(allColors);
   const [sizes, setSizes] = React.useState(allSize);
   const [seasons, setSeasons] = React.useState(allSeason);
 
+  const onHandChangCategory = (index: number) => {
+    setType(
+      types.map((type, currentIndex) => {
+        return currentIndex === index
+          ? { ...type, checked: !type.checked }
+          : type;
+      })
+    );
+  };
   const onHandChangColor = (index: number) => {
     setColors(
       colors.map((color, currentIndex) => {
@@ -78,9 +101,26 @@ const SideFilter: React.FC<SideFilterProps> = () => {
   return (
     <div className={styles.root}>
       <div className={styles.filterGroup}>
+        <p>КАТЕГОРІЯ</p>
+        <span></span>
+      </div>
+      <div>
+        {allTypes.map((type, id) => (
+          <Checkbox
+            key={type.name}
+            isCheked={type.checked}
+            checkHandler={() => onHandChangCategory(id)}
+            label={type.name}
+            index={id}
+          />
+        ))}
+      </div>
+
+      <div className={styles.filterGroup}>
         <p>ЦІНА</p>
         <span></span>
       </div>
+
       <div>
         <PriceSlider />
         <button className={styles.btn}>Переглянути</button>

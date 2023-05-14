@@ -5,3 +5,39 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+@media (max-width: 930px) {
+  .root {
+    margin-top: 20px;
+    max-width: 606px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 620px) {
+  .root {
+    max-width: 100%;
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+// @media (max-width: 520px) {
+//   .root {
+//     max-width: 406px;
+//   }
+// }
+// @media (max-width: 470px) {
+//   .root {
+//     max-width: 356px;
+//   }
+// }
+// @media (max-width: 420px) {
+//   .root {
+//     max-width: 306px;
+//   }
+// }

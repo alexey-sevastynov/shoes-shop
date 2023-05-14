@@ -13,6 +13,9 @@ const Header: React.FC<HeaderProps> = () => {
         <LanguagePopup />
         <p>Dnipro</p>
       </div>
+      <Link to="/menu" className={styles.blockMenuMob}>
+        <span />
+      </Link>
       <Link to="/">
         <h1>Shop women shoes</h1>
       </Link>
