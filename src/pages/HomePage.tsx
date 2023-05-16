@@ -9,7 +9,7 @@ interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
   const isMobile = useMediaQuery({
-    query: "(min-width: 780px)",
+    query: "(min-width: 1200px)", //780
   });
 
   return (
@@ -22,7 +22,6 @@ const HomePage: React.FC<HomePageProps> = () => {
       <div className="main-col-2-mobile">
         <div className="main-col-2-mobile-header">
           <Category />
-
           <Sort />
         </div>
         <Items />

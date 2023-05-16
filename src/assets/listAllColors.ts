@@ -1,0 +1,15 @@
+export const allColors = [
+  { en: "White", ua: "Білий", checked: false },
+  { en: "Beige", ua: "Бежевий", checked: false },
+  { en: "Azure", ua: "Блакитний", checked: false },
+  { en: "Yellow", ua: "Жовтий", checked: false },
+  { en: "Green", ua: "Зелений", checked: false },
+  { en: "Brown", ua: "Коричневий", checked: false },
+  { en: "Multi", ua: "Мульті", checked: false },
+  { en: "Pink", ua: "Рожевий", checked: false },
+  { en: "Gray", ua: "Сірий", checked: false },
+  { en: "Blue", ua: "Синій", checked: false },
+  { en: "Violet", ua: "Фіолетовий", checked: false },
+  { en: "Red", ua: "Червоний", checked: false },
+  { en: "Black", ua: "Чорний", checked: false },
+];

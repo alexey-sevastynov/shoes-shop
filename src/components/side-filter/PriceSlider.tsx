@@ -5,9 +5,11 @@ const MIN_RANGE_INPUT: number = 0;
 const MAX_RANGE_INPUT: number = 9999;
 const PRICE_GAP: number = 1000;
 
-interface PriceSliderProps {}
+interface PriceSliderProps {
+  valutaText: string;
+}
 
-const PriceSlider: React.FC<PriceSliderProps> = () => {
+const PriceSlider: React.FC<PriceSliderProps> = ({ valutaText }) => {
   const [minVal, setMinVal] = React.useState<any>(1000);
   const [maxVal, setMaxVal] = React.useState<any>(9999);
 
@@ -46,7 +48,7 @@ const PriceSlider: React.FC<PriceSliderProps> = () => {
             value={minVal}
             onChange={onChangeMin}
           />
-          <span>uah</span>
+          <span>{valutaText}</span>
         </div>
         <div className="separator">-</div>
         <div className="field">
@@ -56,7 +58,7 @@ const PriceSlider: React.FC<PriceSliderProps> = () => {
             value={maxVal}
             onChange={onChangeMax}
           />
-          <span>uah</span>
+          <span>{valutaText}</span>
         </div>
       </div>
       <div className="slider">

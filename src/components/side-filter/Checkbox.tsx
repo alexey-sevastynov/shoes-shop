@@ -20,9 +20,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
     <div className={styles.checkbox}>
       <div className={styles.flag}></div>
       <input
+        className="chexbox"
         type="checkbox"
         id={`checkbox - ${index}`}
-        value={isCheked}
+        checked={isCheked}
         onChange={checkHandler}
       />
       <label htmlFor="checkbox">{label}</label>

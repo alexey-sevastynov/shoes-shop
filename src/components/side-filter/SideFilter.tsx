@@ -2,71 +2,28 @@ import React from "react";
 import styles from "./sideFilter.module.scss";
 import PriceSlider from "./PriceSlider";
 import Checkbox from "./Checkbox";
-
-type LabelType = {
-  name: string;
-  checked: boolean;
-};
-
-const allTypes = [
-  { name: "ТУФЛІ", checked: false },
-  { name: "БАЛЕТКИ", checked: false },
-  { name: "КРОСІВКИ", checked: false },
-  { name: "КЕДИ", checked: false },
-  { name: "БОСОНІЖКИ", checked: false },
-  { name: "САНДАЛІ", checked: false },
-  { name: "ЧЕРЕВИКИ", checked: false },
-  { name: "БОТИЛЬЙОНИ", checked: false },
-  { name: "ЧОБОТИ", checked: false },
-  { name: "БОТФОРТИ", checked: false },
-];
-
-const allColors = [
-  { name: "Білий", checked: false },
-  { name: "Бежевий", checked: false },
-  { name: "Блакитний", checked: false },
-  { name: "Жовтий", checked: false },
-  { name: "Зелений", checked: false },
-  { name: "Коричневий", checked: false },
-  { name: "Мульті", checked: false },
-  { name: "Рожевий", checked: false },
-  { name: "Сірий", checked: false },
-  { name: "Синій", checked: false },
-  { name: "Фіолетовий", checked: false },
-  { name: "Червоний", checked: false },
-  { name: "Чорний", checked: false },
-];
-
-const allSize = [
-  { name: "36", checked: false },
-  { name: "37", checked: false },
-  { name: "38", checked: false },
-  { name: "39", checked: false },
-  { name: "40", checked: false },
-  { name: "41", checked: false },
-];
-
-const allSeason = [
-  { name: "ДЕМІ", checked: false },
-  { name: "ЗИМА", checked: false },
-  { name: "РІК", checked: false },
-  { name: "ЛІТО", checked: false },
-];
+import { allCategories } from "../../assets/listAllCategories";
+import { useAppSelector } from "../../redux/hook";
+import { allColors } from "../../assets/listAllColors";
+import { allSize } from "../../assets/listAllSizes";
+import { allSeasons } from "../../assets/listAllSeasons";
+import { selectTranslations } from "../../redux/slices/i18nSlice";
 
 interface SideFilterProps {}
 
 const SideFilter: React.FC<SideFilterProps> = () => {
-  const [types, setType] = React.useState(allTypes);
+  const [types, setType] = React.useState(allCategories);
   const [colors, setColors] = React.useState(allColors);
   const [sizes, setSizes] = React.useState(allSize);
-  const [seasons, setSeasons] = React.useState(allSeason);
+  const [seasons, setSeasons] = React.useState(allSeasons);
+
+  const t = useAppSelector(selectTranslations);
+  const { lang } = useAppSelector((state) => state.i18n);
 
   const onHandChangCategory = (index: number) => {
     setType(
-      types.map((type, currentIndex) => {
-        return currentIndex === index
-          ? { ...type, checked: !type.checked }
-          : type;
+      types.map((obj, currentIndex) => {
+        return currentIndex === index ? { ...obj, checked: !obj.checked } : obj;
       })
     );
   };
@@ -101,48 +58,48 @@ const SideFilter: React.FC<SideFilterProps> = () => {
   return (
     <div className={styles.root}>
       <div className={styles.filterGroup}>
-        <p>КАТЕГОРІЯ</p>
+        <p>{t.sideFilter.category}</p>
         <span></span>
       </div>
       <div>
-        {allTypes.map((type, id) => (
+        {types.map((obj, id) => (
           <Checkbox
-            key={type.name}
-            isCheked={type.checked}
+            key={obj.en}
+            isCheked={obj.checked}
             checkHandler={() => onHandChangCategory(id)}
-            label={type.name}
+            label={lang === "en" ? obj.en : obj.ua}
             index={id}
           />
         ))}
       </div>
 
       <div className={styles.filterGroup}>
-        <p>ЦІНА</p>
+        <p>{t.sideFilter.price}</p>
         <span></span>
       </div>
 
       <div>
-        <PriceSlider />
-        <button className={styles.btn}>Переглянути</button>
+        <PriceSlider valutaText={t.sideFilter.uah} />
+        <button className={styles.btn}>{t.sideFilter.show}</button>
       </div>
       <div className={styles.filterGroup}>
-        <p>КОЛІР</p>
+        <p>{t.sideFilter.color}</p>
         <span></span>
       </div>
       <form>
-        {colors.map((color, id) => (
+        {colors.map((obj, id) => (
           <Checkbox
-            key={color.name}
-            isCheked={color.checked}
+            key={obj.en}
+            isCheked={obj.checked}
             checkHandler={() => onHandChangColor(id)}
-            label={color.name}
+            label={lang === "en" ? obj.en : obj.ua}
             index={id}
           />
         ))}
-        <button className={styles.btn}>Переглянути</button>
+        <button className={styles.btn}>{t.sideFilter.show}</button>
       </form>
       <div className={styles.filterGroup}>
-        <p>РОЗМІР</p>
+        <p>{t.sideFilter.size}</p>
         <span></span>
       </div>
       <form>
@@ -156,24 +113,24 @@ const SideFilter: React.FC<SideFilterProps> = () => {
           />
         ))}
 
-        <button className={styles.btn}>Переглянути</button>
+        <button className={styles.btn}>{t.sideFilter.show}</button>
       </form>
       <div className={styles.filterGroup}>
-        <p>СЕЗОН</p>
+        <p>{t.sideFilter.season}</p>
         <span></span>
       </div>
       <form>
-        {seasons.map((season, id) => (
+        {seasons.map((obj, id) => (
           <Checkbox
-            key={season.name}
-            isCheked={season.checked}
+            key={obj.en}
+            isCheked={obj.checked}
             checkHandler={() => onHandChangSeason(id)}
-            label={season.name}
+            label={lang === "en" ? obj.en : obj.ua}
             index={id}
           />
         ))}
 
-        <button className={styles.btn}>Переглянути</button>
+        <button className={styles.btn}>{t.sideFilter.show}</button>
       </form>
     </div>
   );

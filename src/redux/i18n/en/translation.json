@@ -1,0 +1,40 @@
+{
+  "header": {
+    "ua": "UKRAINE",
+    "en": "ENGLISH",
+    "city": "DNIPRO",
+    "title": "SHOP WOMEN SHOES"
+  },
+  "sideFilter": {
+    "category": "CATEGORY",
+    "price": "PRICE",
+    "color": "COLOR",
+    "size": "SIZE",
+    "season": "SEASON",
+    "show": "SHOW",
+    "uah": "uah"
+  },
+  "basket": {
+    "basket": "Basket",
+    "goods": "Goods",
+    "summ": "Summ",
+    "uah": "uah",
+    "accept": "I accept",
+    "agreement": "User agreement",
+    "order": "TO ORDER",
+    "article": "Article",
+    "size": "Size",
+    "price": "Price",
+    "remove": "remove goods",
+    "ordering": "Placing an order",
+    "surName": "Surname",
+    "name": "Name",
+    "paternalName": "Paternal name",
+    "phone": "Contact phone",
+    "notCall": "Do not bother me with a call to confirm the order",
+    "followOrdering": "to track order status",
+    "delivery": "Delivery/payment",
+    "region": "Region",
+    "city": "City"
+  }
+}

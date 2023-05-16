@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./basket.module.scss";
 
-interface CardBasket {}
+interface CardBasket {
+  t: any;
+}
 
-const CardBasket: React.FC<CardBasket> = () => {
+const CardBasket: React.FC<CardBasket> = ({ t }) => {
   return (
     <div className={styles.basketCard}>
       <img
@@ -14,10 +16,10 @@ const CardBasket: React.FC<CardBasket> = () => {
         <p className={styles.title}>Жіночі босоніжки Respect чорний</p>
         <div>
           <span>
-            Артикул: <button>02422 - 220 BLACK</button>
+            {t.basket.article}: <button>02422 - 220 BLACK</button>
           </span>
           <div>
-            <span>Розмір: 39</span>
+            <span> {t.basket.size}: 39</span>
           </div>
         </div>
         <div className={styles.count}>
@@ -25,10 +27,12 @@ const CardBasket: React.FC<CardBasket> = () => {
           <input type="number" />
           <button>+</button>
         </div>
-        <p className={styles.price}>Ціна: 3,990 грн</p>
+        <p className={styles.price}>
+          {t.basket.price}: 3,990 {t.basket.uah}
+        </p>
         <div className={styles.btnRemove}>
           <div className={styles.close} />
-          <p>remove goods</p>
+          <p> {t.basket.remove}</p>
         </div>
       </div>
     </div>

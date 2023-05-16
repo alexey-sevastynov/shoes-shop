@@ -4,47 +4,50 @@ import CardBasket from "./CardBasket";
 import Ordering from "./Ordering";
 import Delivery from "./Delivery";
 import Comment from "./Comment";
+import { selectTranslations } from "../../redux/slices/i18nSlice";
+import { useAppSelector } from "../../redux/hook";
 
 interface BasketProps {}
 
 const Basket: React.FC<BasketProps> = () => {
+  const t = useAppSelector(selectTranslations);
   return (
     <div className={styles.root}>
-      <p className={styles.title}>Basket</p>
+      <p className={styles.title}>{t.basket.basket}</p>
       <div className={styles.basketCards}>
         <div className={styles.basketCardsCol_1}>
-          <CardBasket />
-          <CardBasket />
-          <CardBasket />
-          <CardBasket />
+          <CardBasket t={t} />
+          <CardBasket t={t} />
+          <CardBasket t={t} />
+          <CardBasket t={t} />
           <div className={styles.price}>
             <div className={styles.priceCol_1}>
-              <p>Товарів:</p>
+              <p>{t.basket.goods}:</p>
               <span>7</span>
             </div>
             <div className={styles.priceCol_2}>
-              <p>Сума:</p>
+              <p>{t.basket.summ}:</p>
               <span>26,738 грн</span>
             </div>
           </div>
         </div>
         <div className={styles.basketCardsCol_2}>
-          <Ordering />
-          <Delivery />
+          <Ordering t={t} />
+          <Delivery t={t} />
           <Comment />
           <div className={styles.agreement}>
             <div className={styles.header}>
               <div className={styles.posNum}>4</div>
-              <p>Угода користувача</p>
+              <p>{t.basket.agreement}</p>
             </div>
             <div>
               <input type="checkbox" name="agreement" />
               <label htmlFor="agreement">
-                Я приймаю <button>Угоду користувача</button>
+                {t.basket.accept} <button>{t.basket.agreement}</button>
               </label>
             </div>
           </div>
-          <button className={styles.btnForm}>ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+          <button className={styles.btnForm}>{t.basket.order}</button>
         </div>
       </div>
     </div>

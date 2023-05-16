@@ -5,17 +5,19 @@ import RegionList from "./RegionList";
 import CityList from "./CityList";
 import BrancesNpList from "./BrancesNpList";
 
-interface DeliveryProps {}
+interface DeliveryProps {
+  t: any;
+}
 
-const Delivery: React.FC<DeliveryProps> = () => {
+const Delivery: React.FC<DeliveryProps> = ({ t }) => {
   return (
     <div className={styles.delivery}>
       <div className={styles.header}>
         <div className={styles.posNum}>2</div>
-        <p>Доставка/оплата</p>
+        <p>{t.basket.delivery}</p>
       </div>
       <div className={styles.region}>
-        <p>Region</p>
+        <p>{t.basket.region}</p>
         <svg
           width="12"
           height="8"
@@ -31,7 +33,7 @@ const Delivery: React.FC<DeliveryProps> = () => {
         {/* <RegionList /> */}
       </div>
       <div className={styles.city}>
-        <p>Місто *</p>
+        <p>{t.basket.city} *</p>
         <svg
           width="12"
           height="8"

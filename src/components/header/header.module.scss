@@ -23,6 +23,8 @@
     position: absolute;
     top: 20px;
     left: 0px;
+    transition: all 1s ease;
+
     li {
       cursor: pointer;
 
@@ -40,6 +42,13 @@
     }
     img {
       margin-left: 3px;
+      transform: rotate(0deg);
+      transition: all 1s ease;
+    }
+
+    .blockArrowIcon {
+      transition: all 1s ease;
+      transform: rotate(540deg);
     }
   }
 

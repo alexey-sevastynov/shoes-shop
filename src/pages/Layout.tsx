@@ -9,7 +9,7 @@ const Layout: React.FC<LayoutProps> = () => {
   return (
     <div className="container">
       <Header />
-      <Filter />
+      {/* <Filter /> */}
       <Outlet />
     </div>
   );

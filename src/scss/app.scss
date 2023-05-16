@@ -142,9 +142,9 @@
 
 @media (max-width: 1200px) {
   .container {
-    .main {
-      justify-content: center;
-    }
+    // .main {
+    //   justify-content: center;
+    // }
   }
 }
 
@@ -161,7 +161,7 @@
   }
 }
 
-@media (max-width: 780px) {
+@media (max-width: 1200px) {
   .container {
     .main {
       .main-col-2 {
