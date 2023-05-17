@@ -5,12 +5,25 @@ import Items from "../components/items/Items";
 import Sort from "../components/sort/Sort";
 import Category from "../components/category/Category";
 
+import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { fetchShoes, selectorShoesData } from "../redux/slices/shoes";
+
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
+  const { items } = useAppSelector(selectorShoesData);
+  const dispatch = useAppDispatch();
   const isMobile = useMediaQuery({
-    query: "(min-width: 1200px)", //780
+    query: "(min-width: 1200px)",
   });
+
+  const apiShoes = async () => {
+    dispatch(fetchShoes());
+  };
+
+  React.useEffect(() => {
+    apiShoes();
+  }, []);
 
   return (
     <div className="main">

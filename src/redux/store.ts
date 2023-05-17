@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import i18nSlice from "./slices/i18nSlice";
 import headerSlice from "./slices/headerSlice";
+import shoesSlise from "./slices/shoes";
 
 const store = configureStore({
   reducer: {
     i18n: i18nSlice,
     header: headerSlice,
+    shoes: shoesSlise,
   },
 });
 
