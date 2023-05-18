@@ -6,7 +6,9 @@ export const fetchShoes = createAsyncThunk(
   "shoes/fetchByIdStatus",
   async (params) => {
     // const {} = params;
-    const response = await axios.get("http://localhost:3001/shoes");
+    const response = await axios.get(
+      "https://shoes-api-a3wt.onrender.com/shoes"
+    );
 
     return response.data;
   }
