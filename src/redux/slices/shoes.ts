@@ -11,6 +11,13 @@ export const fetchShoes = createAsyncThunk(
     return response.data;
   }
 );
+
+enum Status {
+  LOADING = "loading",
+  SUCCESS = "success",
+  ERROR = "error",
+}
+
 type ShoesItem = {
   article: string;
   category: string;
@@ -30,12 +37,14 @@ type ShoesItem = {
 };
 
 interface ShoesSliceState {
+  status: Status;
   items: ShoesItem[];
   id: number;
   currentItem: ShoesItem;
 }
 
 const initialState: ShoesSliceState = {
+  status: Status.LOADING,
   items: [],
   id: 0,
   currentItem: {
@@ -73,17 +82,16 @@ export const shoesSlise = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchShoes.pending, (state, action) => {
-      // state.status = "loading";
-
+      state.status = Status.LOADING;
       state.items = [];
     });
     builder.addCase(fetchShoes.fulfilled, (state, action) => {
+      state.status = Status.SUCCESS;
       state.items = action.payload;
-      // state.status = "success";
     });
     builder.addCase(fetchShoes.rejected, (state, action) => {
+      state.status = Status.ERROR;
       state.items = [];
-      // state.status = "error";
     });
   },
 });

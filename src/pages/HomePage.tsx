@@ -8,11 +8,14 @@ import ItemCard from "../components/item-card/ItemCard";
 
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { fetchShoes, selectorShoesData } from "../redux/slices/shoes";
+import ErrorApi from "../erorr-api/ErorrApi";
+import Skeleton from "../components/Skeleton";
 
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
-  const { items } = useAppSelector(selectorShoesData);
+  const { items, status } = useAppSelector(selectorShoesData);
+  console.log(status);
   const dispatch = useAppDispatch();
   const isMobile = useMediaQuery({
     query: "(min-width: 1200px)",
@@ -26,15 +29,20 @@ const HomePage: React.FC<HomePageProps> = () => {
     apiShoes();
   }, []);
 
+  const showShoes = items.map((shoe) => <ItemCard key={shoe.id} {...shoe} />);
+
+  const onLoader = [...new Array(6)].map((_, index) => (
+    <Skeleton key={index} />
+  ));
+
   return (
     <div className="main">
       {isMobile && <SideFilter />}
       <div className="main-col-2">
         <Sort />
         <div className="main-col-2-items">
-          {items.map((shoe) => (
-            <ItemCard key={shoe.id} {...shoe} />
-          ))}
+          {status === "error" && <ErrorApi />}
+          {status === "loading" ? onLoader : showShoes}
         </div>
       </div>
       <div className="main-col-2-mobile">
@@ -43,9 +51,8 @@ const HomePage: React.FC<HomePageProps> = () => {
           <Sort />
         </div>
         <div className="main-col-2-items">
-          {items.map((shoe) => (
-            <ItemCard key={shoe.id} {...shoe} />
-          ))}
+          {status === "error" && <ErrorApi />}
+          {status === "loading" ? onLoader : showShoes}
         </div>
       </div>
     </div>
