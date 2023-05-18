@@ -90,15 +90,19 @@
       }
 
       .close {
+        width: 24px;
+        height: 24px;
         cursor: pointer;
+
         position: absolute;
         top: 40px;
-        right: 24px;
+        right: 0px;
 
         &::before,
         &::after {
           content: "";
           position: absolute;
+          top: 10px;
           width: 24px;
           height: 2px;
           background: $black;
@@ -120,6 +124,8 @@
       margin: 10px 0px 16px 0px;
       .futer-foto {
         img {
+          width: 76px;
+          height: 101px;
           cursor: pointer;
           display: block;
         }
