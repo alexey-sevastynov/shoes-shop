@@ -1,9 +1,10 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import SideFilter from "../components/side-filter/SideFilter";
-import Items from "../components/items/Items";
+
 import Sort from "../components/sort/Sort";
 import Category from "../components/category/Category";
+import ItemCard from "../components/item-card/ItemCard";
 
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { fetchShoes, selectorShoesData } from "../redux/slices/shoes";
@@ -30,14 +31,22 @@ const HomePage: React.FC<HomePageProps> = () => {
       {isMobile && <SideFilter />}
       <div className="main-col-2">
         <Sort />
-        <Items />
+        <div className="main-col-2-items">
+          {items.map((shoe) => (
+            <ItemCard key={shoe.id} {...shoe} />
+          ))}
+        </div>
       </div>
       <div className="main-col-2-mobile">
         <div className="main-col-2-mobile-header">
           <Category />
           <Sort />
         </div>
-        <Items />
+        <div className="main-col-2-items">
+          {items.map((shoe) => (
+            <ItemCard key={shoe.id} {...shoe} />
+          ))}
+        </div>
       </div>
     </div>
   );

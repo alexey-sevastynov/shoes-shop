@@ -23,7 +23,8 @@
         "https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-4-515x687.jpg",
         "https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-5-515x687.jpg"
       ],
-      "country": { "ua": "Китай", "en": "China" }
+      "country": { "ua": "Китай", "en": "China" },
+      "sizes": [37, 41]
     },
     {
       "id": 1,
@@ -48,7 +49,8 @@
         "https://respect-shoes.com.ua/image/cache/data/products/VS75-147315/VS75-147315-4-515x687.jpg",
         "https://respect-shoes.com.ua/image/cache/data/products/VS75-147315/VS75-147315-5-515x687.jpg"
       ],
-      "country": { "ua": "Китай", "en": "China" }
+      "country": { "ua": "Китай", "en": "China" },
+      "sizes": [37, 38]
     },
     {
       "id": 2,
@@ -76,7 +78,8 @@
         "https://respect-shoes.com.ua/image/cache/data/products/616-2/616-2-4-515x687.jpg",
         "https://respect-shoes.com.ua/image/cache/data/products/616-2/616-2-5-515x687.jpg"
       ],
-      "country": { "ua": "Китай", "en": "China" }
+      "country": { "ua": "Китай", "en": "China" },
+      "sizes": [37, 38, 39, 40, 41]
     },
     {
       "id": 3,
@@ -101,7 +104,8 @@
         "https://respect-shoes.com.ua/image/cache/data/products/028-9052-R03/028-9052-R03-4-515x687.jpg",
         "https://respect-shoes.com.ua/image/cache/data/products/028-9052-R03/028-9052-R03-5-515x687.jpg"
       ],
-      "country": { "ua": "Турція", "en": "Turkey" }
+      "country": { "ua": "Турція", "en": "Turkey" },
+      "sizes": [38, 39, 40, 41]
     },
     {
       "id": 4,
@@ -126,29 +130,8 @@
         "https://respect-shoes.com.ua/image/cache/data/products/AS071-1/AS071-1-4-515x687.jpg",
         "https://respect-shoes.com.ua/image/cache/data/products/AS071-1/AS071-1-5-515x687.jpg"
       ],
-      "country": { "ua": "Китай", "en": "China" }
-    },
-    {
-      "id": 5,
-      "name": {
-        "ua": "Балетки Respect жовті",
-        "en": "Female boots Respect black"
-      },
-      "season": { "ua": "літо", "en": "summer" },
-      "article": "616-2",
-      "category": "sneakers",
-      "sale": true,
-      "price": 4090,
-      "priseSale": 3468,
-      "color": { "ua": "білий", "en": "white" },
-      "material": {
-        "ua": "нат.шкіра/текстиль",
-        "en": "natural leather/textile"
-      },
-      "materialBottom": { "ua": "ПУ", "en": "Polyurethane" },
-      "heelHight": { "ua": "середній", "en": "average" },
-      "imageURL": ["", "", "", "", ""],
-      "country": { "ua": "Китай", "en": "China" }
+      "country": { "ua": "Китай", "en": "China" },
+      "sizes": [37, 38, 41]
     }
   ]
 }

@@ -1,19 +1,69 @@
 import React from "react";
 import styles from "./itemCard.module.scss";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { selectorShoesData, setId, setObjShoe } from "../../redux/slices/shoes";
 
-interface ItemCardProps {}
+interface ItemCardProps {
+  article?: string;
+  category?: string;
+  color?: { ua: string; en: string };
+  country?: { ua: string; en: string };
+  heelHight?: { ua: string; en: string };
+  id?: number;
+  imageURL?: string[];
+  material?: { ua: string; en: string };
+  materialBottom?: { ua: string; en: string };
+  name?: { ua: string; en: string };
+  price?: number;
+  priseSale?: number;
+  sale?: boolean;
+  season?: { ua: string; en: string };
+}
 
-const ItemCard: React.FC<ItemCardProps> = () => {
+const ItemCard: React.FC<ItemCardProps> = ({
+  article,
+  imageURL,
+  price,
+  priseSale,
+  sale,
+  id,
+}) => {
+  const { items } = useAppSelector(selectorShoesData);
+  const dispatch = useAppDispatch();
+  const firstImg = imageURL?.filter((_, id) => id === 0)[0];
+  const secondImg = imageURL?.filter((_, id) => id === 1)[0];
+
+  const onClickId = (id: number) => {
+    console.log(id);
+    dispatch(setId(id));
+    dispatch(setObjShoe(items[id]));
+  };
+
+  const showPrice = sale ? (
+    <div className={styles.sale}>
+      <p>
+        {priseSale} <span>uah</span>
+      </p>
+      <p>
+        {price} <span>uah</span>
+      </p>
+    </div>
+  ) : (
+    <p>
+      {price} <span>uah</span>
+    </p>
+  );
+
   return (
     <div className={styles.root}>
       <Link to="/description">
         <div className={styles.changePhotos}>
           <div className={styles.changePhoto1}>
-            <img src="https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-1-386x515.jpg" />
+            <img src={firstImg} onClick={() => onClickId(!id ? 0 : id)} />
           </div>
           <div className={styles.changePhoto2}>
-            <img src="https://respect-shoes.com.ua/image/cache/data/products/IS73-153225/IS73-153225-3-386x515.jpg" />
+            <img src={secondImg} />
           </div>
         </div>
       </Link>
@@ -31,10 +81,8 @@ const ItemCard: React.FC<ItemCardProps> = () => {
         ></path>
       </svg>
       <div className={styles.footer}>
-        <span>Артикул: IS73-153225</span>
-        <p>
-          1759 <span>uah</span>
-        </p>
+        <span>Артикул: {article}</span>
+        {showPrice}
       </div>
     </div>
   );

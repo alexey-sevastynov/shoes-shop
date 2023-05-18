@@ -1,25 +1,75 @@
 import React from "react";
 import styles from "./description.module.scss";
+import { useAppSelector } from "../../redux/hook";
 
-type DescrptionProps = {};
+type DescrptionProps = {
+  article?: string;
+  category?: string;
+  color?: { ua: string; en: string };
+  country?: { ua: string; en: string };
+  heelHight?: { ua: string; en: string };
+  id?: number;
+  imageURL?: string[];
+  material?: { ua: string; en: string };
+  materialBottom?: { ua: string; en: string };
+  name?: { ua: string; en: string };
+  price?: number;
+  priseSale?: number;
+  sale?: boolean;
+  season?: { ua: string; en: string };
+  sizes: number[];
+};
 
-const Descrption: React.FC<DescrptionProps> = () => {
+const Descrption: React.FC<DescrptionProps> = ({
+  name,
+  article,
+  season,
+  color,
+  material,
+  materialBottom,
+  heelHight,
+  country,
+  sale,
+  price,
+  priseSale,
+  sizes,
+}) => {
+  const { lang } = useAppSelector((state) => state.i18n);
+
+  const showTranslete = (obj: any) => {
+    const { ua, en } = obj;
+    return lang === "ua" ? ua : en;
+  };
+
+  const showPrice = sale ? (
+    <div className={styles.sale}>
+      <p>
+        {priseSale} <span>uah</span>
+      </p>
+      <p>
+        {price} <span>uah</span>
+      </p>
+    </div>
+  ) : (
+    <p>
+      {price} <span>uah</span>
+    </p>
+  );
+
   return (
     <div className={styles.root}>
-      <div className={styles.title}>Жіночі туфлі Respect бежеві</div>
+      <div className={styles.title}>{showTranslete(name)}</div>
       <div className={styles.subtitle}>
-        <p>Артикул: IS73-153225</p>
+        <p>Артикул: {article}</p>
       </div>
-      <p>Сезон: Літо</p>
-      <p>Колекція: Нова колекція</p>
-      <p>Колір: бежевий</p>
-      <p>Підклад: без підкладки</p>
-      <p>Матеріал підошви: Туніт</p>
-      <p>Висота каблука: низький</p>
-      <p>Країна-виробник: Китай</p>
-      <div className={styles.price}>
-        1,759 <span>uah</span>
-      </div>
+      <p>Сезон: {showTranslete(season)}</p>
+      {/* <p>Колекція: Нова колекція</p> */}
+      <p>Колір: {showTranslete(color)}</p>
+      <p>Матеріал: {showTranslete(material)}</p>
+      <p>Матеріал підошви: {showTranslete(materialBottom)}</p>
+      <p>Висота каблука: {showTranslete(heelHight)}</p>
+      <p>Країна-виробник: {showTranslete(country)}</p>
+      <div className={styles.price}>{showPrice}</div>
 
       <div className={styles.size}>
         <p>Оберіть розмір</p>
@@ -27,10 +77,9 @@ const Descrption: React.FC<DescrptionProps> = () => {
       </div>
 
       <div className={styles.possibleSizes}>
-        <button>37</button>
-        <button>38</button>
-        <button>39</button>
-        <button>40</button>
+        {sizes.map((size) => (
+          <button key={size}>{size}</button>
+        ))}
       </div>
 
       <div className={styles.btnToBasket}>

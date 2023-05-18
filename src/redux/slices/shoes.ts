@@ -26,14 +26,35 @@ type ShoesItem = {
   priseSale: number;
   sale: boolean;
   season: { ua: string; en: string };
+  sizes: number[];
 };
 
 interface ShoesSliceState {
   items: ShoesItem[];
+  id: number;
+  currentItem: ShoesItem;
 }
 
 const initialState: ShoesSliceState = {
   items: [],
+  id: 0,
+  currentItem: {
+    article: "",
+    category: "",
+    color: { ua: "", en: "" },
+    country: { ua: "", en: "" },
+    heelHight: { ua: "", en: "" },
+    id: 0,
+    imageURL: [],
+    material: { ua: "", en: "" },
+    materialBottom: { ua: "", en: "" },
+    name: { ua: "", en: "" },
+    price: 0,
+    priseSale: 0,
+    sale: false,
+    season: { ua: "", en: "" },
+    sizes: [36, 37, 38, 39, 40, 41],
+  },
 };
 
 export const shoesSlise = createSlice({
@@ -43,11 +64,17 @@ export const shoesSlise = createSlice({
     setItems(state, action: PayloadAction<ShoesItem[]>) {
       state.items = action.payload;
     },
+    setId(state, action: PayloadAction<number>) {
+      state.id = action.payload;
+    },
+    setObjShoe(state, action: PayloadAction<ShoesItem>) {
+      state.currentItem = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchShoes.pending, (state, action) => {
       // state.status = "loading";
-      console.log("...loading");
+
       state.items = [];
     });
     builder.addCase(fetchShoes.fulfilled, (state, action) => {
@@ -63,6 +90,6 @@ export const shoesSlise = createSlice({
 
 export const selectorShoesData = (state: RootState) => state.shoes;
 
-export const { setItems } = shoesSlise.actions;
+export const { setItems, setId, setObjShoe } = shoesSlise.actions;
 
 export default shoesSlise.reducer;

@@ -23,13 +23,42 @@
 
   .price {
     margin-top: 24px;
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 30px;
-    color: $black;
+    p {
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 30px;
+      color: $black;
+    }
 
     span {
       font-size: 16px;
+    }
+
+    .sale {
+      display: flex;
+
+      p {
+        &:nth-child(1) {
+          color: $red;
+          span {
+            color: $red;
+          }
+        }
+      }
+      p {
+        &:nth-child(2) {
+          margin-left: 15px;
+          color: $grey;
+          font-size: 14px;
+          text-decoration: line-through;
+          font-weight: 600;
+
+          span {
+            color: $grey;
+            font-size: 14px;
+          }
+        }
+      }
     }
   }
 

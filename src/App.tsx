@@ -4,7 +4,6 @@ import Header from "./components/header/Header";
 import Filter from "./components/filter/Filter";
 import SideFilter from "./components/side-filter/SideFilter";
 
-import Items from "./components/items/Items";
 import FotoBlock from "./components/foto-block/FotoBlock";
 import Descrption from "./components/description/Descrption";
 import Sort from "./components/sort/Sort";

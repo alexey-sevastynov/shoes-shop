@@ -11,8 +11,6 @@ type HeaderProps = {};
 const Header: React.FC<HeaderProps> = () => {
   const t = useAppSelector(selectTranslations);
 
-  console.log(t);
-
   return (
     <header className={styles.root}>
       <div className={styles.blockLanguage}>

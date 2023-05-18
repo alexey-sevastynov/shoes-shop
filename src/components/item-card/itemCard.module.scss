@@ -1,3 +1,5 @@
+@import "../../scss/variable.scss";
+
 .root {
   position: relative;
   width: 300px;
@@ -28,6 +30,32 @@
 
   .footer {
     margin: 5px 10px 0px 5px;
+    .sale {
+      display: flex;
+      align-items: end;
+      p {
+        &:nth-child(1) {
+          color: $red;
+          span {
+            color: $red;
+          }
+        }
+      }
+      p {
+        &:nth-child(2) {
+          margin-left: 15px;
+          color: $grey;
+          font-size: 14px;
+          text-decoration: line-through;
+          font-weight: 600;
+
+          span {
+            color: $grey;
+            font-size: 14px;
+          }
+        }
+      }
+    }
   }
 
   span {
