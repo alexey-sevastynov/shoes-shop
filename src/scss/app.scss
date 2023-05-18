@@ -181,7 +181,9 @@
         .main-col-2-items {
           .skeleton {
             width: 49%;
-            height: 464px;
+            height: auto;
+            rect {
+            }
           }
         }
       }
