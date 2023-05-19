@@ -3,11 +3,13 @@
   width: 250px;
 
   .filterGroup {
+    position: relative;
     padding: 24px 0;
     border-top: 1px solid rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
     span {
       display: block;
       width: 7px;
@@ -16,6 +18,25 @@
       border-right: 2px solid #000000;
 
       transform: rotate(135deg);
+    }
+
+    .filterActive {
+      position: absolute;
+      left: 90px;
+      width: 140px;
+
+      overflow: hidden;
+      display: flex;
+      p {
+        padding: 0px 2px;
+        color: $light-grey;
+      }
+      .green {
+        color: $green;
+      }
+      .red {
+        color: $red;
+      }
     }
   }
 
@@ -69,6 +90,13 @@
 
     .btn {
       display: none;
+    }
+
+    .filterGroup {
+      .filterActive {
+        width: auto;
+        overflow: visible;
+      }
     }
   }
 }

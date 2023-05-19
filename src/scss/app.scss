@@ -283,8 +283,11 @@
           cursor: pointer;
           position: absolute;
           top: 50%;
-          right: 34px;
-          transform: translateX(-50%);
+          right: 20px;
+          transform: translateY(-50%);
+          padding-top: 10px;
+          width: 24px;
+          height: 24px;
 
           &::before,
           &::after {
@@ -312,6 +315,7 @@
       .filter-mobile-footer {
         padding: 29px 10px 16px 10px;
         button {
+          cursor: pointer;
           font-size: 12px;
           display: block;
           padding: 13px;
