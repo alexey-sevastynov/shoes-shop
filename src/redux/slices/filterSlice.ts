@@ -1,5 +1,11 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice, current } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+
+type TypeItem = {
+  ua: string;
+  en: string;
+  checked: boolean;
+};
 
 type SortItem = {
   sortProperty: "rating" | "priceSale" | "-priceSale";
@@ -10,6 +16,7 @@ type SortItem = {
 interface FilterSliceState {
   categoryId: number;
   sort: SortItem;
+  types: TypeItem[];
 }
 
 const initialState: FilterSliceState = {
@@ -19,6 +26,15 @@ const initialState: FilterSliceState = {
     ua: "по популярності",
     sortProperty: "rating",
   },
+  types: [
+    { ua: "Туфлі", en: "Shoes", checked: false },
+    { ua: "Балетки", en: "Ballet", checked: false },
+    { ua: "Кросівки", en: "Sneakers", checked: false },
+    { ua: "Босоніжки", en: "Sandals", checked: false },
+    { ua: "Черевики", en: "Boots", checked: false },
+    { ua: "Ботильйони", en: "Ankle boots", checked: false },
+    { ua: "Ботфорти", en: "Jackboots", checked: false },
+  ],
 };
 
 export const filterSlice = createSlice({
@@ -28,11 +44,18 @@ export const filterSlice = createSlice({
     setSort: (state, action: PayloadAction<SortItem>) => {
       state.sort = action.payload;
     },
+    setTypes: (state, action: PayloadAction<number>) => {
+      state.types = state.types.map((obj, currentIndex) => {
+        return currentIndex === action.payload
+          ? { ...obj, checked: !obj.checked }
+          : obj;
+      });
+    },
   },
 });
 
 export const selectorSort = (state: RootState) => state.filter;
 
-export const { setSort } = filterSlice.actions;
+export const { setSort, setTypes } = filterSlice.actions;
 
 export default filterSlice.reducer;

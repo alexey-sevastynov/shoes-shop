@@ -20,20 +20,28 @@ const HomePage: React.FC<HomePageProps> = () => {
   });
 
   const { items, status } = useAppSelector(selectorShoesData);
-  const { sort } = useAppSelector(selectorSort);
+  const { sort, types } = useAppSelector(selectorSort);
 
   const dispatch = useAppDispatch();
 
   const apiShoes = async () => {
     const showSortName = sort.sortProperty.replace("-", "");
     const ascOrDesc = sort.sortProperty.includes("-") ? "asc" : "desc";
+    const showCategories = types
+      .filter((category) => category.checked)
+      .map((item) => "category=" + item.en.toLowerCase() + "&")
+      .join("");
 
-    dispatch(fetchShoes({ showSortName, ascOrDesc }));
+    dispatch(fetchShoes({ showSortName, ascOrDesc, showCategories }));
   };
 
   React.useEffect(() => {
     apiShoes();
   }, [sort]);
+
+  const onClickCategories = () => {
+    apiShoes();
+  };
 
   const showShoes = items.map((shoe) => <ItemCard key={shoe.id} {...shoe} />);
 
@@ -43,7 +51,7 @@ const HomePage: React.FC<HomePageProps> = () => {
 
   return (
     <div className="main">
-      {isMobile && <SideFilter />}
+      {isMobile && <SideFilter onClickCategories={onClickCategories} />}
       <div className="main-col-2">
         <Sort />
         <div className="main-col-2-items">

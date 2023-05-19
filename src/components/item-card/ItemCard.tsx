@@ -37,7 +37,32 @@ const ItemCard: React.FC<ItemCardProps> = ({
   const onClickId = (id: number) => {
     console.log(id);
     dispatch(setId(id));
-    dispatch(setObjShoe(items[id]));
+
+    const item = items.find((item) => item.id === id);
+    console.log(item);
+
+    if (!item) {
+      const obj = {
+        article: "",
+        category: "",
+        color: { ua: "", en: "" },
+        country: { ua: "", en: "" },
+        heelHight: { ua: "", en: "" },
+        id: 0,
+        imageURL: [],
+        material: { ua: "", en: "" },
+        materialBottom: { ua: "", en: "" },
+        name: { ua: "", en: "" },
+        price: 0,
+        priceSale: 0,
+        sale: false,
+        season: { ua: "", en: "" },
+        sizes: [36, 37, 38, 39, 40, 41],
+      };
+      dispatch(setObjShoe(obj));
+    } else {
+      dispatch(setObjShoe(item));
+    }
   };
 
   const showPrice = sale ? (

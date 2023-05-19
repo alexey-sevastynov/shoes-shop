@@ -3,17 +3,21 @@ import axios from "axios";
 import { RootState } from "../store";
 
 type FetchShoesArgs = {
-  showSortName: string;
-  ascOrDesc: string;
+  showSortName?: string;
+  ascOrDesc?: string;
+  showCategories?: string;
 };
 
 export const fetchShoes = createAsyncThunk<ShoesItem[], FetchShoesArgs>(
   "shoes/fetchByIdStatus",
   async (params) => {
-    const { showSortName, ascOrDesc } = params;
+    const { showSortName, ascOrDesc, showCategories } = params;
+
     const response = await axios.get(
-      `https://shoes-api-a3wt.onrender.com/shoes?_sort=${showSortName}&_order=${ascOrDesc}`
-      // "https://shoes-api-a3wt.onrender.com/shoes?_sort=priseSale&_order=desc"
+      `https://shoes-api-a3wt.onrender.com/shoes?${
+        showCategories === undefined ? "" : showCategories
+      }_sort=${showSortName}&_order=${ascOrDesc}`
+      // "https://shoes-api-a3wt.onrender.com/shoes?category=sandals&category=shoes&category=jackboots&"
     );
 
     return response.data;
@@ -87,6 +91,13 @@ export const shoesSlise = createSlice({
     setObjShoe(state, action: PayloadAction<ShoesItem>) {
       state.currentItem = action.payload;
     },
+    showByCategory(state, action: PayloadAction<string[]>) {
+      state.items = state.items.filter((item) => {
+        return action.payload.find(
+          (currentCategory) => item.category === currentCategory
+        );
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchShoes.pending, (state, action) => {
@@ -106,6 +117,7 @@ export const shoesSlise = createSlice({
 
 export const selectorShoesData = (state: RootState) => state.shoes;
 
-export const { setItems, setId, setObjShoe } = shoesSlise.actions;
+export const { setItems, setId, setObjShoe, showByCategory } =
+  shoesSlise.actions;
 
 export default shoesSlise.reducer;

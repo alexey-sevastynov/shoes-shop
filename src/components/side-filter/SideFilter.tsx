@@ -3,30 +3,34 @@ import styles from "./sideFilter.module.scss";
 import PriceSlider from "./PriceSlider";
 import Checkbox from "./Checkbox";
 import { allCategories } from "../../assets/listAllCategories";
-import { useAppSelector } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { allColors } from "../../assets/listAllColors";
 import { allSize } from "../../assets/listAllSizes";
 import { allSeasons } from "../../assets/listAllSeasons";
 import { selectTranslations } from "../../redux/slices/i18nSlice";
+import { selectorSort, setTypes } from "../../redux/slices/filterSlice";
+import { selectorShoesData, showByCategory } from "../../redux/slices/shoes";
 
-interface SideFilterProps {}
+interface SideFilterProps {
+  onClickCategories?: any;
+}
 
-const SideFilter: React.FC<SideFilterProps> = () => {
-  const [types, setType] = React.useState(allCategories);
+const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
+  const dispatch = useAppDispatch();
+
   const [colors, setColors] = React.useState(allColors);
   const [sizes, setSizes] = React.useState(allSize);
   const [seasons, setSeasons] = React.useState(allSeasons);
 
   const t = useAppSelector(selectTranslations);
   const { lang } = useAppSelector((state) => state.i18n);
+  const { types } = useAppSelector(selectorSort);
+  const { items } = useAppSelector(selectorShoesData);
 
   const onHandChangCategory = (index: number) => {
-    setType(
-      types.map((obj, currentIndex) => {
-        return currentIndex === index ? { ...obj, checked: !obj.checked } : obj;
-      })
-    );
+    dispatch(setTypes(index));
   };
+
   const onHandChangColor = (index: number) => {
     setColors(
       colors.map((color, currentIndex) => {
@@ -71,6 +75,9 @@ const SideFilter: React.FC<SideFilterProps> = () => {
             index={id}
           />
         ))}
+        <button className={styles.btn} onClick={onClickCategories}>
+          {t.sideFilter.show}
+        </button>
       </div>
 
       <div className={styles.filterGroup}>
