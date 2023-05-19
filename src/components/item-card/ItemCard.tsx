@@ -16,7 +16,7 @@ interface ItemCardProps {
   materialBottom?: { ua: string; en: string };
   name?: { ua: string; en: string };
   price?: number;
-  priseSale?: number;
+  priceSale?: number;
   sale?: boolean;
   season?: { ua: string; en: string };
 }
@@ -25,7 +25,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   article,
   imageURL,
   price,
-  priseSale,
+  priceSale,
   sale,
   id,
 }) => {
@@ -43,7 +43,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   const showPrice = sale ? (
     <div className={styles.sale}>
       <p>
-        {priseSale} <span>uah</span>
+        {priceSale} <span>uah</span>
       </p>
       <p>
         {price} <span>uah</span>

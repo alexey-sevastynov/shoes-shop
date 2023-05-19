@@ -10,24 +10,30 @@ import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { fetchShoes, selectorShoesData } from "../redux/slices/shoes";
 import ErrorApi from "../erorr-api/ErorrApi";
 import Skeleton from "../components/Skeleton";
+import { selectorSort } from "../redux/slices/filterSlice";
 
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
-  const { items, status } = useAppSelector(selectorShoesData);
-  console.log(status);
-  const dispatch = useAppDispatch();
   const isMobile = useMediaQuery({
     query: "(min-width: 1200px)",
   });
 
+  const { items, status } = useAppSelector(selectorShoesData);
+  const { sort } = useAppSelector(selectorSort);
+
+  const dispatch = useAppDispatch();
+
   const apiShoes = async () => {
-    dispatch(fetchShoes());
+    const showSortName = sort.sortProperty.replace("-", "");
+    const ascOrDesc = sort.sortProperty.includes("-") ? "asc" : "desc";
+
+    dispatch(fetchShoes({ showSortName, ascOrDesc }));
   };
 
   React.useEffect(() => {
     apiShoes();
-  }, []);
+  }, [sort]);
 
   const showShoes = items.map((shoe) => <ItemCard key={shoe.id} {...shoe} />);
 

@@ -14,7 +14,7 @@ type DescrptionProps = {
   materialBottom?: { ua: string; en: string };
   name?: { ua: string; en: string };
   price?: number;
-  priseSale?: number;
+  priceSale?: number;
   sale?: boolean;
   season?: { ua: string; en: string };
   sizes: number[];
@@ -31,7 +31,7 @@ const Descrption: React.FC<DescrptionProps> = ({
   country,
   sale,
   price,
-  priseSale,
+  priceSale,
   sizes,
 }) => {
   const { lang } = useAppSelector((state) => state.i18n);
@@ -44,7 +44,7 @@ const Descrption: React.FC<DescrptionProps> = ({
   const showPrice = sale ? (
     <div className={styles.sale}>
       <p>
-        {priseSale} <span>uah</span>
+        {priceSale} <span>uah</span>
       </p>
       <p>
         {price} <span>uah</span>

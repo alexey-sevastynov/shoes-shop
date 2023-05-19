@@ -2,12 +2,18 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../store";
 
-export const fetchShoes = createAsyncThunk(
+type FetchShoesArgs = {
+  showSortName: string;
+  ascOrDesc: string;
+};
+
+export const fetchShoes = createAsyncThunk<ShoesItem[], FetchShoesArgs>(
   "shoes/fetchByIdStatus",
   async (params) => {
-    // const {} = params;
+    const { showSortName, ascOrDesc } = params;
     const response = await axios.get(
-      "https://shoes-api-a3wt.onrender.com/shoes"
+      `https://shoes-api-a3wt.onrender.com/shoes?_sort=${showSortName}&_order=${ascOrDesc}`
+      // "https://shoes-api-a3wt.onrender.com/shoes?_sort=priseSale&_order=desc"
     );
 
     return response.data;
@@ -32,7 +38,7 @@ type ShoesItem = {
   materialBottom: { ua: string; en: string };
   name: { ua: string; en: string };
   price: number;
-  priseSale: number;
+  priceSale: number;
   sale: boolean;
   season: { ua: string; en: string };
   sizes: number[];
@@ -61,7 +67,7 @@ const initialState: ShoesSliceState = {
     materialBottom: { ua: "", en: "" },
     name: { ua: "", en: "" },
     price: 0,
-    priseSale: 0,
+    priceSale: 0,
     sale: false,
     season: { ua: "", en: "" },
     sizes: [36, 37, 38, 39, 40, 41],
