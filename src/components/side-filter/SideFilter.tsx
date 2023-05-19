@@ -11,6 +11,7 @@ import { selectTranslations } from "../../redux/slices/i18nSlice";
 import {
   selectorSort,
   setColors,
+  setSeasons,
   setTypes,
 } from "../../redux/slices/filterSlice";
 import { selectorShoesData, showByCategory } from "../../redux/slices/shoes";
@@ -23,11 +24,11 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
   const dispatch = useAppDispatch();
 
   const [sizes, setSizes] = React.useState(allSize);
-  const [seasons, setSeasons] = React.useState(allSeasons);
+  // const [seasons, setSeasons] = React.useState(allSeasons);
 
   const t = useAppSelector(selectTranslations);
   const { lang } = useAppSelector((state) => state.i18n);
-  const { types, colors } = useAppSelector(selectorSort);
+  const { types, colors, seasons } = useAppSelector(selectorSort);
 
   const onHandChangCategory = (index: number) => {
     dispatch(setTypes(index));
@@ -46,13 +47,14 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
     );
   };
   const onHandChangSeason = (index: number) => {
-    setSeasons(
-      seasons.map((season, currentIndex) => {
-        return currentIndex === index
-          ? { ...season, checked: !season.checked }
-          : season;
-      })
-    );
+    dispatch(setSeasons(index));
+    // setSeasons(
+    //   seasons.map((season, currentIndex) => {
+    //     return currentIndex === index
+    //       ? { ...season, checked: !season.checked }
+    //       : season;
+    //   })
+    // );
   };
 
   return (
@@ -126,7 +128,7 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
         <p>{t.sideFilter.season}</p>
         <span></span>
       </div>
-      <form>
+      <div>
         {seasons.map((obj, id) => (
           <Checkbox
             key={obj.en}
@@ -137,8 +139,10 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
           />
         ))}
 
-        <button className={styles.btn}>{t.sideFilter.show}</button>
-      </form>
+        <button className={styles.btn} onClick={onClickCategories}>
+          {t.sideFilter.show}
+        </button>
+      </div>
     </div>
   );
 };

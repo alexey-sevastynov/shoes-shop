@@ -8,6 +8,7 @@ type FetchShoesArgs = {
   showCategories?: string;
   filterByPrice: string;
   filterByColors: string;
+  filterBySeasons: string;
 };
 
 export const fetchShoes = createAsyncThunk<ShoesItem[], FetchShoesArgs>(
@@ -19,14 +20,17 @@ export const fetchShoes = createAsyncThunk<ShoesItem[], FetchShoesArgs>(
       showCategories,
       filterByPrice,
       filterByColors,
+      filterBySeasons,
     } = params;
 
     const filterCategory = showCategories === undefined ? "" : showCategories;
     const filterColor = filterByColors === undefined ? "" : filterByColors;
 
+    const filterSeason = filterBySeasons === undefined ? "" : filterBySeasons;
+
     const response = await axios.get(
-      `https://shoes-api-a3wt.onrender.com/shoes?${filterCategory}${filterColor}_sort=${showSortName}&_order=${ascOrDesc}&${filterByPrice}`
-      // `https://shoes-api-a3wt.onrender.com/shoes?color.en=white`
+      `https://shoes-api-a3wt.onrender.com/shoes?${filterCategory}${filterColor}${filterSeason}_sort=${showSortName}&_order=${ascOrDesc}&${filterByPrice}`
+      // `https://shoes-api-a3wt.onrender.com/shoes?season.en=winter`
     );
 
     return response.data;

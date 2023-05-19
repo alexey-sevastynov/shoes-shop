@@ -21,21 +21,25 @@ const HomePage: React.FC<HomePageProps> = () => {
 
   const { items, status, maxPrice, minPrice } =
     useAppSelector(selectorShoesData);
-  const { sort, types, colors } = useAppSelector(selectorSort);
+  const { sort, types, colors, seasons } = useAppSelector(selectorSort);
 
   const dispatch = useAppDispatch();
 
   const apiShoes = async () => {
     const showSortName = sort.sortProperty.replace("-", "");
     const ascOrDesc = sort.sortProperty.includes("-") ? "asc" : "desc";
+    const filterByPrice = `priceSale_gte=${minPrice}&priceSale_lte=${maxPrice}`;
     const showCategories = types
       .filter((category) => category.checked)
       .map((item) => "category=" + item.en.toLowerCase() + "&")
       .join("");
-    const filterByPrice = `priceSale_gte=${minPrice}&priceSale_lte=${maxPrice}`;
     const filterByColors = colors
       .filter((color) => color.checked)
       .map((item) => "color.en=" + item.en.toLowerCase() + "&")
+      .join("");
+    const filterBySeasons = seasons
+      .filter((season) => season.checked)
+      .map((item) => "season.en=" + item.en.toLowerCase() + "&")
       .join("");
 
     dispatch(
@@ -45,6 +49,7 @@ const HomePage: React.FC<HomePageProps> = () => {
         showCategories,
         filterByPrice,
         filterByColors,
+        filterBySeasons,
       })
     );
   };

@@ -18,6 +18,7 @@ interface FilterSliceState {
   sort: SortItem;
   types: TypeItem[];
   colors: TypeItem[];
+  seasons: TypeItem[];
 }
 
 const initialState: FilterSliceState = {
@@ -51,6 +52,12 @@ const initialState: FilterSliceState = {
     { en: "Red", ua: "Червоний", checked: false },
     { en: "Black", ua: "Чорний", checked: false },
   ],
+  seasons: [
+    { en: "DEMІ", ua: "ДЕМІ", checked: false },
+    { en: "WINTER", ua: "ЗИМА", checked: false },
+    { en: "YEAR", ua: "РІК", checked: false },
+    { en: "SUMMER", ua: "ЛІТО", checked: false },
+  ],
 };
 
 export const filterSlice = createSlice({
@@ -75,11 +82,19 @@ export const filterSlice = createSlice({
           : obj;
       });
     },
+
+    setSeasons: (state, action: PayloadAction<number>) => {
+      state.seasons = state.seasons.map((obj, currentIndex) => {
+        return currentIndex === action.payload
+          ? { ...obj, checked: !obj.checked }
+          : obj;
+      });
+    },
   },
 });
 
 export const selectorSort = (state: RootState) => state.filter;
 
-export const { setSort, setTypes, setColors } = filterSlice.actions;
+export const { setSort, setTypes, setColors, setSeasons } = filterSlice.actions;
 
 export default filterSlice.reducer;
