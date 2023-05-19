@@ -1,8 +1,19 @@
 import React from "react";
 import SideFilter from "../components/side-filter/SideFilter";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
-import { fetchShoes, selectorShoesData } from "../redux/slices/shoes";
-import { selectorSort } from "../redux/slices/filterSlice";
+import {
+  fetchShoes,
+  selectorShoesData,
+  setMaxPrice,
+  setMinPrice,
+} from "../redux/slices/shoes";
+import {
+  clearColors,
+  clearSeasons,
+  clearSizes,
+  clearTypes,
+  selectorSort,
+} from "../redux/slices/filterSlice";
 import { Link } from "react-router-dom";
 
 interface FilterMobilePageProps {}
@@ -60,6 +71,14 @@ const FilterMobilePage: React.FC<FilterMobilePageProps> = () => {
   const onClickBack = () => {
     window.history.back();
   };
+  const onClickRemoveFilter = () => {
+    dispatch(clearTypes());
+    dispatch(clearColors());
+    dispatch(clearSizes());
+    dispatch(clearSeasons());
+    dispatch(setMinPrice(999));
+    dispatch(setMaxPrice(9999));
+  };
 
   return (
     <div className="filter-mobile">
@@ -73,9 +92,20 @@ const FilterMobilePage: React.FC<FilterMobilePageProps> = () => {
         <button onClick={onClickCategories}>
           Смотреть ({items.length}) товаров
         </button>
-        <button className="back" onClick={onClickBack}>
-          Назад
-        </button>
+        {types.filter((item) => item.checked === true).length === 0 &&
+        colors.filter((item) => item.checked === true).length === 0 &&
+        sizes.filter((item) => item.checked === true).length === 0 &&
+        seasons.filter((item) => item.checked === true).length === 0 &&
+        maxPrice === 9999 &&
+        minPrice === 999 ? (
+          <button className="back" onClick={onClickBack}>
+            Назад
+          </button>
+        ) : (
+          <button className="back" onClick={onClickRemoveFilter}>
+            Видалити вибрані фільтри
+          </button>
+        )}
       </div>
     </div>
   );

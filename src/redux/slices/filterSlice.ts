@@ -83,7 +83,11 @@ export const filterSlice = createSlice({
           : obj;
       });
     },
-
+    clearTypes: (state) => {
+      state.types = state.types.map((item) => {
+        return { ...item, checked: (item.checked = false) };
+      });
+    },
     setColors: (state, action: PayloadAction<number>) => {
       state.colors = state.colors.map((obj, currentIndex) => {
         return currentIndex === action.payload
@@ -91,12 +95,21 @@ export const filterSlice = createSlice({
           : obj;
       });
     },
-
+    clearColors: (state) => {
+      state.colors = state.colors.map((item) => {
+        return { ...item, checked: (item.checked = false) };
+      });
+    },
     setSeasons: (state, action: PayloadAction<number>) => {
       state.seasons = state.seasons.map((obj, currentIndex) => {
         return currentIndex === action.payload
           ? { ...obj, checked: !obj.checked }
           : obj;
+      });
+    },
+    clearSeasons: (state) => {
+      state.seasons = state.seasons.map((item) => {
+        return { ...item, checked: (item.checked = false) };
       });
     },
     setSizes: (state, action: PayloadAction<number>) => {
@@ -106,12 +119,26 @@ export const filterSlice = createSlice({
           : obj;
       });
     },
+    clearSizes: (state) => {
+      state.sizes = state.sizes.map((item) => {
+        return { ...item, checked: (item.checked = false) };
+      });
+    },
   },
 });
 
 export const selectorSort = (state: RootState) => state.filter;
 
-export const { setSort, setTypes, setColors, setSeasons, setSizes } =
-  filterSlice.actions;
+export const {
+  setSort,
+  setTypes,
+  setColors,
+  setSeasons,
+  setSizes,
+  clearTypes,
+  clearColors,
+  clearSeasons,
+  clearSizes,
+} = filterSlice.actions;
 
 export default filterSlice.reducer;
