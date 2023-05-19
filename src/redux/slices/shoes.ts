@@ -9,6 +9,7 @@ type FetchShoesArgs = {
   filterByPrice: string;
   filterByColors: string;
   filterBySeasons: string;
+  filterBySizes: string;
 };
 
 export const fetchShoes = createAsyncThunk<ShoesItem[], FetchShoesArgs>(
@@ -21,6 +22,7 @@ export const fetchShoes = createAsyncThunk<ShoesItem[], FetchShoesArgs>(
       filterByPrice,
       filterByColors,
       filterBySeasons,
+      filterBySizes,
     } = params;
 
     const filterCategory = showCategories === undefined ? "" : showCategories;
@@ -28,9 +30,11 @@ export const fetchShoes = createAsyncThunk<ShoesItem[], FetchShoesArgs>(
 
     const filterSeason = filterBySeasons === undefined ? "" : filterBySeasons;
 
+    const filterSize = filterBySizes === undefined ? "" : filterBySizes;
+
     const response = await axios.get(
-      `https://shoes-api-a3wt.onrender.com/shoes?${filterCategory}${filterColor}${filterSeason}_sort=${showSortName}&_order=${ascOrDesc}&${filterByPrice}`
-      // `https://shoes-api-a3wt.onrender.com/shoes?season.en=winter`
+      `https://shoes-api-a3wt.onrender.com/shoes?${filterCategory}${filterColor}${filterSeason}${filterSize}_sort=${showSortName}&_order=${ascOrDesc}&${filterByPrice}`
+      // `https://shoes-api-a3wt.onrender.com/shoes?sizes_like=37`
     );
 
     return response.data;

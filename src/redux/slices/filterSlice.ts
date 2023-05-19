@@ -19,6 +19,7 @@ interface FilterSliceState {
   types: TypeItem[];
   colors: TypeItem[];
   seasons: TypeItem[];
+  sizes: { name: string; checked: boolean }[];
 }
 
 const initialState: FilterSliceState = {
@@ -58,6 +59,14 @@ const initialState: FilterSliceState = {
     { en: "YEAR", ua: "РІК", checked: false },
     { en: "SUMMER", ua: "ЛІТО", checked: false },
   ],
+  sizes: [
+    { name: "36", checked: false },
+    { name: "37", checked: false },
+    { name: "38", checked: false },
+    { name: "39", checked: false },
+    { name: "40", checked: false },
+    { name: "41", checked: false },
+  ],
 };
 
 export const filterSlice = createSlice({
@@ -90,11 +99,19 @@ export const filterSlice = createSlice({
           : obj;
       });
     },
+    setSizes: (state, action: PayloadAction<number>) => {
+      state.sizes = state.sizes.map((obj, currentIndex) => {
+        return currentIndex === action.payload
+          ? { ...obj, checked: !obj.checked }
+          : obj;
+      });
+    },
   },
 });
 
 export const selectorSort = (state: RootState) => state.filter;
 
-export const { setSort, setTypes, setColors, setSeasons } = filterSlice.actions;
+export const { setSort, setTypes, setColors, setSeasons, setSizes } =
+  filterSlice.actions;
 
 export default filterSlice.reducer;

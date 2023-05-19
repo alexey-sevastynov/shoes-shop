@@ -21,7 +21,7 @@ const HomePage: React.FC<HomePageProps> = () => {
 
   const { items, status, maxPrice, minPrice } =
     useAppSelector(selectorShoesData);
-  const { sort, types, colors, seasons } = useAppSelector(selectorSort);
+  const { sort, types, colors, seasons, sizes } = useAppSelector(selectorSort);
 
   const dispatch = useAppDispatch();
 
@@ -42,6 +42,11 @@ const HomePage: React.FC<HomePageProps> = () => {
       .map((item) => "season.en=" + item.en.toLowerCase() + "&")
       .join("");
 
+    const filterBySizes = sizes
+      .filter((size) => size.checked)
+      .map((item) => "sizes_like=" + item.name + "&")
+      .join("");
+
     dispatch(
       fetchShoes({
         showSortName,
@@ -50,6 +55,7 @@ const HomePage: React.FC<HomePageProps> = () => {
         filterByPrice,
         filterByColors,
         filterBySeasons,
+        filterBySizes,
       })
     );
   };
