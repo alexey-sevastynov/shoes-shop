@@ -19,8 +19,9 @@ const HomePage: React.FC<HomePageProps> = () => {
     query: "(min-width: 1200px)",
   });
 
-  const { items, status } = useAppSelector(selectorShoesData);
-  const { sort, types } = useAppSelector(selectorSort);
+  const { items, status, maxPrice, minPrice } =
+    useAppSelector(selectorShoesData);
+  const { sort, types, colors } = useAppSelector(selectorSort);
 
   const dispatch = useAppDispatch();
 
@@ -31,8 +32,21 @@ const HomePage: React.FC<HomePageProps> = () => {
       .filter((category) => category.checked)
       .map((item) => "category=" + item.en.toLowerCase() + "&")
       .join("");
+    const filterByPrice = `priceSale_gte=${minPrice}&priceSale_lte=${maxPrice}`;
+    const filterByColors = colors
+      .filter((color) => color.checked)
+      .map((item) => "color.en=" + item.en.toLowerCase() + "&")
+      .join("");
 
-    dispatch(fetchShoes({ showSortName, ascOrDesc, showCategories }));
+    dispatch(
+      fetchShoes({
+        showSortName,
+        ascOrDesc,
+        showCategories,
+        filterByPrice,
+        filterByColors,
+      })
+    );
   };
 
   React.useEffect(() => {

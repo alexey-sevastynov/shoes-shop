@@ -8,7 +8,11 @@ import { allColors } from "../../assets/listAllColors";
 import { allSize } from "../../assets/listAllSizes";
 import { allSeasons } from "../../assets/listAllSeasons";
 import { selectTranslations } from "../../redux/slices/i18nSlice";
-import { selectorSort, setTypes } from "../../redux/slices/filterSlice";
+import {
+  selectorSort,
+  setColors,
+  setTypes,
+} from "../../redux/slices/filterSlice";
 import { selectorShoesData, showByCategory } from "../../redux/slices/shoes";
 
 interface SideFilterProps {
@@ -18,27 +22,19 @@ interface SideFilterProps {
 const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
   const dispatch = useAppDispatch();
 
-  const [colors, setColors] = React.useState(allColors);
   const [sizes, setSizes] = React.useState(allSize);
   const [seasons, setSeasons] = React.useState(allSeasons);
 
   const t = useAppSelector(selectTranslations);
   const { lang } = useAppSelector((state) => state.i18n);
-  const { types } = useAppSelector(selectorSort);
-  const { items } = useAppSelector(selectorShoesData);
+  const { types, colors } = useAppSelector(selectorSort);
 
   const onHandChangCategory = (index: number) => {
     dispatch(setTypes(index));
   };
 
   const onHandChangColor = (index: number) => {
-    setColors(
-      colors.map((color, currentIndex) => {
-        return currentIndex === index
-          ? { ...color, checked: !color.checked }
-          : color;
-      })
-    );
+    dispatch(setColors(index));
   };
   const onHandChangSize = (index: number) => {
     setSizes(
@@ -87,13 +83,15 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
 
       <div>
         <PriceSlider valutaText={t.sideFilter.uah} />
-        <button className={styles.btn}>{t.sideFilter.show}</button>
+        <button className={styles.btn} onClick={onClickCategories}>
+          {t.sideFilter.show}
+        </button>
       </div>
       <div className={styles.filterGroup}>
         <p>{t.sideFilter.color}</p>
         <span></span>
       </div>
-      <form>
+      <div>
         {colors.map((obj, id) => (
           <Checkbox
             key={obj.en}
@@ -103,8 +101,10 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
             index={id}
           />
         ))}
-        <button className={styles.btn}>{t.sideFilter.show}</button>
-      </form>
+        <button className={styles.btn} onClick={onClickCategories}>
+          {t.sideFilter.show}
+        </button>
+      </div>
       <div className={styles.filterGroup}>
         <p>{t.sideFilter.size}</p>
         <span></span>

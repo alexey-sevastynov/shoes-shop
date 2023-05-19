@@ -6,18 +6,27 @@ type FetchShoesArgs = {
   showSortName?: string;
   ascOrDesc?: string;
   showCategories?: string;
+  filterByPrice: string;
+  filterByColors: string;
 };
 
 export const fetchShoes = createAsyncThunk<ShoesItem[], FetchShoesArgs>(
   "shoes/fetchByIdStatus",
   async (params) => {
-    const { showSortName, ascOrDesc, showCategories } = params;
+    const {
+      showSortName,
+      ascOrDesc,
+      showCategories,
+      filterByPrice,
+      filterByColors,
+    } = params;
+
+    const filterCategory = showCategories === undefined ? "" : showCategories;
+    const filterColor = filterByColors === undefined ? "" : filterByColors;
 
     const response = await axios.get(
-      `https://shoes-api-a3wt.onrender.com/shoes?${
-        showCategories === undefined ? "" : showCategories
-      }_sort=${showSortName}&_order=${ascOrDesc}`
-      // "https://shoes-api-a3wt.onrender.com/shoes?category=sandals&category=shoes&category=jackboots&"
+      `https://shoes-api-a3wt.onrender.com/shoes?${filterCategory}${filterColor}_sort=${showSortName}&_order=${ascOrDesc}&${filterByPrice}`
+      // `https://shoes-api-a3wt.onrender.com/shoes?color.en=white`
     );
 
     return response.data;
@@ -53,12 +62,16 @@ interface ShoesSliceState {
   items: ShoesItem[];
   id: number;
   currentItem: ShoesItem;
+  minPrice: number;
+  maxPrice: number;
 }
 
 const initialState: ShoesSliceState = {
   status: Status.LOADING,
   items: [],
   id: 0,
+  minPrice: 999,
+  maxPrice: 9999,
   currentItem: {
     article: "",
     category: "",
@@ -98,6 +111,12 @@ export const shoesSlise = createSlice({
         );
       });
     },
+    setMinPrice(state, action: PayloadAction<number>) {
+      state.minPrice = action.payload;
+    },
+    setMaxPrice(state, action: PayloadAction<number>) {
+      state.maxPrice = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchShoes.pending, (state, action) => {
@@ -117,7 +136,13 @@ export const shoesSlise = createSlice({
 
 export const selectorShoesData = (state: RootState) => state.shoes;
 
-export const { setItems, setId, setObjShoe, showByCategory } =
-  shoesSlise.actions;
+export const {
+  setItems,
+  setId,
+  setObjShoe,
+  showByCategory,
+  setMinPrice,
+  setMaxPrice,
+} = shoesSlise.actions;
 
 export default shoesSlise.reducer;

@@ -17,6 +17,7 @@ interface FilterSliceState {
   categoryId: number;
   sort: SortItem;
   types: TypeItem[];
+  colors: TypeItem[];
 }
 
 const initialState: FilterSliceState = {
@@ -35,6 +36,21 @@ const initialState: FilterSliceState = {
     { ua: "Ботильйони", en: "Ankle boots", checked: false },
     { ua: "Ботфорти", en: "Jackboots", checked: false },
   ],
+  colors: [
+    { en: "White", ua: "Білий", checked: false },
+    { en: "Beige", ua: "Бежевий", checked: false },
+    { en: "Azure", ua: "Блакитний", checked: false },
+    { en: "Yellow", ua: "Жовтий", checked: false },
+    { en: "Green", ua: "Зелений", checked: false },
+    { en: "Brown", ua: "Коричневий", checked: false },
+    { en: "Multi", ua: "Мульті", checked: false },
+    { en: "Pink", ua: "Рожевий", checked: false },
+    { en: "Gray", ua: "Сірий", checked: false },
+    { en: "Blue", ua: "Синій", checked: false },
+    { en: "Violet", ua: "Фіолетовий", checked: false },
+    { en: "Red", ua: "Червоний", checked: false },
+    { en: "Black", ua: "Чорний", checked: false },
+  ],
 };
 
 export const filterSlice = createSlice({
@@ -51,11 +67,19 @@ export const filterSlice = createSlice({
           : obj;
       });
     },
+
+    setColors: (state, action: PayloadAction<number>) => {
+      state.colors = state.colors.map((obj, currentIndex) => {
+        return currentIndex === action.payload
+          ? { ...obj, checked: !obj.checked }
+          : obj;
+      });
+    },
   },
 });
 
 export const selectorSort = (state: RootState) => state.filter;
 
-export const { setSort, setTypes } = filterSlice.actions;
+export const { setSort, setTypes, setColors } = filterSlice.actions;
 
 export default filterSlice.reducer;
