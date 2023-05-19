@@ -1,13 +1,23 @@
 import React from "react";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { selectTranslations, setLang } from "../redux/slices/i18nSlice";
+import { onTogglePopup } from "../redux/slices/headerSlice";
+import { selectorShoesData } from "../redux/slices/shoes";
 
 interface MenuMobilePageProps {}
 
 const MenuMobilePage: React.FC<MenuMobilePageProps> = () => {
+  const dispatch = useAppDispatch();
+  const t = useAppSelector(selectTranslations);
+
+  const { lang } = useAppSelector((state) => state.i18n);
+  const { items } = useAppSelector(selectorShoesData);
+
   return (
     <div className="menu-mobile">
       <div className="menu-mobile-header">
         <p>Shop women shoes</p>
-        <div className="header-close" />
+        <div className="header-close" onClick={() => window.history.back()} />
       </div>
       <div className="menu-mobile-search">
         <input type="text" placeholder="Search" />
@@ -29,9 +39,19 @@ const MenuMobilePage: React.FC<MenuMobilePageProps> = () => {
         <p>SALE</p>
       </div>
       <div className="menu-mobile-language">
-        <p>УКРАЇНСЬКА (UA)</p>
         <div className="language-popup">
-          <span>English</span>
+          <span
+            className={lang === "en" ? "language-popup-active" : ""}
+            onClick={() => dispatch(setLang("en"))}
+          >
+            {t.header.en}
+          </span>
+          <span
+            className={lang === "ua" ? "language-popup-active" : ""}
+            onClick={() => dispatch(setLang("ua"))}
+          >
+            {t.header.ua}
+          </span>
         </div>
       </div>
     </div>

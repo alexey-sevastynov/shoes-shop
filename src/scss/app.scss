@@ -377,6 +377,11 @@
         padding: 10px;
         font-size: 14px;
       }
+      .language-popup {
+        .language-popup-active {
+          font-weight: 600;
+        }
+      }
     }
   }
 }
