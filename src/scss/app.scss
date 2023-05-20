@@ -15,6 +15,71 @@
       flex-direction: column;
       align-items: flex-end;
 
+      .main-col-2-filter-block {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
+        width: 910px;
+
+        .main-col-2-filter {
+          border: 1px solid $light-grey;
+          margin-top: 20px;
+          margin-right: 5px;
+          position: relative;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $light-grey;
+          }
+
+          &.clear {
+            background-color: red;
+            p {
+              color: $white;
+            }
+            .close {
+              &::before,
+              &::after {
+                background: $white;
+              }
+            }
+          }
+
+          p {
+            padding: 2px 20px 2px 7px;
+            font-size: 14px;
+            color: $black;
+          }
+
+          .close {
+            position: absolute;
+            top: 50%;
+            right: 2px;
+            transform: translateY(-50%);
+            padding-top: 8px;
+            width: 14px;
+            height: 14px;
+
+            &::before,
+            &::after {
+              content: "";
+              position: absolute;
+              width: 12px;
+              height: 1px;
+              background: $black;
+            }
+
+            &::before {
+              transform: rotate(45deg);
+            }
+            &::after {
+              transform: rotate(-45deg);
+            }
+          }
+        }
+      }
+
       .main-col-2-items {
         margin-top: 20px;
         width: 910px;

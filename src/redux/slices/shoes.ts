@@ -55,6 +55,7 @@ type ShoesItem = {
   heelHight: { ua: string; en: string };
   id: number;
   imageURL: string[];
+  imageURLMain: string[];
   material: { ua: string; en: string };
   materialBottom: { ua: string; en: string };
   name: { ua: string; en: string };
@@ -88,6 +89,7 @@ const initialState: ShoesSliceState = {
     heelHight: { ua: "", en: "" },
     id: 0,
     imageURL: [],
+    imageURLMain: [],
     material: { ua: "", en: "" },
     materialBottom: { ua: "", en: "" },
     name: { ua: "", en: "" },
@@ -125,6 +127,13 @@ export const shoesSlise = createSlice({
     setMaxPrice(state, action: PayloadAction<number>) {
       state.maxPrice = action.payload;
     },
+
+    // defaultMinPrice(state) {
+    //   state.minPrice = 999;
+    // },
+    // defaultMaxPrice(state) {
+    //   state.maxPrice = 9999;
+    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchShoes.pending, (state, action) => {

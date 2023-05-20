@@ -12,6 +12,7 @@ interface ItemCardProps {
   heelHight?: { ua: string; en: string };
   id?: number;
   imageURL?: string[];
+  imageURLMain?: string[];
   material?: { ua: string; en: string };
   materialBottom?: { ua: string; en: string };
   name?: { ua: string; en: string };
@@ -24,6 +25,7 @@ interface ItemCardProps {
 const ItemCard: React.FC<ItemCardProps> = ({
   article,
   imageURL,
+  imageURLMain,
   price,
   priceSale,
   sale,
@@ -31,11 +33,13 @@ const ItemCard: React.FC<ItemCardProps> = ({
 }) => {
   const { items } = useAppSelector(selectorShoesData);
   const dispatch = useAppDispatch();
-  const firstImg = imageURL?.filter((_, id) => id === 0)[0];
-  const secondImg = imageURL?.filter((_, id) => id === 1)[0];
+  // const firstImg = imageURL?.filter((_, id) => id === 0)[0];
+  // const secondImg = imageURL?.filter((_, id) => id === 1)[0];
+
+  const firstImg = !imageURLMain ? "" : imageURLMain[0];
+  const secondImg = !imageURLMain ? "" : imageURLMain[1];
 
   const onClickId = (id: number) => {
-    console.log(id);
     dispatch(setId(id));
 
     const item = items.find((item) => item.id === id);
@@ -50,6 +54,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
         heelHight: { ua: "", en: "" },
         id: 0,
         imageURL: [],
+        imageURLMain: [],
         material: { ua: "", en: "" },
         materialBottom: { ua: "", en: "" },
         name: { ua: "", en: "" },

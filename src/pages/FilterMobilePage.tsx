@@ -14,7 +14,6 @@ import {
   clearTypes,
   selectorSort,
 } from "../redux/slices/filterSlice";
-import { Link } from "react-router-dom";
 
 interface FilterMobilePageProps {}
 

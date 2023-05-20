@@ -7,10 +7,25 @@ import Category from "../components/category/Category";
 import ItemCard from "../components/item-card/ItemCard";
 
 import { useAppDispatch, useAppSelector } from "../redux/hook";
-import { fetchShoes, selectorShoesData } from "../redux/slices/shoes";
+import {
+  fetchShoes,
+  selectorShoesData,
+  setMaxPrice,
+  setMinPrice,
+} from "../redux/slices/shoes";
 import ErrorApi from "../erorr-api/ErorrApi";
 import Skeleton from "../components/Skeleton";
-import { selectorSort } from "../redux/slices/filterSlice";
+import {
+  clearColor,
+  clearColors,
+  clearSeason,
+  clearSeasons,
+  clearSize,
+  clearSizes,
+  clearType,
+  clearTypes,
+  selectorSort,
+} from "../redux/slices/filterSlice";
 
 interface HomePageProps {}
 
@@ -62,10 +77,80 @@ const HomePage: React.FC<HomePageProps> = () => {
 
   React.useEffect(() => {
     apiShoes();
-  }, [sort]);
+  }, [types, colors, sizes, seasons, maxPrice, minPrice]);
 
   const onClickCategories = () => {
     apiShoes();
+  };
+
+  const onClickRemoveFilter = () => {
+    dispatch(clearTypes());
+    dispatch(clearColors());
+    dispatch(clearSizes());
+    dispatch(clearSeasons());
+    dispatch(setMinPrice(999));
+    dispatch(setMaxPrice(9999));
+  };
+
+  const removeActiveCategory = (
+    obj?: any,
+    maxPrice?: number,
+    minPrice?: number
+  ) => {
+    if (
+      obj.en === "White" ||
+      obj.en === "Beige" ||
+      obj.en === "Azure" ||
+      obj.en === "Yellow" ||
+      obj.en === "Green" ||
+      obj.en === "Brown" ||
+      obj.en === "Multi" ||
+      obj.en === "Pink" ||
+      obj.en === "Gray" ||
+      obj.en === "Blue" ||
+      obj.en === "Violet" ||
+      obj.en === "Red" ||
+      obj.en === "Black"
+    ) {
+      dispatch(clearColor(obj.en));
+    }
+
+    if (
+      obj.en === "Shoes" ||
+      obj.en === "Ballet" ||
+      obj.en === "Sneakers" ||
+      obj.en === "Sandals" ||
+      obj.en === "Boots" ||
+      obj.en === "Ankle boots" ||
+      obj.en === "Jackboots"
+    ) {
+      dispatch(clearType(obj.en));
+    }
+
+    if (
+      obj.name === "36" ||
+      obj.name === "37" ||
+      obj.name === "38" ||
+      obj.name === "39" ||
+      obj.name === "40" ||
+      obj.name === "41"
+    ) {
+      dispatch(clearSize(obj.name));
+    }
+
+    if (
+      obj.en === "DEMІ" ||
+      obj.en === "WINTER" ||
+      obj.en === "YEAR" ||
+      obj.en === "SUMMER"
+    ) {
+      dispatch(clearSeason(obj.en));
+    }
+
+    if (minPrice || maxPrice) {
+      dispatch(setMinPrice(999));
+      dispatch(setMaxPrice(9999));
+    }
   };
 
   const showShoes = items.map((shoe) => <ItemCard key={shoe.id} {...shoe} />);
@@ -74,11 +159,60 @@ const HomePage: React.FC<HomePageProps> = () => {
     <Skeleton key={index} />
   ));
 
+  const showActiveFilterNames = (obj: any, isSize?: boolean) => {
+    return obj
+      .filter((item: any) => item.checked === true)
+      .map((item: any) => (
+        <div
+          key={isSize ? item.name : item.en}
+          className="main-col-2-filter"
+          onClick={() => removeActiveCategory(item)}
+        >
+          <p>{isSize ? item.name : item.en}</p>
+          <div className="close" />
+        </div>
+      ));
+  };
+
   return (
     <div className="main">
       {isMobile && <SideFilter onClickCategories={onClickCategories} />}
       <div className="main-col-2">
         <Sort />
+        <div className="main-col-2-filter-block">
+          {showActiveFilterNames(types)}
+          {showActiveFilterNames(colors)}
+          {showActiveFilterNames(seasons)}
+          {showActiveFilterNames(sizes, true)}
+
+          {minPrice !== 999 || maxPrice !== 9999 ? (
+            <div
+              className="main-col-2-filter"
+              onClick={() => removeActiveCategory({}, maxPrice, minPrice)}
+            >
+              <p>
+                from {minPrice} to {maxPrice}{" "}
+              </p>
+              <div className="close" />
+            </div>
+          ) : null}
+
+          {types.filter((item) => item.checked === true).length === 0 &&
+          colors.filter((item) => item.checked === true).length === 0 &&
+          sizes.filter((item) => item.checked === true).length === 0 &&
+          seasons.filter((item) => item.checked === true).length === 0 &&
+          maxPrice === 9999 &&
+          minPrice === 999 ? null : (
+            <div
+              className="main-col-2-filter clear"
+              onClick={onClickRemoveFilter}
+            >
+              <p>clear all</p>
+              <div className="close" />
+            </div>
+          )}
+        </div>
+
         <div className="main-col-2-items">
           {status === "error" && <ErrorApi />}
           {status === "loading" ? onLoader : showShoes}

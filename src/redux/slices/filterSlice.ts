@@ -88,6 +88,12 @@ export const filterSlice = createSlice({
         return { ...item, checked: (item.checked = false) };
       });
     },
+    clearType: (state, action: PayloadAction<string>) => {
+      state.types = state.types.map((item) =>
+        item.en === action.payload ? { ...item, checked: false } : { ...item }
+      );
+    },
+
     setColors: (state, action: PayloadAction<number>) => {
       state.colors = state.colors.map((obj, currentIndex) => {
         return currentIndex === action.payload
@@ -98,6 +104,13 @@ export const filterSlice = createSlice({
     clearColors: (state) => {
       state.colors = state.colors.map((item) => {
         return { ...item, checked: (item.checked = false) };
+      });
+    },
+    clearColor: (state, action: PayloadAction<string>) => {
+      state.colors = state.colors.map((item) => {
+        return item.en === action.payload
+          ? { ...item, checked: (item.checked = false) }
+          : { ...item };
       });
     },
     setSeasons: (state, action: PayloadAction<number>) => {
@@ -112,6 +125,13 @@ export const filterSlice = createSlice({
         return { ...item, checked: (item.checked = false) };
       });
     },
+    clearSeason: (state, action: PayloadAction<string>) => {
+      state.seasons = state.seasons.map((item) => {
+        return item.en === action.payload
+          ? { ...item, checked: (item.checked = false) }
+          : { ...item };
+      });
+    },
     setSizes: (state, action: PayloadAction<number>) => {
       state.sizes = state.sizes.map((obj, currentIndex) => {
         return currentIndex === action.payload
@@ -122,6 +142,13 @@ export const filterSlice = createSlice({
     clearSizes: (state) => {
       state.sizes = state.sizes.map((item) => {
         return { ...item, checked: (item.checked = false) };
+      });
+    },
+    clearSize: (state, action: PayloadAction<string>) => {
+      state.sizes = state.sizes.map((item) => {
+        return item.name === action.payload
+          ? { ...item, checked: (item.checked = false) }
+          : { ...item };
       });
     },
   },
@@ -139,6 +166,10 @@ export const {
   clearColors,
   clearSeasons,
   clearSizes,
+  clearType,
+  clearColor,
+  clearSize,
+  clearSeason,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
