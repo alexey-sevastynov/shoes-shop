@@ -77,7 +77,7 @@ const HomePage: React.FC<HomePageProps> = () => {
 
   React.useEffect(() => {
     apiShoes();
-  }, [types, colors, sizes, seasons, maxPrice, minPrice]);
+  }, [sort, types, colors, sizes, seasons, maxPrice, minPrice]);
 
   const onClickCategories = () => {
     apiShoes();

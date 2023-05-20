@@ -26,7 +26,7 @@ const FilterMobilePage: React.FC<FilterMobilePageProps> = () => {
 
   const apiShoes = async () => {
     const showSortName = sort.sortProperty.replace("-", "");
-    const ascOrDesc = sort.sortProperty.includes("-") ? "asc" : "desc";
+    const ascOrDesc = (await sort.sortProperty.includes("-")) ? "asc" : "desc";
     const filterByPrice = `priceSale_gte=${minPrice}&priceSale_lte=${maxPrice}`;
     const showCategories = types
       .filter((category) => category.checked)
