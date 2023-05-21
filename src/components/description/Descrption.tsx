@@ -1,26 +1,42 @@
 import React from "react";
 import styles from "./description.module.scss";
-import { useAppSelector } from "../../redux/hook";
+
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { addItem, selectorBasket } from "../../redux/slices/basketSlice";
+import { selectorShoesData } from "../../redux/slices/shoes";
+import { type } from "os";
 
 type DescrptionProps = {
-  article?: string;
+  article: string;
   category?: string;
-  color?: { ua: string; en: string };
-  country?: { ua: string; en: string };
-  heelHight?: { ua: string; en: string };
+  color: { ua: string; en: string };
+  country: { ua: string; en: string };
+  heelHight: { ua: string; en: string };
   id?: number;
   imageURL?: string[];
-  material?: { ua: string; en: string };
-  materialBottom?: { ua: string; en: string };
-  name?: { ua: string; en: string };
-  price?: number;
-  priceSale?: number;
-  sale?: boolean;
-  season?: { ua: string; en: string };
+  material: { ua: string; en: string };
+  materialBottom: { ua: string; en: string };
+  name: { ua: string; en: string };
+  price: number;
+  priceSale: number;
+  sale: boolean;
+  season: { ua: string; en: string };
   sizes: number[];
 };
 
+type currentObjItem = {
+  article: string;
+  id: number;
+  imageURL: string[];
+  name: { ua: string; en: string };
+  priceSale: number;
+  sizes: number;
+  count?: number;
+  totalPrice: number;
+};
+
 const Descrption: React.FC<DescrptionProps> = ({
+  id,
   name,
   article,
   season,
@@ -33,10 +49,26 @@ const Descrption: React.FC<DescrptionProps> = ({
   price,
   priceSale,
   sizes,
+  imageURL,
 }) => {
+  const dispatch = useAppDispatch();
+  const [activeSizes, setActiveSizes] = React.useState(0);
   const { lang } = useAppSelector((state) => state.i18n);
+  const { currentItem } = useAppSelector(selectorShoesData);
+  const { items } = useAppSelector(selectorBasket);
 
-  const showTranslete = (obj: any) => {
+  if (items) {
+    const object = items.find(
+      (item) => item.id === id && item.sizes === activeSizes
+    );
+    console.log(object?.count, "+");
+  }
+
+  const showTranslete = (obj: {
+    ua: string;
+    en: string;
+    checked?: boolean;
+  }) => {
     const { ua, en } = obj;
     return lang === "ua" ? ua : en;
   };
@@ -55,6 +87,29 @@ const Descrption: React.FC<DescrptionProps> = ({
       {price} <span>uah</span>
     </p>
   );
+  const onClickSizes = (index: number) => {
+    setActiveSizes(index);
+  };
+
+  const onClickAdd = () => {
+    const { article, name, id, imageURL, priceSale } = currentItem;
+
+    const currentObj: currentObjItem = {
+      article: article,
+      id: id,
+      imageURL: imageURL,
+      name: name,
+      priceSale: priceSale,
+      sizes: activeSizes,
+      count: 0,
+      totalPrice: 0,
+    };
+    if (currentObj.sizes === 0) {
+      alert("choise size!");
+    } else {
+      dispatch(addItem(currentObj));
+    }
+  };
 
   return (
     <div className={styles.root}>
@@ -78,11 +133,13 @@ const Descrption: React.FC<DescrptionProps> = ({
 
       <div className={styles.possibleSizes}>
         {sizes.map((size) => (
-          <button key={size}>{size}</button>
+          <button key={size} onClick={() => onClickSizes(size)}>
+            {size}
+          </button>
         ))}
       </div>
 
-      <div className={styles.btnToBasket}>
+      <div className={styles.btnToBasket} onClick={onClickAdd}>
         <svg
           width="17"
           height="18"

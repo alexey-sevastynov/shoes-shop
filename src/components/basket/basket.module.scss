@@ -24,6 +24,12 @@
         display: flex;
         gap: 40px;
         border-bottom: 1px solid $light-grey;
+        img {
+          width: 205px;
+          object-fit: cover;
+          object-position: 0px 75%;
+          height: 205px;
+        }
 
         &:not(:first-child) {
           padding-top: 15px;
@@ -424,6 +430,10 @@
         .basketCard {
           flex-direction: column;
           gap: 10px;
+          img {
+            width: 100%;
+            height: auto;
+          }
           .basketCardDescription {
             .title {
               text-align: center;

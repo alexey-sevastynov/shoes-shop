@@ -1,36 +1,89 @@
 import React from "react";
 import styles from "./basket.module.scss";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import {
+  addItem,
+  minusItem,
+  plusItem,
+  removeItem,
+  selectorBasket,
+} from "../../redux/slices/basketSlice";
 
 interface CardBasket {
-  t: any;
+  t?: any;
+  article?: string;
+  id?: number;
+  imageURL?: string[];
+  name?: { ua: string; en: string };
+  priceSale?: number;
+  sizes?: number;
+  count?: any;
+  totalPrice?: number;
 }
 
-const CardBasket: React.FC<CardBasket> = ({ t }) => {
+const CardBasket: React.FC<CardBasket> = ({
+  t,
+
+  article,
+  id,
+  imageURL,
+  name,
+  priceSale,
+  sizes,
+  count,
+  totalPrice,
+}) => {
+  const dispatch = useAppDispatch();
+
+  const onClickRemove = () => {
+    const obj = {
+      id: id ? id : 0,
+      sizes: sizes ? sizes : 36,
+    };
+    if (window.confirm(`Do you want delete?${id} - id, ${sizes} - sizes`)) {
+      dispatch(removeItem(obj));
+    }
+  };
+
+  const onClickMinus = () => {
+    const obj = {
+      id: id ? id : 0,
+      sizes: sizes ? sizes : 36,
+    };
+    dispatch(minusItem(obj));
+  };
+  const onClickPlus = () => {
+    const obj = {
+      id: id ? id : 0,
+      sizes: sizes ? sizes : 36,
+    };
+    dispatch(plusItem(obj));
+  };
+
   return (
     <div className={styles.basketCard}>
-      <img
-        src="https://respect-shoes.com.ua/image/cache/data/products/02422-220-BLACK/02422-220-BLACK-1-205x205.jpg"
-        alt="shoe"
-      />
+      <img src={!imageURL ? "" : imageURL[0]} alt="shoe" />
       <div className={styles.basketCardDescription}>
-        <p className={styles.title}>Жіночі босоніжки Respect чорний</p>
+        <p className={styles.title}>{name?.en}</p>
         <div>
           <span>
-            {t.basket.article}: <button>02422 - 220 BLACK</button>
+            {t.basket.article}: <button>{article}</button>
           </span>
           <div>
-            <span> {t.basket.size}: 39</span>
+            <span>
+              {t.basket.size}: {sizes}
+            </span>
           </div>
         </div>
         <div className={styles.count}>
-          <button>-</button>
-          <input type="number" />
-          <button>+</button>
+          <button onClick={onClickMinus}>-</button>
+          <input type="number" value={count} />
+          <button onClick={onClickPlus}>+</button>
         </div>
         <p className={styles.price}>
-          {t.basket.price}: 3,990 {t.basket.uah}
+          {t.basket.price}: {totalPrice} {t.basket.uah}
         </p>
-        <div className={styles.btnRemove}>
+        <div className={styles.btnRemove} onClick={onClickRemove}>
           <div className={styles.close} />
           <p> {t.basket.remove}</p>
         </div>

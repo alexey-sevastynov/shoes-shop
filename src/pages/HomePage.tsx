@@ -1,20 +1,15 @@
 import React from "react";
-import { useMediaQuery } from "react-responsive";
-import SideFilter from "../components/side-filter/SideFilter";
 
+import { useMediaQuery } from "react-responsive";
+
+import SideFilter from "../components/side-filter/SideFilter";
 import Sort from "../components/sort/Sort";
 import Category from "../components/category/Category";
 import ItemCard from "../components/item-card/ItemCard";
+import Skeleton from "../components/Skeleton";
 
 import { useAppDispatch, useAppSelector } from "../redux/hook";
-import {
-  fetchShoes,
-  selectorShoesData,
-  setMaxPrice,
-  setMinPrice,
-} from "../redux/slices/shoes";
 import ErrorApi from "../erorr-api/ErorrApi";
-import Skeleton from "../components/Skeleton";
 import {
   clearColor,
   clearColors,
@@ -26,6 +21,12 @@ import {
   clearTypes,
   selectorSort,
 } from "../redux/slices/filterSlice";
+import {
+  fetchShoes,
+  selectorShoesData,
+  setMaxPrice,
+  setMinPrice,
+} from "../redux/slices/shoes";
 
 interface HomePageProps {}
 

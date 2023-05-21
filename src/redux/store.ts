@@ -3,6 +3,7 @@ import i18nSlice from "./slices/i18nSlice";
 import headerSlice from "./slices/headerSlice";
 import shoesSlise from "./slices/shoes";
 import filterSlice from "./slices/filterSlice";
+import basketSlice from "./slices/basketSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     header: headerSlice,
     shoes: shoesSlise,
     filter: filterSlice,
+    basket: basketSlice,
   },
 });
 
