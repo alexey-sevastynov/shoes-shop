@@ -4,6 +4,7 @@ import headerSlice from "./slices/headerSlice";
 import shoesSlise from "./slices/shoes";
 import filterSlice from "./slices/filterSlice";
 import basketSlice from "./slices/basketSlice";
+import favoriteSlice from "./slices/favoriteSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     shoes: shoesSlise,
     filter: filterSlice,
     basket: basketSlice,
+    favorite: favoriteSlice,
   },
 });
 

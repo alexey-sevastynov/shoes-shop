@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { addItem, selectorBasket } from "../../redux/slices/basketSlice";
 import { selectorShoesData } from "../../redux/slices/shoes";
 import { type } from "os";
+import { addFavorite } from "../../redux/slices/favoriteSlice";
 
 type DescrptionProps = {
   article: string;
@@ -111,6 +112,22 @@ const Descrption: React.FC<DescrptionProps> = ({
     }
   };
 
+  const onClickAddFavorite = () => {
+    const { article, name, id, imageURL, priceSale } = currentItem;
+
+    const obj = {
+      article: article,
+      id: id,
+      imageURL: imageURL,
+      name: name,
+      priceSale: priceSale,
+      sale: false,
+      price: price,
+    };
+
+    dispatch(addFavorite(obj));
+  };
+
   return (
     <div className={styles.root}>
       <div className={styles.title}>{showTranslete(name)}</div>
@@ -133,7 +150,11 @@ const Descrption: React.FC<DescrptionProps> = ({
 
       <div className={styles.possibleSizes}>
         {sizes.map((size) => (
-          <button key={size} onClick={() => onClickSizes(size)}>
+          <button
+            className={activeSizes === size ? styles.active : null}
+            key={size}
+            onClick={() => onClickSizes(size)}
+          >
             {size}
           </button>
         ))}
@@ -162,7 +183,7 @@ const Descrption: React.FC<DescrptionProps> = ({
         </svg>
         <p>ДОДАТИ ДО КОШИКА</p>
       </div>
-      <div className={styles.btnToFavorite}>
+      <div className={styles.btnToFavorite} onClick={onClickAddFavorite}>
         <svg
           width="20"
           height="20"

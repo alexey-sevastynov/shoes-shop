@@ -34,29 +34,22 @@ const CardBasket: React.FC<CardBasket> = ({
   totalPrice,
 }) => {
   const dispatch = useAppDispatch();
+  const obj = {
+    id: id ? id : 0,
+    sizes: sizes ? sizes : 36,
+    priceSale: priceSale ? priceSale : 0,
+  };
 
   const onClickRemove = () => {
-    const obj = {
-      id: id ? id : 0,
-      sizes: sizes ? sizes : 36,
-    };
     if (window.confirm(`Do you want delete?${id} - id, ${sizes} - sizes`)) {
       dispatch(removeItem(obj));
     }
   };
 
   const onClickMinus = () => {
-    const obj = {
-      id: id ? id : 0,
-      sizes: sizes ? sizes : 36,
-    };
     dispatch(minusItem(obj));
   };
   const onClickPlus = () => {
-    const obj = {
-      id: id ? id : 0,
-      sizes: sizes ? sizes : 36,
-    };
     dispatch(plusItem(obj));
   };
 
@@ -76,8 +69,10 @@ const CardBasket: React.FC<CardBasket> = ({
           </div>
         </div>
         <div className={styles.count}>
-          <button onClick={onClickMinus}>-</button>
-          <input type="number" value={count} />
+          <button disabled={count === 1} onClick={onClickMinus}>
+            -
+          </button>
+          <input disabled type="number" value={count} />
           <button onClick={onClickPlus}>+</button>
         </div>
         <p className={styles.price}>

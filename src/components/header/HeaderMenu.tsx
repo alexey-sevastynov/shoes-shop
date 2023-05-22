@@ -3,11 +3,13 @@ import styles from "./header.module.scss";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../redux/hook";
 import { selectorBasket } from "../../redux/slices/basketSlice";
+import { selectorFavorite } from "../../redux/slices/favoriteSlice";
 
 type HeaderMenuProps = {};
 
 const HeaderMenu: React.FC<HeaderMenuProps> = () => {
   const { totalCount } = useAppSelector(selectorBasket);
+  const { itemsFavorite } = useAppSelector(selectorFavorite);
 
   return (
     <div className={styles.blockTools}>
@@ -34,8 +36,11 @@ const HeaderMenu: React.FC<HeaderMenuProps> = () => {
             ></path>
           </svg>
         </Link>
-        <div className={styles.circle}>{totalCount}</div>
+        {totalCount === 0 ? null : (
+          <div className={styles.circle}>{totalCount}</div>
+        )}
       </div>
+
       <div className={styles.favorite}>
         <Link to="/favorite">
           <svg
@@ -51,7 +56,9 @@ const HeaderMenu: React.FC<HeaderMenuProps> = () => {
             ></path>
           </svg>
         </Link>
-        <div className={styles.circle}>2</div>
+        {itemsFavorite.length === 0 ? null : (
+          <div className={styles.circle}>{itemsFavorite.length}</div>
+        )}
       </div>
     </div>
   );

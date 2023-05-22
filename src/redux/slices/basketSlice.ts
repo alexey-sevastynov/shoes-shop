@@ -70,7 +70,7 @@ export const basketSlice = createSlice({
 
     minusItem: (
       state,
-      action: PayloadAction<{ id: number; sizes: number }>
+      action: PayloadAction<{ id: number; sizes: number; priceSale: number }>
     ) => {
       const findItem = state.items.find(
         (obj) =>
@@ -79,6 +79,7 @@ export const basketSlice = createSlice({
 
       if (findItem) {
         findItem.count--;
+        findItem.totalPrice = findItem.count * action.payload.priceSale;
         state.totalPrice = state.items.reduce(
           (sum, obj) => obj.priceSale * obj.count + sum,
           0
@@ -86,7 +87,10 @@ export const basketSlice = createSlice({
         state.totalCount = state.items.reduce((sum, obj) => obj.count + sum, 0);
       }
     },
-    plusItem: (state, action: PayloadAction<{ id: number; sizes: number }>) => {
+    plusItem: (
+      state,
+      action: PayloadAction<{ id: number; sizes: number; priceSale: number }>
+    ) => {
       const findItem = state.items.find(
         (obj) =>
           obj.id === action.payload.id && obj.sizes === action.payload.sizes
@@ -94,6 +98,7 @@ export const basketSlice = createSlice({
 
       if (findItem) {
         findItem.count++;
+        findItem.totalPrice = findItem.count * action.payload.priceSale;
         state.totalPrice = state.items.reduce(
           (sum, obj) => obj.priceSale * obj.count + sum,
           0

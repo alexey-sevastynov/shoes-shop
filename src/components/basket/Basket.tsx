@@ -18,42 +18,46 @@ const Basket: React.FC<BasketProps> = () => {
   return (
     <div className={styles.root}>
       <p className={styles.title}>{t.basket.basket}</p>
-      <div className={styles.basketCards}>
-        <div className={styles.basketCardsCol_1}>
-          {items.map((item) => (
-            <CardBasket t={t} {...item} />
-          ))}
+      {items.length !== 0 ? (
+        <div className={styles.basketCards}>
+          <div className={styles.basketCardsCol_1}>
+            {items.map((item) => (
+              <CardBasket t={t} {...item} />
+            ))}
 
-          <div className={styles.price}>
-            <div className={styles.priceCol_1}>
-              <p>{t.basket.goods}:</p>
-              <span>{totalCount}</span>
-            </div>
-            <div className={styles.priceCol_2}>
-              <p>{t.basket.summ}:</p>
-              <span>{totalPrice} грн</span>
-            </div>
-          </div>
-        </div>
-        <div className={styles.basketCardsCol_2}>
-          <Ordering t={t} />
-          <Delivery t={t} />
-          <Comment />
-          <div className={styles.agreement}>
-            <div className={styles.header}>
-              <div className={styles.posNum}>4</div>
-              <p>{t.basket.agreement}</p>
-            </div>
-            <div>
-              <input type="checkbox" name="agreement" />
-              <label htmlFor="agreement">
-                {t.basket.accept} <button>{t.basket.agreement}</button>
-              </label>
+            <div className={styles.price}>
+              <div className={styles.priceCol_1}>
+                <p>{t.basket.goods}:</p>
+                <span>{totalCount}</span>
+              </div>
+              <div className={styles.priceCol_2}>
+                <p>{t.basket.summ}:</p>
+                <span>{totalPrice} грн</span>
+              </div>
             </div>
           </div>
-          <button className={styles.btnForm}>{t.basket.order}</button>
+          <div className={styles.basketCardsCol_2}>
+            <Ordering t={t} />
+            <Delivery t={t} />
+            <Comment />
+            <div className={styles.agreement}>
+              <div className={styles.header}>
+                <div className={styles.posNum}>4</div>
+                <p>{t.basket.agreement}</p>
+              </div>
+              <div>
+                <input type="checkbox" name="agreement" />
+                <label htmlFor="agreement">
+                  {t.basket.accept} <button>{t.basket.agreement}</button>
+                </label>
+              </div>
+            </div>
+            <button className={styles.btnForm}>{t.basket.order}</button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <p>Ваш кошик пустий</p>
+      )}
     </div>
   );
 };
