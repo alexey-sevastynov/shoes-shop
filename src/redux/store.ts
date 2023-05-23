@@ -5,6 +5,8 @@ import shoesSlise from "./slices/shoes";
 import filterSlice from "./slices/filterSlice";
 import basketSlice from "./slices/basketSlice";
 import favoriteSlice from "./slices/favoriteSlice";
+import npSlice from "./slices/npSlice";
+import npPointsSlice from "./slices/npPoints";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ const store = configureStore({
     filter: filterSlice,
     basket: basketSlice,
     favorite: favoriteSlice,
+    np: npSlice,
+    npPoints: npPointsSlice,
   },
 });
 

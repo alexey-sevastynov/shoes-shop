@@ -1,31 +1,38 @@
 import React from "react";
 import styles from "./basket.module.scss";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { getActiveCity, getActiveRef } from "../../redux/slices/npSlice";
 
-type CityListProps = {};
+type CityListProps = {
+  city?: string;
+  setToggleCity?: any;
+  toggleCity?: boolean;
+  setValue?: any;
+  value?: string;
+};
 
-const CityList: React.FC<CityListProps> = () => {
+const CityList: React.FC<CityListProps> = ({
+  city,
+  setToggleCity,
+  setValue,
+  value,
+}) => {
+  const dispatch = useAppDispatch();
+  const { itemsNp } = useAppSelector((state) => state.np);
+
+  const onClickCityActive = (city: any) => {
+    dispatch(getActiveCity(city));
+    setToggleCity(false);
+    setValue(city);
+
+    dispatch(getActiveRef(itemsNp));
+  };
   return (
-    <ul className={styles.popup}>
-      <li className={styles.active}>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-    </ul>
+    <>
+      <li className={styles.active} onClick={() => onClickCityActive(city)}>
+        {city}
+      </li>
+    </>
   );
 };
 

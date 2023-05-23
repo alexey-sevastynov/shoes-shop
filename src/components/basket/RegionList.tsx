@@ -1,31 +1,28 @@
 import React from "react";
 import styles from "./basket.module.scss";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { getActiveRegion } from "../../redux/slices/npSlice";
 
-interface RegionProps {}
+interface RegionProps {
+  region?: string;
+}
 
-const RegionList: React.FC<RegionProps> = () => {
+const RegionList: React.FC<RegionProps> = ({ region }) => {
+  const dispatch = useAppDispatch();
+  const { activeRegion } = useAppSelector((state) => state.np);
+  const clickRegionActive = (region: any) => {
+    dispatch(getActiveRegion(region));
+  };
+
   return (
-    <ul className={styles.popup}>
-      <li className={styles.active}>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-      <li>Dnipropetrovska</li>
-    </ul>
+    <>
+      <li
+        className={activeRegion === region ? styles.active : null}
+        onClick={() => clickRegionActive(region)}
+      >
+        {region}
+      </li>
+    </>
   );
 };
 
