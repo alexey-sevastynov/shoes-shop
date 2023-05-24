@@ -5,13 +5,18 @@ import { getActiveBranch } from "../../redux/slices/npPoints";
 
 type BrancesNpListProps = {
   branch?: string;
+  setValueBranch?: any;
 };
 
-const BrancesNpList: React.FC<BrancesNpListProps> = ({ branch }) => {
+const BrancesNpList: React.FC<BrancesNpListProps> = ({
+  branch,
+  setValueBranch,
+}) => {
   const dispatch = useAppDispatch();
   const { activeBranch } = useAppSelector((state) => state.npPoints);
   const clickBranchActive = (branch: any) => {
     dispatch(getActiveBranch(branch));
+    setValueBranch(branch);
   };
 
   return (

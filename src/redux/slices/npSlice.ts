@@ -85,9 +85,11 @@ const npSlice = createSlice({
         state.cityRef = res.ref;
       }
     },
+    clearRef: (state, action) => {
+      state.cityRef = action.payload;
+    },
 
     getCitiesRegion: (state, action) => {
-      console.log(action);
       const description = action.payload.map((elem: Record<string, any>) => {
         return {
           description: elem.Description,
@@ -122,6 +124,7 @@ export const {
   getCitiesRegion,
   getActiveCity,
   getActiveRef,
+  clearRef,
 } = npSlice.actions;
 
 export default npSlice.reducer;

@@ -35,11 +35,25 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
     (state) => state.npPoints
   );
   const [value, setValue] = React.useState<string>("");
+
+  //region
   const [toggleRegion, setToggleRegion] = React.useState(false);
   const regionRef = React.useRef<HTMLDivElement>(null);
+  //city
   const [toggleCity, setToggleCity] = React.useState(false);
+  const cityPopupRef = React.useRef<HTMLDivElement>(null);
+  //branch
+  const [valueBranch, setValueBranch] = React.useState<string>("");
   const [toggleBranche, setToggleBranche] = React.useState(false);
   const branchRef = React.useRef<HTMLDivElement>(null);
+  //delivery method
+  const [toggleDelivMethod, setToggleDelivMethod] = React.useState(false);
+  const [delivMethod, setDelivMethod] = React.useState("");
+  const delivMethodRef = React.useRef<HTMLDivElement>(null);
+  //pay method
+  const [togglePayMethod, setTogglePayMethod] = React.useState(false);
+  const [payMethod, setPayMethod] = React.useState("");
+  const paydRef = React.useRef<HTMLDivElement>(null);
 
   const apiNewPosta = async () => {
     dispatch(fetchNp());
@@ -54,6 +68,21 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
       if (branchRef.current && !e.composedPath().includes(branchRef.current)) {
         setToggleBranche(false);
       }
+      if (
+        cityPopupRef.current &&
+        !e.composedPath().includes(cityPopupRef.current)
+      ) {
+        setToggleCity(false);
+      }
+      if (
+        delivMethodRef.current &&
+        !e.composedPath().includes(delivMethodRef.current)
+      ) {
+        setToggleDelivMethod(false);
+      }
+      if (paydRef.current && !e.composedPath().includes(paydRef.current)) {
+        setTogglePayMethod(false);
+      }
     };
 
     document.body.addEventListener("click", handleOutsideClick);
@@ -65,7 +94,7 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
   }, []);
 
   React.useEffect(() => {
-    if (isComponentMounted) {
+    if (isComponentMounted && cityRef !== "") {
       dispatch(fetchPointNp({ cityRef }));
     }
   }, [cityRef]);
@@ -88,9 +117,25 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
     }
   };
 
+  const clickDelivMethod = () => {
+    setToggleDelivMethod(!toggleDelivMethod);
+  };
+
+  const activeDelivMethod = (nameMethod: string) => {
+    setDelivMethod(nameMethod);
+  };
+
+  const clickPayMethod = () => {
+    setTogglePayMethod(!togglePayMethod);
+  };
+
+  const activePayMethod = (nameMethod: string) => {
+    setPayMethod(nameMethod);
+  };
+
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
-    if (value.length > 1) {
+    if (event.target.value.length >= 1) {
       setToggleCity(true);
     } else {
       setToggleCity(false);
@@ -102,6 +147,20 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
       dispatch(getActiveRef(itemsNp));
     }
   };
+  const onChangeInputBranch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValueBranch(event.target.value);
+    if (event.target.value.length >= 1) {
+      setToggleBranche(true);
+    } else {
+      setToggleCity(false);
+    }
+
+    // if (allCity.find((item) => item === event.target.value)) {
+    //   setToggleCity(false);
+    //   dispatch(getActiveCity(event.target.value));
+    //   dispatch(getActiveRef(itemsNp));
+    // }
+  };
 
   return (
     <div className={styles.delivery}>
@@ -112,6 +171,7 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
       <div className={styles.region} ref={regionRef} onClick={clickRegion}>
         <p>{activeRegion === "" ? t.basket.region : activeRegion}</p>
         <svg
+          style={toggleRegion ? { transform: "rotate(180deg)" } : {}}
           width="12"
           height="8"
           viewBox="0 0 12 8"
@@ -126,13 +186,13 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
         {toggleRegion && (
           <ul className={styles.popup}>
             {allRegions.map((region) => (
-              <RegionList key={region} region={region} />
+              <RegionList key={region} region={region} setValue={setValue} />
             ))}
             <RegionList />
           </ul>
         )}
       </div>
-      <div className={styles.city} onClick={clickCity}>
+      <div className={styles.city} ref={cityPopupRef} onClick={clickCity}>
         <input
           placeholder={`${t.basket.city} *`}
           onChange={(event) => onChangeInput(event)}
@@ -157,8 +217,12 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
           </ul>
         )}
       </div>
-      <div className={styles.deliveryMethod}>
-        <p>Спосіб доставки *</p>
+      <div
+        className={styles.deliveryMethod}
+        ref={delivMethodRef}
+        onClick={clickDelivMethod}
+      >
+        {delivMethod === "" ? <p>Спосіб доставки *</p> : <p>{delivMethod}</p>}
         <svg
           width="12"
           height="8"
@@ -171,35 +235,85 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
             fill="#13110C"
           ></path>
         </svg>
-        {/* <ul className={styles.popup}>
-          <li className={styles.active}>Віділення Нової пошти</li>
-          <li>Адресна доставка</li>
-        </ul> */}
-      </div>
-      <div className={styles.branches} ref={branchRef} onClick={clickBranches}>
-        <p>{activeBranch === "" ? "Введіть номер складу *" : activeBranch}</p>
-        <svg
-          width="12"
-          height="8"
-          viewBox="0 0 12 8"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0.34375 6.35589L6.00042 0.699219L11.6571 6.35589L10.7144 7.29922L6.00042 2.58455L1.28642 7.29922L0.34375 6.35589Z"
-            fill="#13110C"
-          ></path>
-        </svg>
-        {toggleBranche && (
+        {toggleDelivMethod && (
           <ul className={styles.popup}>
-            {allBranches.map((branch) => (
-              <BrancesNpList key={branch} branch={branch} />
+            {["Віділення Нової пошти", "Адресна доставка"].map((item) => (
+              <li
+                key={item}
+                className={delivMethod === item ? styles.active : null}
+                onClick={() => activeDelivMethod(item)}
+              >
+                {item}
+              </li>
             ))}
           </ul>
         )}
       </div>
-      <div className={styles.adress}>
-        <input type="text" placeholder="Adress" />
+      {delivMethod === "Віділення Нової пошти" && (
+        <div
+          className={styles.branches}
+          ref={branchRef}
+          onClick={clickBranches}
+        >
+          <input
+            type="adress"
+            placeholder="Введіть номер складу *"
+            onChange={(e) => onChangeInputBranch(e)}
+            value={valueBranch}
+          />
+
+          <svg
+            width="12"
+            height="8"
+            viewBox="0 0 12 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0.34375 6.35589L6.00042 0.699219L11.6571 6.35589L10.7144 7.29922L6.00042 2.58455L1.28642 7.29922L0.34375 6.35589Z"
+              fill="#13110C"
+            ></path>
+          </svg>
+          {toggleBranche && (
+            <ul className={styles.popup}>
+              {allBranches
+                .filter((item) =>
+                  item.toLowerCase().includes(valueBranch.toLowerCase())
+                )
+                .map((branch) => (
+                  <BrancesNpList
+                    key={branch}
+                    branch={branch}
+                    setValueBranch={setValueBranch}
+                  />
+                ))}
+            </ul>
+          )}
+        </div>
+      )}
+      {delivMethod === "Адресна доставка" && (
+        <div className={styles.adress}>
+          <input type="text" placeholder="Adress" />
+          <svg
+            width="12"
+            height="8"
+            viewBox="0 0 12 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0.34375 6.35589L6.00042 0.699219L11.6571 6.35589L10.7144 7.29922L6.00042 2.58455L1.28642 7.29922L0.34375 6.35589Z"
+              fill="#13110C"
+            ></path>
+          </svg>
+        </div>
+      )}
+      <div
+        className={styles.PriceMethod}
+        ref={paydRef}
+        onClick={clickPayMethod}
+      >
+        {payMethod === "" ? <p>Спосіб оплати *</p> : <p>{payMethod}</p>}
         <svg
           width="12"
           height="8"
@@ -212,25 +326,28 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
             fill="#13110C"
           ></path>
         </svg>
-      </div>
-      <div className={styles.PriceMethod}>
-        <p>Спосіб оплати *</p>
-        <svg
-          width="12"
-          height="8"
-          viewBox="0 0 12 8"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0.34375 6.35589L6.00042 0.699219L11.6571 6.35589L10.7144 7.29922L6.00042 2.58455L1.28642 7.29922L0.34375 6.35589Z"
-            fill="#13110C"
-          ></path>
-        </svg>
-        {/* <ul className={styles.popup}>
-          <li className={styles.active}>Віділення Нової пошти</li>
-          <li>Адресна доставка</li>
-        </ul> */}
+        {togglePayMethod && (
+          <ul className={styles.popup}>
+            {(delivMethod === "Віділення Нової пошти"
+              ? [
+                  "Готівкою при отриманні у відділені Нової Пошти",
+                  "Онлайн-оплата VISA/MASTERCARD. Знижка -5%",
+                ]
+              : [
+                  "Готівкою кур'єру Нової Пошти",
+                  "Онлайн-оплата VISA/MASTERCARD. Знижка -5%",
+                ]
+            ).map((item) => (
+              <li
+                key={item}
+                className={payMethod === item ? styles.active : null}
+                onClick={() => activePayMethod(item)}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

@@ -62,7 +62,6 @@ const Descrption: React.FC<DescrptionProps> = ({
     const object = items.find(
       (item) => item.id === id && item.sizes === activeSizes
     );
-    console.log(object?.count, "+");
   }
 
   const showTranslete = (obj: {

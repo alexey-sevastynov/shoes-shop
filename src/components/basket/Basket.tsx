@@ -22,7 +22,7 @@ const Basket: React.FC<BasketProps> = () => {
         <div className={styles.basketCards}>
           <div className={styles.basketCardsCol_1}>
             {items.map((item) => (
-              <CardBasket t={t} {...item} />
+              <CardBasket key={item.id} t={t} {...item} />
             ))}
 
             <div className={styles.price}>

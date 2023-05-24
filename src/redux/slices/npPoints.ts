@@ -64,7 +64,14 @@ const npPointsSlice = createSlice({
       const uniqueRegions: string[] = Array.from(new Set(newArray));
       state.allBranches = uniqueRegions;
     },
+    clearAllBranches: (state, action) => {
+      state.allBranches = action.payload;
+      state.itemsPointsNp = action.payload;
+    },
     getActiveBranch: (state, action) => {
+      state.activeBranch = action.payload;
+    },
+    clearBranch: (state, action) => {
       state.activeBranch = action.payload;
     },
   },
@@ -82,6 +89,11 @@ const npPointsSlice = createSlice({
   },
 });
 
-export const { getAllBranches, getActiveBranch } = npPointsSlice.actions;
+export const {
+  getAllBranches,
+  getActiveBranch,
+  clearAllBranches,
+  clearBranch,
+} = npPointsSlice.actions;
 
 export default npPointsSlice.reducer;

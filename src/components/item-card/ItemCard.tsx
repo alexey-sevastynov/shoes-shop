@@ -52,7 +52,6 @@ const ItemCard: React.FC<ItemCardProps> = ({
     dispatch(setId(id));
 
     const item = items.find((item) => item.id === id);
-    console.log(item);
 
     if (!item) {
       const obj = {
