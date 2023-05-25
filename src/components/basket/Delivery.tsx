@@ -4,7 +4,7 @@ import Sort from "../sort/Sort";
 import RegionList from "./RegionList";
 import CityList from "./CityList";
 import BrancesNpList from "./BrancesNpList";
-import { useComponentDidMount } from "../../hook/hook";
+import { isValidCity, useComponentDidMount } from "../../hook/hook";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import {
@@ -18,6 +18,7 @@ import {
   updateActiveAdress,
 } from "../../redux/slices/npSlice";
 import { fetchPointNp, getAllBranches } from "../../redux/slices/npPoints";
+import { selectorBasket } from "../../redux/slices/basketSlice";
 
 const NP_API_KEY = "9bb8f3a4087c2ec455b7e1cd7310f4c5";
 const API_URL = "https://api.novaposhta.ua/v2.0/json/";
@@ -28,8 +29,17 @@ interface DeliveryProps {
 
 const Delivery: React.FC<DeliveryProps> = ({ t }) => {
   const dispatch = useAppDispatch();
-  const { itemsNp, allRegions, activeRegion, allCity, cityRef } =
-    useAppSelector((state) => state.np);
+  const {
+    itemsNp,
+    allRegions,
+    activeRegion,
+    allCity,
+    cityRef,
+    activeCity,
+    activeAdress,
+  } = useAppSelector((state) => state.np);
+
+  const { checkeForm } = useAppSelector(selectorBasket);
 
   const isComponentMounted = useComponentDidMount(); //hook
 
@@ -183,7 +193,13 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
         <p>{t.basket.delivery}</p>
       </div>
       <div className={styles.region} ref={regionRef} onClick={clickRegion}>
-        <p>{activeRegion === "" ? t.basket.region : activeRegion}</p>
+        <p
+          className={
+            activeRegion === "" && checkeForm ? styles.activeError : {}
+          }
+        >
+          {activeRegion === "" ? t.basket.region : activeRegion}
+        </p>
         <svg
           style={toggleRegion ? { transform: "rotate(180deg)" } : {}}
           width="12"
@@ -209,6 +225,11 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
       <div className={styles.city} ref={cityPopupRef} onClick={clickCity}>
         <input
           placeholder={`${t.basket.city} *`}
+          className={
+            !isValidCity(allCity, activeCity) && checkeForm
+              ? styles.activeError
+              : {}
+          }
           onChange={(event) => onChangeInput(event)}
           value={value}
         />
@@ -236,7 +257,17 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
         ref={delivMethodRef}
         onClick={clickDelivMethod}
       >
-        {delivMethod === "" ? <p>Спосіб доставки *</p> : <p>{delivMethod}</p>}
+        {delivMethod === "" ? (
+          <p
+            className={
+              delivMethod === "" && checkeForm ? styles.activeError : {}
+            }
+          >
+            Спосіб доставки *
+          </p>
+        ) : (
+          <p>{delivMethod}</p>
+        )}
         <svg
           style={toggleDelivMethod ? { transform: "rotate(180deg)" } : {}}
           width="12"
@@ -273,6 +304,9 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
           <input
             type="adress"
             placeholder="Введіть номер складу *"
+            className={
+              activeBranch === "" && checkeForm ? styles.activeError : {}
+            }
             onChange={(e) => onChangeInputBranch(e)}
             value={valueBranch}
           />
@@ -311,22 +345,13 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
         <div className={styles.adress}>
           <input
             type="text"
+            className={
+              activeAdress === "" && checkeForm ? styles.activeError : {}
+            }
             onChange={handleChangeAdress}
             value={adress}
             placeholder="Adress"
           />
-          <svg
-            width="12"
-            height="8"
-            viewBox="0 0 12 8"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.34375 6.35589L6.00042 0.699219L11.6571 6.35589L10.7144 7.29922L6.00042 2.58455L1.28642 7.29922L0.34375 6.35589Z"
-              fill="#13110C"
-            ></path>
-          </svg>
         </div>
       )}
       <div
@@ -334,7 +359,15 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
         ref={paydRef}
         onClick={clickPayMethod}
       >
-        {payMethod === "" ? <p>Спосіб оплати *</p> : <p>{payMethod}</p>}
+        {payMethod === "" ? (
+          <p
+            className={payMethod === "" && checkeForm ? styles.activeError : {}}
+          >
+            Спосіб оплати *
+          </p>
+        ) : (
+          <p>{payMethod}</p>
+        )}
         <svg
           style={togglePayMethod ? { transform: "rotate(180deg)" } : {}}
           width="12"

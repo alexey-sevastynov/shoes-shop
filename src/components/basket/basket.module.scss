@@ -159,6 +159,14 @@
 
     .basketCardsCol_2 {
       width: 50%;
+      .agreement {
+        .activeError {
+          color: $red;
+          button {
+            color: $red;
+          }
+        }
+      }
     }
 
     .basketCardsCol_2 {
@@ -167,15 +175,24 @@
       .comment {
         margin-bottom: 45px;
       }
+
       input {
         color: $black;
         &::placeholder {
           color: $grey;
         }
       }
+
       .ordering {
         border: 1px solid $light-grey;
         padding: 15px;
+
+        .inputError {
+          color: $red;
+          &::placeholder {
+            color: red;
+          }
+        }
 
         .header {
           display: flex;
@@ -218,6 +235,10 @@
         .inputEmail {
           padding: 10px 0px 5px 0px;
           border-bottom: 1px solid $light-grey;
+
+          input {
+            width: 100%;
+          }
         }
 
         .emailLabel {
@@ -263,6 +284,21 @@
             color: $black;
           }
         }
+        .region,
+        .city,
+        .deliveryMethod,
+        .branches,
+        .PriceMethod,
+        .adress {
+          .activeError {
+            color: $red;
+
+            &::placeholder {
+              color: $red;
+            }
+          }
+        }
+
         .region,
         .city,
         .deliveryMethod,

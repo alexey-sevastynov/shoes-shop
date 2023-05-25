@@ -23,6 +23,7 @@ interface basketSliceState {
   isCallBack: boolean;
   valueEmail: string;
   valueComent: string;
+  checkeForm: boolean;
 }
 
 const initialState: basketSliceState = {
@@ -36,6 +37,7 @@ const initialState: basketSliceState = {
   isCallBack: false,
   valueEmail: "",
   valueComent: "",
+  checkeForm: false,
 };
 
 export const basketSlice = createSlice({
@@ -138,6 +140,9 @@ export const basketSlice = createSlice({
     setValueComent: (state, action: PayloadAction<string>) => {
       state.valueComent = action.payload;
     },
+    setCheckedForm: (state, action: PayloadAction<boolean>) => {
+      state.checkeForm = action.payload;
+    },
     toggleIsCallBack: (state, action: PayloadAction<boolean>) => {
       // const toggle = (input: boolean) => !input;
       state.isCallBack = action.payload;
@@ -159,5 +164,6 @@ export const {
   toggleIsCallBack,
   setValueEmail,
   setValueComent,
+  setCheckedForm,
 } = basketSlice.actions;
 export default basketSlice.reducer;

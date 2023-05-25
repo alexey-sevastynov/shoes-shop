@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./basket.module.scss";
-import { useAppDispatch } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import {
+  selectorBasket,
   setValueEmail,
   setValueMobile,
   setValueName,
@@ -9,6 +10,7 @@ import {
   setValueSurName,
   toggleIsCallBack,
 } from "../../redux/slices/basketSlice";
+import { isValidEmail } from "../../hook/hook";
 
 interface OrderingProps {
   t: any;
@@ -17,11 +19,13 @@ interface OrderingProps {
 const Ordering: React.FC<OrderingProps> = ({ t }) => {
   const dispatch = useAppDispatch();
 
+  const { checkeForm } = useAppSelector(selectorBasket);
+
   const [surName, setSurName] = React.useState<string>("");
   const [name, setName] = React.useState<string>("");
   const [paternalName, setpaternalName] = React.useState<string>("");
   const [mobile, setMobile] = React.useState<string>("");
-  const [eamil, setEmail] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
 
   const updateSearchValue = React.useCallback(
     (str: string, state: string, bol?: boolean): void => {
@@ -82,18 +86,23 @@ const Ordering: React.FC<OrderingProps> = ({ t }) => {
       <div className={styles.inputName}>
         <input
           type="text"
+          className={surName.length <= 2 && checkeForm ? styles.inputError : {}}
           onChange={handleChangeSurName}
           value={surName}
           placeholder={`${t.basket.surName} *`}
         />
         <input
           type="text"
+          className={name.length <= 2 && checkeForm ? styles.inputError : {}}
           onChange={handleChangeName}
           value={name}
           placeholder={`${t.basket.name} *`}
         />
         <input
           type="text"
+          className={
+            paternalName.length <= 2 && checkeForm ? styles.inputError : {}
+          }
           onChange={handleChangepaternalName}
           value={paternalName}
           placeholder={`${t.basket.paternalName} *`}
@@ -102,6 +111,7 @@ const Ordering: React.FC<OrderingProps> = ({ t }) => {
       <div className={styles.inputPhone}>
         <input
           type="tel"
+          className={mobile.length <= 9 && checkeForm ? styles.inputError : {}}
           onChange={handleChangeMobile}
           value={mobile}
           placeholder={`${t.basket.phone} *`}
@@ -119,8 +129,14 @@ const Ordering: React.FC<OrderingProps> = ({ t }) => {
       <div className={styles.inputEmail}>
         <input
           type="email"
+          className={
+            (email.length <= 3 && checkeForm) ||
+            (!isValidEmail(email) && checkeForm)
+              ? styles.inputError
+              : {}
+          }
           onChange={handleChangeEmail}
-          value={eamil}
+          value={email}
           placeholder="Email *"
         />
       </div>

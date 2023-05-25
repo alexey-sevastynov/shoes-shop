@@ -8,8 +8,9 @@ import Delivery from "./Delivery";
 import Comment from "./Comment";
 
 import { selectTranslations } from "../../redux/slices/i18nSlice";
-import { useAppSelector } from "../../redux/hook";
-import { selectorBasket } from "../../redux/slices/basketSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { selectorBasket, setCheckedForm } from "../../redux/slices/basketSlice";
+import { isValidCity, isValidEmail } from "../../hook/hook";
 
 const TOKEN = "6106484951:AAGBh8mrWzbiOIqToGFZ1pPaN99wB6_GwK4";
 const CHAD_ID = "-1001892003844";
@@ -18,6 +19,7 @@ const URL_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 interface BasketProps {}
 
 const Basket: React.FC<BasketProps> = () => {
+  const dispatch = useAppDispatch();
   const t = useAppSelector(selectTranslations);
   const {
     items,
@@ -30,8 +32,9 @@ const Basket: React.FC<BasketProps> = () => {
     valueComent,
     valueEmail,
     isCallBack,
+    checkeForm,
   } = useAppSelector(selectorBasket);
-  const { activeRegion, activeCity, activeMethod, activeAdress } =
+  const { activeRegion, activeCity, activeMethod, activeAdress, allCity } =
     useAppSelector((state) => state.np);
 
   const { activeBranch } = useAppSelector((state) => state.npPoints);
@@ -77,27 +80,41 @@ ______________________________
     message += `Коментар покупця: <i>${
       valueComent.length === 0 ? "---" : valueComent
     }</i>\n`;
-
-    axios
-      .post(URL_API, {
-        chat_id: CHAD_ID,
-        parse_mode: "html",
-        text: message,
-      })
-      .then(() => {
-        // setTel("");
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setOrderSuccess(true);
-        console.log(document.body.scrollHeight);
-        window.scroll(document.body.scrollHeight, document.body.scrollHeight);
-        setTimeout(() => {
-          setOrderSuccess(false);
-        }, 4000);
-      });
+    if (
+      valueSurName.length <= 2 ||
+      valueMobile.length <= 9 ||
+      valueEmail.length <= 3 ||
+      valueName.length <= 2 ||
+      valuePaternalName.length <= 2 ||
+      !isValidEmail(valueEmail) ||
+      activeCity.length <= 2 ||
+      !isValidCity(allCity, activeCity) ||
+      activeMethod === "" ||
+      activeBranch === ""
+    ) {
+      dispatch(setCheckedForm(true));
+    } else {
+      axios
+        .post(URL_API, {
+          chat_id: CHAD_ID,
+          parse_mode: "html",
+          text: message,
+        })
+        .then(() => {
+          // setTel("");
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setOrderSuccess(true);
+          console.log(document.body.scrollHeight);
+          window.scroll(document.body.scrollHeight, document.body.scrollHeight);
+          setTimeout(() => {
+            setOrderSuccess(false);
+          }, 4000);
+        });
+    }
   };
 
   return (
@@ -138,20 +155,23 @@ ______________________________
                   onChange={() => setIsAccept(!isAccept)}
                   name="agreement"
                 />
-                <label htmlFor="agreement">
+                <label
+                  // className={checkeForm === false ? styles.activeError : {}}
+                  htmlFor="agreement"
+                >
                   {t.basket.accept} <button>{t.basket.agreement}</button>
                 </label>
               </div>
             </div>
-            <button onClick={onSubmit} className={styles.btnForm}>
-              {t.basket.order}
-            </button>
             {orderSuccess && (
               <h3 style={{ textAlign: "center" }}>
                 Щиро дякуємо, що обрали нас! Ми вже збираємо товар для
                 відправки!
               </h3>
             )}
+            <button onClick={onSubmit} className={styles.btnForm}>
+              {t.basket.order}
+            </button>
           </div>
         </div>
       ) : (
