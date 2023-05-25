@@ -90,7 +90,8 @@ ______________________________
       activeCity.length <= 2 ||
       !isValidCity(allCity, activeCity) ||
       activeMethod === "" ||
-      activeBranch === ""
+      activeBranch === "" ||
+      isAccept === false
     ) {
       dispatch(setCheckedForm(true));
     } else {
@@ -112,7 +113,7 @@ ______________________________
           window.scroll(document.body.scrollHeight, document.body.scrollHeight);
           setTimeout(() => {
             setOrderSuccess(false);
-          }, 4000);
+          }, 14000);
         });
     }
   };
@@ -156,7 +157,9 @@ ______________________________
                   name="agreement"
                 />
                 <label
-                  // className={checkeForm === false ? styles.activeError : {}}
+                  className={
+                    isAccept === false && checkeForm ? styles.activeError : {}
+                  }
                   htmlFor="agreement"
                 >
                   {t.basket.accept} <button>{t.basket.agreement}</button>
