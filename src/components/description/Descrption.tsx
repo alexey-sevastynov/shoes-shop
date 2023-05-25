@@ -24,6 +24,7 @@ type DescrptionProps = {
   season: { ua: string; en: string };
   sizes: number[];
   setTogglePopupBaket?: any;
+  setTogglePopupSize: any;
 };
 
 type currentObjItem = {
@@ -53,6 +54,7 @@ const Descrption: React.FC<DescrptionProps> = ({
   sizes,
   imageURL,
   setTogglePopupBaket,
+  setTogglePopupSize,
 }) => {
   const dispatch = useAppDispatch();
   const [activeSizes, setActiveSizes] = React.useState(0);
@@ -147,7 +149,7 @@ const Descrption: React.FC<DescrptionProps> = ({
 
       <div className={styles.size}>
         <p>Оберіть розмір</p>
-        <button>Розмірна сітка</button>
+        <button onClick={() => setTogglePopupSize(true)}>Розмірна сітка</button>
       </div>
 
       <div className={styles.possibleSizes}>

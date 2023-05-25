@@ -1,2 +1,59 @@
+@import "../../scss/variable.scss";
+
 .root {
+  padding: 1px 5px;
+  min-width: 365px;
+  height: auto;
+  background-color: $white;
+  box-shadow: 0px 4px 10px $grey;
+  position: relative;
+
+  .head {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    p {
+      font-size: 18px;
+    }
+  }
+
+  .close {
+    position: absolute;
+    cursor: pointer;
+
+    top: 18px;
+    right: 5px;
+    transform: translateY(-50%);
+    padding-top: 10px;
+    width: 24px;
+    height: 24px;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 2px;
+      background: $black;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .table {
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 5px;
+
+    div {
+      text-align: center;
+    }
+  }
 }

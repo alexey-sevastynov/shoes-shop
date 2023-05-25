@@ -108,10 +108,17 @@
     justify-content: space-between;
     position: relative;
 
-    .description-popup {
-      position: absolute;
+    .description-popup,
+    .description-size {
       left: 50%;
       transform: translateX(-50%);
+    }
+
+    .description-popup {
+      position: absolute;
+    }
+    .description-size {
+      position: fixed;
     }
   }
 
