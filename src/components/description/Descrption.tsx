@@ -23,6 +23,7 @@ type DescrptionProps = {
   sale: boolean;
   season: { ua: string; en: string };
   sizes: number[];
+  setTogglePopupBaket?: any;
 };
 
 type currentObjItem = {
@@ -51,6 +52,7 @@ const Descrption: React.FC<DescrptionProps> = ({
   priceSale,
   sizes,
   imageURL,
+  setTogglePopupBaket,
 }) => {
   const dispatch = useAppDispatch();
   const [activeSizes, setActiveSizes] = React.useState(0);
@@ -108,6 +110,7 @@ const Descrption: React.FC<DescrptionProps> = ({
       alert("choise size!");
     } else {
       dispatch(addItem(currentObj));
+      setTogglePopupBaket(true);
     }
   };
 

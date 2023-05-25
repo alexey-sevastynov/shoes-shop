@@ -308,7 +308,7 @@
         .deliveryMethod,
         .PriceMethod {
           .popup {
-            height: 70px;
+            height: 120px;
             overflow: hidden;
           }
         }
@@ -530,6 +530,119 @@
               font-size: 16px;
             }
           }
+        }
+      }
+    }
+  }
+}
+
+.basketCard {
+  padding-bottom: 15px;
+  display: flex;
+  gap: 40px;
+  border-bottom: 1px solid $light-grey;
+  img {
+    width: 205px;
+    object-fit: cover;
+    object-position: 0px 75%;
+    height: 205px;
+  }
+
+  &:not(:first-child) {
+    padding-top: 15px;
+  }
+
+  .basketCardDescription {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .title {
+      text-align: left;
+      font-size: 20px;
+      color: $black;
+    }
+
+    span {
+      font-size: 13px;
+      color: $grey;
+
+      button {
+        cursor: pointer;
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+
+    .count {
+      width: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      input {
+        text-align: right;
+        padding: 3px 7px 3px 10px;
+        border: 1px solid $grey;
+        border-radius: 2px;
+        background-color: $light-grey;
+        width: 36px;
+      }
+      button {
+        cursor: pointer;
+        width: 14px;
+        height: 14px;
+        color: $white;
+        align-items: center;
+        font-weight: bold;
+        line-height: 12px;
+        font-size: 14px;
+
+        background-color: $light-grey;
+        border-radius: 2px;
+
+        &:hover {
+          background-color: $grey;
+        }
+      }
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .btnRemove {
+      position: relative;
+      .close {
+        cursor: pointer;
+        position: absolute;
+        top: 8px;
+        left: 0px;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          width: 14px;
+          height: 2px;
+          background: $red;
+        }
+
+        &::before {
+          transform: rotate(45deg);
+        }
+        &::after {
+          transform: rotate(-45deg);
+        }
+      }
+
+      p {
+        cursor: pointer;
+        font-size: 14px;
+        color: $grey;
+        margin-left: 25px;
+        &:hover {
+          color: $black;
         }
       }
     }

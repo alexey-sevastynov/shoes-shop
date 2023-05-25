@@ -224,6 +224,7 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
       >
         {delivMethod === "" ? <p>Спосіб доставки *</p> : <p>{delivMethod}</p>}
         <svg
+          style={toggleDelivMethod ? { transform: "rotate(180deg)" } : {}}
           width="12"
           height="8"
           viewBox="0 0 12 8"
@@ -263,6 +264,7 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
           />
 
           <svg
+            style={toggleBranche ? { transform: "rotate(180deg)" } : {}}
             width="12"
             height="8"
             viewBox="0 0 12 8"
@@ -315,6 +317,7 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
       >
         {payMethod === "" ? <p>Спосіб оплати *</p> : <p>{payMethod}</p>}
         <svg
+          style={togglePayMethod ? { transform: "rotate(180deg)" } : {}}
           width="12"
           height="8"
           viewBox="0 0 12 8"

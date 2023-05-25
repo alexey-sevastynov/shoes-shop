@@ -106,6 +106,13 @@
   .description {
     display: flex;
     justify-content: space-between;
+    position: relative;
+
+    .description-popup {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   .karusel {

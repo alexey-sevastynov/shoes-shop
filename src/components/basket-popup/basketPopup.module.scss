@@ -1,0 +1,72 @@
+@import "../../scss/variable.scss";
+
+.basketPopup {
+  margin: 0px 0px 20px 0px;
+  padding: 1px 5px;
+  min-width: 365px;
+  height: auto;
+  background-color: $white;
+  box-shadow: 0px 4px 10px $grey;
+  position: relative;
+
+  .close {
+    position: absolute;
+    cursor: pointer;
+
+    top: 18px;
+    right: 5px;
+    transform: translateY(-50%);
+    padding-top: 10px;
+    width: 24px;
+    height: 24px;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 2px;
+      background: $black;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .title {
+    padding: 20px 0;
+    font-size: 25px;
+    color: $grey;
+    margin: 0px 0 25px 0;
+    text-align: center;
+    border-bottom: 1px solid $light-grey;
+  }
+  .btn {
+    display: flex;
+    flex-direction: column;
+    button {
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: 200;
+      line-height: 30px;
+      &:nth-child(1) {
+        font-size: 18px;
+
+        background-color: $black;
+
+        a {
+          color: $white;
+        }
+      }
+
+      &:nth-child(2) {
+        margin-top: 5px;
+        border: 1px solid $light-grey;
+      }
+    }
+  }
+}
