@@ -33,6 +33,8 @@ interface npSliceState {
   activeRegion: string;
   activeCity: string;
   cityRef: string;
+  activeMethod: string;
+  activeAdress: string;
 }
 
 const initialState: npSliceState = {
@@ -42,6 +44,8 @@ const initialState: npSliceState = {
   activeRegion: "",
   activeCity: "",
   cityRef: "",
+  activeMethod: "",
+  activeAdress: "",
 };
 
 const npSlice = createSlice({
@@ -88,6 +92,9 @@ const npSlice = createSlice({
     clearRef: (state, action) => {
       state.cityRef = action.payload;
     },
+    updateActiveAdress: (state, action) => {
+      state.activeAdress = action.payload;
+    },
 
     getCitiesRegion: (state, action) => {
       const description = action.payload.map((elem: Record<string, any>) => {
@@ -102,6 +109,10 @@ const npSlice = createSlice({
       );
 
       state.allCity = newArray.map((item: any) => item.description);
+    },
+
+    getActiveDeliveryMethod: (state, action) => {
+      state.activeMethod = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -125,6 +136,8 @@ export const {
   getActiveCity,
   getActiveRef,
   clearRef,
+  getActiveDeliveryMethod,
+  updateActiveAdress,
 } = npSlice.actions;
 
 export default npSlice.reducer;

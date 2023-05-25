@@ -10,10 +10,12 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import {
   fetchNp,
   getActiveCity,
+  getActiveDeliveryMethod,
   getActiveRef,
   getActiveRegion,
   getAllRegions,
   getCitiesRegion,
+  updateActiveAdress,
 } from "../../redux/slices/npSlice";
 import { fetchPointNp, getAllBranches } from "../../redux/slices/npPoints";
 
@@ -54,6 +56,8 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
   const [togglePayMethod, setTogglePayMethod] = React.useState(false);
   const [payMethod, setPayMethod] = React.useState("");
   const paydRef = React.useRef<HTMLDivElement>(null);
+  // deivery to home
+  const [adress, setAdress] = React.useState("");
 
   const apiNewPosta = async () => {
     dispatch(fetchNp());
@@ -122,6 +126,7 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
   };
 
   const activeDelivMethod = (nameMethod: string) => {
+    dispatch(getActiveDeliveryMethod(nameMethod));
     setDelivMethod(nameMethod);
   };
 
@@ -160,6 +165,15 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
     //   dispatch(getActiveCity(event.target.value));
     //   dispatch(getActiveRef(itemsNp));
     // }
+  };
+
+  const updateSearchValue = React.useCallback((str: string): void => {
+    dispatch(updateActiveAdress(str));
+  }, []);
+
+  const handleChangeAdress = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAdress(event.target.value);
+    updateSearchValue(event.target.value);
   };
 
   return (
@@ -295,7 +309,12 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
       )}
       {delivMethod === "Адресна доставка" && (
         <div className={styles.adress}>
-          <input type="text" placeholder="Adress" />
+          <input
+            type="text"
+            onChange={handleChangeAdress}
+            value={adress}
+            placeholder="Adress"
+          />
           <svg
             width="12"
             height="8"
