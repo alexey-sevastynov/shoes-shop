@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { selectTranslations, setLang } from "../redux/slices/i18nSlice";
 import { onTogglePopup } from "../redux/slices/headerSlice";
 import { selectorShoesData } from "../redux/slices/shoes";
+import { selectorSort, setSearchValue } from "../redux/slices/filterSlice";
 
 interface MenuMobilePageProps {}
 
@@ -11,7 +12,18 @@ const MenuMobilePage: React.FC<MenuMobilePageProps> = () => {
   const t = useAppSelector(selectTranslations);
 
   const { lang } = useAppSelector((state) => state.i18n);
-  const { items } = useAppSelector(selectorShoesData);
+  const { searchValue } = useAppSelector(selectorSort);
+
+  const [value, setValue] = React.useState<string>("");
+
+  const updateSearchValue = React.useCallback((str: string): void => {
+    dispatch(setSearchValue(str));
+  }, []);
+
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+    updateSearchValue(event.target.value);
+  };
 
   return (
     <div className="menu-mobile">
@@ -20,8 +32,14 @@ const MenuMobilePage: React.FC<MenuMobilePageProps> = () => {
         <div className="header-close" onClick={() => window.history.back()} />
       </div>
       <div className="menu-mobile-search">
-        <input type="text" placeholder="Search" />
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchValue}
+          onChange={onChangeInput}
+        />
         <svg
+          onClick={() => window.history.back()}
           width="18"
           height="18"
           viewBox="0 0 18 18"

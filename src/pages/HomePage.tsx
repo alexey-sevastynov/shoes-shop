@@ -37,7 +37,8 @@ const HomePage: React.FC<HomePageProps> = () => {
 
   const { items, status, maxPrice, minPrice } =
     useAppSelector(selectorShoesData);
-  const { sort, types, colors, seasons, sizes } = useAppSelector(selectorSort);
+  const { sort, types, colors, seasons, sizes, searchValue } =
+    useAppSelector(selectorSort);
 
   const dispatch = useAppDispatch();
 
@@ -154,7 +155,11 @@ const HomePage: React.FC<HomePageProps> = () => {
     }
   };
 
-  const showShoes = items.map((shoe) => <ItemCard key={shoe.id} {...shoe} />);
+  const showShoes = items
+    .filter((items) =>
+      items.article.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    .map((shoe) => <ItemCard key={shoe.id} {...shoe} />);
 
   const onLoader = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />

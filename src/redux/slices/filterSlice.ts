@@ -14,6 +14,7 @@ type SortItem = {
 };
 
 interface FilterSliceState {
+  searchValue: string;
   categoryId: number;
   sort: SortItem;
   types: TypeItem[];
@@ -23,6 +24,7 @@ interface FilterSliceState {
 }
 
 const initialState: FilterSliceState = {
+  searchValue: "",
   categoryId: 0,
   sort: {
     en: "popular (DESC)",
@@ -73,6 +75,9 @@ export const filterSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
+    setSearchValue: (state, action: PayloadAction<string>) => {
+      state.searchValue = action.payload;
+    },
     setSort: (state, action: PayloadAction<SortItem>) => {
       state.sort = action.payload;
     },
@@ -157,6 +162,7 @@ export const filterSlice = createSlice({
 export const selectorSort = (state: RootState) => state.filter;
 
 export const {
+  setSearchValue,
   setSort,
   setTypes,
   setColors,
