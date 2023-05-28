@@ -6,7 +6,9 @@
     "en": "ENGLISH",
     "city": "DNIPRO",
     "title": "SHOP WOMEN SHOES",
-    "search": "Search by article..."
+    "search": "Search by article...",
+    "shopWomenShoes": "SHOP WOMEN SHOES",
+    "sale": "SALE"
   },
   "sideFilter": {
     "filter": "FILTER",

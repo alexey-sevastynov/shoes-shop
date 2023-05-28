@@ -342,6 +342,20 @@
       left: 0;
       background-color: white;
 
+      .menu-mobile-search__block {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        button {
+          display: block;
+          cursor: pointer;
+          width: 35%;
+          padding: 0px 5px;
+          margin-right: 10px;
+          background-color: $black;
+          color: white;
+        }
+      }
       .filter-mobile-header,
       .menu-mobile-header {
         display: flex;
@@ -414,6 +428,7 @@
       justify-content: start;
     }
     .menu-mobile-search {
+      width: 65%;
       position: relative;
       margin: 0px 10px;
 
@@ -421,7 +436,7 @@
         font-size: 14px;
         font-weight: 400;
         width: 100%;
-        padding: 9px 40px 7px 8px;
+        padding: 19px 40px 17px 8px;
         border: 1px solid $light-grey;
       }
 
@@ -476,6 +491,7 @@
         max-width: 606px;
         display: flex;
         gap: 5px;
+        row-gap: 10px;
         flex-wrap: wrap;
         justify-content: space-between;
       }
