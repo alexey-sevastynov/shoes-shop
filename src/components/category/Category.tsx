@@ -1,13 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./category.module.scss";
+import { useAppSelector } from "../../redux/hook";
+import { selectTranslations } from "../../redux/slices/i18nSlice";
 
 interface CategoryProps {}
 
 const Category: React.FC<CategoryProps> = () => {
+  const t = useAppSelector(selectTranslations);
   return (
     <Link className={styles.root} to="/filter">
-      <p>Category</p>
+      <p>{t.sideFilter.filter}</p>
       <svg
         width="12"
         height="8"

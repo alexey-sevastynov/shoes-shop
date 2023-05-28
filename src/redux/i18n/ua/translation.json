@@ -7,13 +7,18 @@
     "title": "МАГАЗИН ЖІНОЧОГО ВЗУТТЯ"
   },
   "sideFilter": {
+    "filter": "ФІЛЬТР",
     "category": "КАТЕГОРІЯ",
     "price": "ЦІНА",
     "color": "КОЛІР",
     "size": "РОЗМІР",
     "season": "СЕЗОН",
     "show": "ПЕРЕГЛЯНУТИ",
-    "uah": "грн"
+    "uah": "грн",
+    "see": "Дивитися",
+    "goods": "товаров",
+    "back": "Назад",
+    "removeSelectedFilters": "Видалити вибрані фільтри"
   },
   "basket": {
     "basket": "Кошик",
@@ -59,5 +64,10 @@
   "favorite": {
     "listFavorites": "Список бажаних товарів",
     "listIsEmpty": "Список бажаних товарів порожній"
+  },
+  "homePage": {
+    "from": "від",
+    "to": "до",
+    "clearAll": "видалити все"
   }
 }

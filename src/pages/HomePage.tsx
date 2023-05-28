@@ -27,6 +27,7 @@ import {
   setMaxPrice,
   setMinPrice,
 } from "../redux/slices/shoes";
+import { selectTranslations } from "../redux/slices/i18nSlice";
 
 interface HomePageProps {}
 
@@ -39,6 +40,8 @@ const HomePage: React.FC<HomePageProps> = () => {
     useAppSelector(selectorShoesData);
   const { sort, types, colors, seasons, sizes, searchValue } =
     useAppSelector(selectorSort);
+
+  const t = useAppSelector(selectTranslations);
 
   const dispatch = useAppDispatch();
 
@@ -197,7 +200,7 @@ const HomePage: React.FC<HomePageProps> = () => {
               onClick={() => removeActiveCategory({}, maxPrice, minPrice)}
             >
               <p>
-                from {minPrice} to {maxPrice}{" "}
+                {t.homePage.from} {minPrice} {t.homePage.to} {maxPrice}
               </p>
               <div className="close" />
             </div>
@@ -213,7 +216,7 @@ const HomePage: React.FC<HomePageProps> = () => {
               className="main-col-2-filter clear"
               onClick={onClickRemoveFilter}
             >
-              <p>clear all</p>
+              <p>{t.homePage.clearAll}</p>
               <div className="close" />
             </div>
           )}

@@ -14,6 +14,7 @@ import {
   clearTypes,
   selectorSort,
 } from "../redux/slices/filterSlice";
+import { selectTranslations } from "../redux/slices/i18nSlice";
 
 interface FilterMobilePageProps {}
 
@@ -22,6 +23,7 @@ const FilterMobilePage: React.FC<FilterMobilePageProps> = () => {
     useAppSelector(selectorShoesData);
   const { sort, types, colors, seasons, sizes } = useAppSelector(selectorSort);
 
+  const t = useAppSelector(selectTranslations);
   const dispatch = useAppDispatch();
 
   const apiShoes = async () => {
@@ -82,14 +84,14 @@ const FilterMobilePage: React.FC<FilterMobilePageProps> = () => {
   return (
     <div className="filter-mobile">
       <div className="filter-mobile-header">
-        <p>filter</p>
+        <p>{t.sideFilter.filter}</p>
 
         <div className="header-close" onClick={onClickBack} />
       </div>
       <SideFilter />
       <div className="filter-mobile-footer">
         <button onClick={onClickCategories}>
-          Смотреть ({items.length}) товаров
+          {t.sideFilter.see} ({items.length}) {t.sideFilter.goods}
         </button>
         {types.filter((item) => item.checked === true).length === 0 &&
         colors.filter((item) => item.checked === true).length === 0 &&
@@ -98,11 +100,11 @@ const FilterMobilePage: React.FC<FilterMobilePageProps> = () => {
         maxPrice === 9999 &&
         minPrice === 999 ? (
           <button className="back" onClick={onClickBack}>
-            Назад
+            {t.sideFilter.back}
           </button>
         ) : (
           <button className="back" onClick={onClickRemoveFilter}>
-            Видалити вибрані фільтри
+            {t.sideFilter.removeSelectedFilters}
           </button>
         )}
       </div>

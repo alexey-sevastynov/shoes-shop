@@ -30,11 +30,11 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
   const { types, colors, seasons, sizes } = useAppSelector(selectorSort);
   const { maxPrice, minPrice } = useAppSelector(selectorShoesData);
 
-  const [toggleCategory, setTogglecategory] = React.useState(false);
-  const [togglePrice, setTogglePrice] = React.useState(false);
-  const [toggleColor, setToggleColor] = React.useState(false);
-  const [toggleSize, setToggleSize] = React.useState(false);
-  const [toggleSeason, setToggleSeason] = React.useState(false);
+  const [toggleCategory, setTogglecategory] = React.useState(true);
+  const [togglePrice, setTogglePrice] = React.useState(true);
+  const [toggleColor, setToggleColor] = React.useState(true);
+  const [toggleSize, setToggleSize] = React.useState(true);
+  const [toggleSeason, setToggleSeason] = React.useState(true);
 
   const onHandChangCategory = (index: number) => {
     dispatch(setTypes(index));
@@ -82,10 +82,6 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
               index={id}
             />
           ))}
-
-          <button className={styles.btn} onClick={onClickCategories}>
-            {t.sideFilter.show}
-          </button>
         </div>
       )}
       <div
@@ -93,20 +89,12 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
         onClick={() => setTogglePrice(!togglePrice)}
       >
         <p>{t.sideFilter.price}</p>
-        <div className={styles.filterActive}>
-          <p>от</p>
-          <p className={styles.green}>{minPrice}</p>
-          <p>до</p>
-          <p className={styles.red}>{maxPrice}</p>
-        </div>
+
         <span></span>
       </div>
       {togglePrice && (
         <div>
           <PriceSlider valutaText={t.sideFilter.uah} />
-          <button className={styles.btn} onClick={onClickCategories}>
-            {t.sideFilter.show}
-          </button>
         </div>
       )}
       <div
@@ -134,9 +122,6 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
               index={id}
             />
           ))}
-          <button className={styles.btn} onClick={onClickCategories}>
-            {t.sideFilter.show}
-          </button>
         </div>
       )}
       <div
@@ -164,10 +149,6 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
               index={id}
             />
           ))}
-
-          <button className={styles.btn} onClick={onClickCategories}>
-            {t.sideFilter.show}
-          </button>
         </div>
       )}
       <div
@@ -195,10 +176,6 @@ const SideFilter: React.FC<SideFilterProps> = ({ onClickCategories }) => {
               index={id}
             />
           ))}
-
-          <button className={styles.btn} onClick={onClickCategories}>
-            {t.sideFilter.show}
-          </button>
         </div>
       )}
     </div>

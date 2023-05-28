@@ -7,13 +7,18 @@
     "title": "SHOP WOMEN SHOES"
   },
   "sideFilter": {
+    "filter": "FILTER",
     "category": "CATEGORY",
     "price": "PRICE",
     "color": "COLOR",
     "size": "SIZE",
     "season": "SEASON",
     "show": "SHOW",
-    "uah": "uah"
+    "uah": "uah",
+    "see": "See",
+    "goods": "goods",
+    "back": "Back",
+    "removeSelectedFilters": "Remove selected filters"
   },
   "basket": {
     "basket": "Basket",
@@ -59,5 +64,10 @@
   "favorite": {
     "listFavorites": "List of desired products",
     "listIsEmpty": "The wish list is empty"
+  },
+  "homePage": {
+    "from": "from",
+    "to": "to",
+    "clearAll": "Сlear all"
   }
 }
