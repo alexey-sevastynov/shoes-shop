@@ -135,14 +135,16 @@ ______________________________
               </div>
               <div className={styles.priceCol_2}>
                 <p>{t.basket.summ}:</p>
-                <span>{totalPrice} грн</span>
+                <span>
+                  {totalPrice} {t.uah}
+                </span>
               </div>
             </div>
           </div>
           <div className={styles.basketCardsCol_2}>
             <Ordering t={t} />
             <Delivery t={t} />
-            <Comment />
+            <Comment t={t} />
             <div className={styles.agreement}>
               <div className={styles.header}>
                 <div className={styles.posNum}>4</div>
@@ -168,8 +170,7 @@ ______________________________
             </div>
             {orderSuccess && (
               <h3 style={{ textAlign: "center" }}>
-                Щиро дякуємо, що обрали нас! Ми вже збираємо товар для
-                відправки!
+                {t.basket.massageSuccessOrder}
               </h3>
             )}
             <button onClick={onSubmit} className={styles.btnForm}>
@@ -178,7 +179,7 @@ ______________________________
           </div>
         </div>
       ) : (
-        <p>Ваш кошик пустий</p>
+        <p>{t.basket.basketIsEmpty}</p>
       )}
     </div>
   );

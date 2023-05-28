@@ -17,7 +17,7 @@ const BasketPopup: React.FC<BasketPopupProps> = ({ setTogglePopupBaket }) => {
 
   return (
     <div className={styles.basketPopup}>
-      <p className={styles.title}>Basket</p>
+      <p className={styles.title}>{t.basket.basket}</p>
       <div
         className={styles.close}
         onClick={() => setTogglePopupBaket(false)}
@@ -28,11 +28,11 @@ const BasketPopup: React.FC<BasketPopupProps> = ({ setTogglePopupBaket }) => {
 
       <div className={styles.btn}>
         <button>
-          <Link to="/cart">Оформити покупку</Link>
+          <Link to="/cart">{t.description.AddToCard}</Link>
         </button>
 
         <button onClick={() => setTogglePopupBaket(false)}>
-          Продовжити покупку
+          {t.description.AddToFavorites}
         </button>
       </div>
     </div>

@@ -1,4 +1,5 @@
 {
+  "uah": "грн",
   "header": {
     "ua": "УКРАЇНСЬКА",
     "en": "АНГЛІЙСЬКА",
@@ -35,6 +36,28 @@
     "followOrdering": "для відстеження стану замовлення",
     "delivery": "Доставка/оплата",
     "region": "Область",
-    "city": "Місто"
+    "city": "Місто",
+    "methodOfDelivery": "Спосіб доставки",
+    "paymentMethod": "Спосіб оплати",
+    "yourComments": "Ваші коментарі",
+    "basketIsEmpty": "Ваш кошик пустий",
+    "massageSuccessOrder": "Щиро дякуємо, що обрали нас! Ми вже збираємо товар для відправки!"
+  },
+  "description": {
+    "article": "Артикул",
+    "season": "Сезон",
+    "color": "Колір",
+    "material": "Матеріал",
+    "soleMaterial": "Матеріал підошви",
+    "heelHeight": "Висота каблука",
+    "producingCountry": "Країна-виробник",
+    "chooseSize": "Оберіть розмір",
+    "dimensionalGrid": "Розмірна сітка",
+    "AddToCard": "ДОДАТИ ДО КОШИКА",
+    "AddToFavorites": "Додати в обране"
+  },
+  "favorite": {
+    "listFavorites": "Список бажаних товарів",
+    "listIsEmpty": "Список бажаних товарів порожній"
   }
 }

@@ -1,4 +1,5 @@
 {
+  "uah": "uah",
   "header": {
     "ua": "UKRAINE",
     "en": "ENGLISH",
@@ -35,6 +36,28 @@
     "followOrdering": "to track order status",
     "delivery": "Delivery/payment",
     "region": "Region",
-    "city": "City"
+    "city": "City",
+    "methodOfDelivery": "Method of delivery",
+    "paymentMethod": "Payment method",
+    "yourComments": "Your comments",
+    "basketIsEmpty": "Your basket is empty!",
+    "massageSuccessOrder": "Thank you very much for choosing us! We are already collecting the goods for shipment!"
+  },
+  "description": {
+    "article": "Article",
+    "season": "Season",
+    "color": "Color",
+    "material": "Material",
+    "soleMaterial": "Sole material",
+    "heelHeight": "Heel height",
+    "producingCountry": "Producing country",
+    "chooseSize": "Choose size",
+    "dimensionalGrid": "Dimensional grid",
+    "AddToCard": "ADD TO CARD",
+    "AddToFavorites": "Add to favorites"
+  },
+  "favorite": {
+    "listFavorites": "List of desired products",
+    "listIsEmpty": "The wish list is empty"
   }
 }

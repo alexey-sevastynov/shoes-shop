@@ -263,7 +263,7 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
               delivMethod === "" && checkeForm ? styles.activeError : {}
             }
           >
-            Спосіб доставки *
+            {t.basket.methodOfDelivery} *
           </p>
         ) : (
           <p>{delivMethod}</p>
@@ -363,7 +363,7 @@ const Delivery: React.FC<DeliveryProps> = ({ t }) => {
           <p
             className={payMethod === "" && checkeForm ? styles.activeError : {}}
           >
-            Спосіб оплати *
+            {t.basket.paymentMethod} *
           </p>
         ) : (
           <p>{payMethod}</p>

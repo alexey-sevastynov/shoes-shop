@@ -6,6 +6,7 @@ import { addItem, selectorBasket } from "../../redux/slices/basketSlice";
 import { selectorShoesData } from "../../redux/slices/shoes";
 import { type } from "os";
 import { addFavorite } from "../../redux/slices/favoriteSlice";
+import { selectTranslations } from "../../redux/slices/i18nSlice";
 
 type DescrptionProps = {
   article: string;
@@ -59,6 +60,7 @@ const Descrption: React.FC<DescrptionProps> = ({
   const dispatch = useAppDispatch();
   const [activeSizes, setActiveSizes] = React.useState(0);
   const { lang } = useAppSelector((state) => state.i18n);
+  const t = useAppSelector(selectTranslations);
   const { currentItem } = useAppSelector(selectorShoesData);
   const { items } = useAppSelector(selectorBasket);
 
@@ -80,15 +82,15 @@ const Descrption: React.FC<DescrptionProps> = ({
   const showPrice = sale ? (
     <div className={styles.sale}>
       <p>
-        {priceSale} <span>uah</span>
+        {priceSale} <span>{t.uah}</span>
       </p>
       <p>
-        {price} <span>uah</span>
+        {price} <span>{t.uah}</span>
       </p>
     </div>
   ) : (
     <p>
-      {price} <span>uah</span>
+      {price} <span>{t.uah}</span>
     </p>
   );
   const onClickSizes = (index: number) => {
@@ -143,20 +145,36 @@ const Descrption: React.FC<DescrptionProps> = ({
     <div className={styles.root}>
       <div className={styles.title}>{showTranslete(name)}</div>
       <div className={styles.subtitle}>
-        <p>Артикул: {article}</p>
+        <p>
+          {t.description.article}: {article}
+        </p>
       </div>
-      <p>Сезон: {showTranslete(season)}</p>
+      <p>
+        {t.description.season}: {showTranslete(season)}
+      </p>
       {/* <p>Колекція: Нова колекція</p> */}
-      <p>Колір: {showTranslete(color)}</p>
-      <p>Матеріал: {showTranslete(material)}</p>
-      <p>Матеріал підошви: {showTranslete(materialBottom)}</p>
-      <p>Висота каблука: {showTranslete(heelHight)}</p>
-      <p>Країна-виробник: {showTranslete(country)}</p>
+      <p>
+        {t.description.color}: {showTranslete(color)}
+      </p>
+      <p>
+        {t.description.material}: {showTranslete(material)}
+      </p>
+      <p>
+        {t.description.soleMaterial}: {showTranslete(materialBottom)}
+      </p>
+      <p>
+        {t.description.heelHeight}: {showTranslete(heelHight)}
+      </p>
+      <p>
+        {t.description.producingCountry}: {showTranslete(country)}
+      </p>
       <div className={styles.price}>{showPrice}</div>
 
       <div className={styles.size}>
-        <p>Оберіть розмір</p>
-        <button onClick={() => setTogglePopupSize(true)}>Розмірна сітка</button>
+        <p>{t.description.chooseSize}</p>
+        <button onClick={() => setTogglePopupSize(true)}>
+          {t.description.dimensionalGrid}
+        </button>
       </div>
 
       <div className={styles.possibleSizes}>
@@ -192,7 +210,7 @@ const Descrption: React.FC<DescrptionProps> = ({
             fill="white"
           ></path>
         </svg>
-        <p>ДОДАТИ ДО КОШИКА</p>
+        <p>{t.description.AddToCard}</p>
       </div>
       <div className={styles.btnToFavorite} onClick={onClickAddFavorite}>
         <svg
@@ -207,7 +225,7 @@ const Descrption: React.FC<DescrptionProps> = ({
             fill="#13110C"
           ></path>
         </svg>
-        <p>Додати в обране</p>
+        <p>{t.description.AddToFavorites}</p>
       </div>
     </div>
   );

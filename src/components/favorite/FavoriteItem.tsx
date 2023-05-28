@@ -17,6 +17,7 @@ interface FavoriteItemProps {
   price: number;
   priceSale: number;
   isFavorite?: boolean;
+  t: any;
 }
 
 const FavoriteItem: React.FC<FavoriteItemProps> = ({
@@ -28,6 +29,7 @@ const FavoriteItem: React.FC<FavoriteItemProps> = ({
   priceSale,
   sale,
   isFavorite,
+  t,
 }) => {
   const dispatch = useAppDispatch();
   const { items } = useAppSelector(selectorShoesData);
@@ -108,10 +110,16 @@ const FavoriteItem: React.FC<FavoriteItemProps> = ({
         {/* <span className={styles.showDel}>Видалити</span>
         <span className={styles.showCart}>До кошика</span> */}
       </div>
-      <p className={styles.itemName}>Артикул: {article}</p>
+      <p className={styles.itemName}>
+        {t.description.article}: {article}
+      </p>
       <div className={styles.itemPrice}>
-        <span>{price} uah</span>
-        <p>{priceSale} uah</p>
+        <span>
+          {price} {t.uah}
+        </span>
+        <p>
+          {priceSale} {t.uah}
+        </p>
       </div>
     </div>
   );
