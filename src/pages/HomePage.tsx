@@ -41,6 +41,8 @@ const HomePage: React.FC<HomePageProps> = () => {
   const { sort, types, colors, seasons, sizes, searchValue } =
     useAppSelector(selectorSort);
 
+  const { lang } = useAppSelector((state) => state.i18n);
+
   const t = useAppSelector(selectTranslations);
 
   const dispatch = useAppDispatch();
@@ -177,7 +179,7 @@ const HomePage: React.FC<HomePageProps> = () => {
           className="main-col-2-filter"
           onClick={() => removeActiveCategory(item)}
         >
-          <p>{isSize ? item.name : item.en}</p>
+          <p>{isSize ? item.name : lang === "en" ? item.en : item.ua}</p>
           <div className="close" />
         </div>
       ));

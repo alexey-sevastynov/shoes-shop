@@ -56,7 +56,7 @@ ______________________________
     .join("");
 
   const onSubmit = () => {
-    let message = `<b>Заявка із сайту !</b>\n`;
+    let message = `<b>Заявка з сайту !</b>\n`;
     message += string;
     message += `<i>Загальна сумма: </i> ${totalPrice} грн\n`;
     message += `<i>Загальна кількість: </i> ${totalCount} шт\n`;
@@ -69,11 +69,11 @@ ______________________________
     message += `<i>Адрес, для курьєра: </i> ${activeAdress}\n`;
     message += `\n`;
     message += `<b>Покупець: </b>\n`;
-    message += `<i>Прізвице: ${valueSurName}</i>\n`;
+    message += `<i>Прізвище: ${valueSurName}</i>\n`;
     message += `<i>Ім'я:     ${valueName}</i>\n`;
     message += `<i>По батькові: ${valuePaternalName}</i>\n`;
     message += `\n`;
-    message += `<i>Перезвонити покупцю?    ${isCallBack ? "ні" : "так"}</i>\n`;
+    message += `<i>Передзвонити покупцю?    ${isCallBack ? "ні" : "так"}</i>\n`;
     message += `<b>Телефон: </b>  ${valueMobile}\n`;
     message += `<b>Email: </b>    ${valueEmail}\n`;
     message += `\n`;

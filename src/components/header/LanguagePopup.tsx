@@ -51,7 +51,7 @@ const LanguagePopup: React.FC<LanguagePopupProps> = () => {
         className={styles.blockArrow}
         onClick={() => dispatch(onTogglePopup())}
       >
-        <p>UA</p>
+        <p>{t.header.activeLanguage}</p>
         <img
           className={togglePopup ? styles.blockArrowIcon : ""}
           src={arrow}

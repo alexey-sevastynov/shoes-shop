@@ -19,19 +19,14 @@ const PriceSlider: React.FC<PriceSliderProps> = ({ valutaText }) => {
   const dispatch = useAppDispatch();
   const { minPrice, maxPrice } = useAppSelector(selectorShoesData);
 
-  // const [minVal, setMinVal] = React.useState<any>(1000);
-  // const [maxVal, setMaxVal] = React.useState<any>(9999);
-
   const onChangeMin = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 4) {
-      // setMinVal(e.target.value);
       const number = +e.target.value;
       dispatch(setMinPrice(number));
     }
   };
   const onChangeMax = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 4) {
-      // setMaxVal(e.target.value);
       const number = +e.target.value;
       dispatch(setMaxPrice(number));
     }
@@ -39,14 +34,12 @@ const PriceSlider: React.FC<PriceSliderProps> = ({ valutaText }) => {
 
   const clickMin = (e: React.MouseEvent<HTMLInputElement>) => {
     if (maxPrice - minPrice < PRICE_GAP) {
-      // setMinVal(+maxVal - PRICE_GAP);
       const result = maxPrice - PRICE_GAP;
       dispatch(setMinPrice(result));
     }
   };
   const clickMax = (e: React.MouseEvent<HTMLInputElement>) => {
     if (maxPrice - minPrice < PRICE_GAP) {
-      // setMaxVal(+minPrice + PRICE_GAP);
       const result = minPrice + PRICE_GAP;
       dispatch(setMaxPrice(result));
     }

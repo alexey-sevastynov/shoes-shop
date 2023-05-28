@@ -13,6 +13,7 @@ const Header: React.FC<HeaderProps> = () => {
   const dispatch = useAppDispatch();
   const [toggleSearch, setToggleSearch] = React.useState(false);
   const [value, setValue] = React.useState<string>("");
+  const t = useAppSelector(selectTranslations);
 
   const updateSearchValue = React.useCallback((str: string): void => {
     dispatch(setSearchValue(str));
@@ -22,8 +23,6 @@ const Header: React.FC<HeaderProps> = () => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
   };
-
-  const t = useAppSelector(selectTranslations);
 
   return (
     <header className={styles.root}>
@@ -50,7 +49,7 @@ const Header: React.FC<HeaderProps> = () => {
             <input
               onChange={(e) => onChangeInput(e)}
               value={value}
-              placeholder="Search by article..."
+              placeholder={`${t.header.search}`}
             />
             <svg
               width="22"

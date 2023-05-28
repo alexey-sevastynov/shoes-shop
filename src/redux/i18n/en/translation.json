@@ -1,10 +1,12 @@
 {
   "uah": "uah",
   "header": {
+    "activeLanguage": "EN",
     "ua": "UKRAINE",
     "en": "ENGLISH",
     "city": "DNIPRO",
-    "title": "SHOP WOMEN SHOES"
+    "title": "SHOP WOMEN SHOES",
+    "search": "Search by article..."
   },
   "sideFilter": {
     "filter": "FILTER",
