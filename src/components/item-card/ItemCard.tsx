@@ -8,6 +8,7 @@ import {
   selectorFavorite,
   toggleFavorite,
 } from "../../redux/slices/favoriteSlice";
+import { selectTranslations } from "../../redux/slices/i18nSlice";
 
 interface ItemCardProps {
   article?: string;
@@ -39,6 +40,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
 }) => {
   const { items } = useAppSelector(selectorShoesData);
   const { itemsFavorite } = useAppSelector(selectorFavorite);
+  const t = useAppSelector(selectTranslations);
   const dispatch = useAppDispatch();
 
   const isTrue = itemsFavorite
@@ -95,15 +97,15 @@ const ItemCard: React.FC<ItemCardProps> = ({
   const showPrice = sale ? (
     <div className={styles.sale}>
       <p>
-        {priceSale} <span>uah</span>
+        {priceSale} <span>{t.uah}</span>
       </p>
       <p>
-        {price} <span>uah</span>
+        {price} <span>{t.uah}</span>
       </p>
     </div>
   ) : (
     <p>
-      {price} <span>uah</span>
+      {price} <span>{t.uah}</span>
     </p>
   );
 
@@ -134,7 +136,9 @@ const ItemCard: React.FC<ItemCardProps> = ({
         ></path>
       </svg>
       <div className={styles.footer}>
-        <span>Артикул: {article}</span>
+        <span>
+          {t.description.article}: {article}
+        </span>
         {showPrice}
       </div>
     </div>
