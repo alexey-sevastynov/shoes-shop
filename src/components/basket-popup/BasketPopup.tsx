@@ -28,11 +28,11 @@ const BasketPopup: React.FC<BasketPopupProps> = ({ setTogglePopupBaket }) => {
 
       <div className={styles.btn}>
         <button>
-          <Link to="/cart">{t.description.AddToCard}</Link>
+          <Link to="/cart">{t.description.toOrder}</Link>
         </button>
 
         <button onClick={() => setTogglePopupBaket(false)}>
-          {t.description.AddToFavorites}
+          {t.description.continueShopping}
         </button>
       </div>
     </div>

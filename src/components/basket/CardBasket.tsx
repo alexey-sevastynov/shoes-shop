@@ -41,7 +41,7 @@ const CardBasket: React.FC<CardBasket> = ({
   };
 
   const onClickRemove = () => {
-    if (window.confirm(`Do you want delete?${id} - id, ${sizes} - sizes`)) {
+    if (window.confirm(`${t.description.wantToDel} ${article}`)) {
       dispatch(removeItem(obj));
     }
   };

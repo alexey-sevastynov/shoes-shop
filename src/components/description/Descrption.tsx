@@ -5,7 +5,11 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { addItem, selectorBasket } from "../../redux/slices/basketSlice";
 import { selectorShoesData } from "../../redux/slices/shoes";
 import { type } from "os";
-import { addFavorite } from "../../redux/slices/favoriteSlice";
+import {
+  addFavorite,
+  selectorFavorite,
+  toggleFavorite,
+} from "../../redux/slices/favoriteSlice";
 import { selectTranslations } from "../../redux/slices/i18nSlice";
 
 type DescrptionProps = {
@@ -63,6 +67,11 @@ const Descrption: React.FC<DescrptionProps> = ({
   const t = useAppSelector(selectTranslations);
   const { currentItem } = useAppSelector(selectorShoesData);
   const { items } = useAppSelector(selectorBasket);
+  const { itemsFavorite } = useAppSelector(selectorFavorite);
+
+  const isTrue = itemsFavorite
+    ? itemsFavorite.find((obj) => obj.id === id)
+    : false;
 
   if (items) {
     const object = items.find(
@@ -111,7 +120,7 @@ const Descrption: React.FC<DescrptionProps> = ({
       totalPrice: 0,
     };
     if (currentObj.sizes === 0) {
-      alert("choise size!");
+      alert(`${t.description.selectASize}`);
     } else {
       dispatch(addItem(currentObj));
       setTogglePopupBaket(true);
@@ -138,7 +147,7 @@ const Descrption: React.FC<DescrptionProps> = ({
       price: price,
     };
 
-    dispatch(addFavorite(obj));
+    dispatch(toggleFavorite(obj));
   };
 
   return (
@@ -222,10 +231,14 @@ const Descrption: React.FC<DescrptionProps> = ({
         >
           <path
             d="M16.1539 2.13074C15.3274 1.32086 14.2324 0.875 13.0715 0.875C11.9106 0.875 10.8157 1.32086 9.98767 2.13147L9.00073 3.10394L8.01233 2.13074C7.18543 1.32086 6.09082 0.875 4.92975 0.875C3.76575 0.875 2.6695 1.32086 1.84149 2.13184C1.01587 2.9472 0.561768 4.03082 0.562501 5.18311C0.563416 6.33337 1.0177 7.41406 1.84186 8.22577L8.73761 15.0172C8.81067 15.0891 8.9057 15.125 9.00073 15.125C9.09595 15.125 9.1908 15.0891 9.26404 15.0172L16.1543 8.22614C16.9812 7.41443 17.4368 6.33374 17.4375 5.18311C17.4382 4.03064 16.9827 2.94684 16.1539 2.13074Z"
-            fill="#13110C"
+            fill={isTrue ? "red" : "black"}
           ></path>
         </svg>
-        <p>{t.description.AddToFavorites}</p>
+        <p>
+          {isTrue
+            ? t.description.removeFromFavorites
+            : t.description.AddToFavorites}
+        </p>
       </div>
     </div>
   );

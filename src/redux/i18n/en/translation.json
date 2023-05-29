@@ -63,7 +63,12 @@
     "chooseSize": "Choose size",
     "dimensionalGrid": "Dimensional grid",
     "AddToCard": "ADD TO CARD",
-    "AddToFavorites": "Add to favorites"
+    "AddToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites",
+    "continueShopping": "Continue shopping",
+    "toOrder": "To order",
+    "selectASize": "Select a size!",
+    "wantToDel": "Do you want to delete?"
   },
   "favorite": {
     "listFavorites": "List of desired products",

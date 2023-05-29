@@ -63,7 +63,12 @@
     "chooseSize": "Оберіть розмір",
     "dimensionalGrid": "Розмірна сітка",
     "AddToCard": "ДОДАТИ ДО КОШИКА",
-    "AddToFavorites": "Додати в обране"
+    "AddToFavorites": "Додати в обране",
+    "removeFromFavorites": "Видалити з обраного",
+    "continueShopping": "Продовжити покупку",
+    "toOrder": "Оформити замовлення",
+    "selectASize": "Виберіть розмір!",
+    "wantToDel": "Хочете видалити?"
   },
   "favorite": {
     "listFavorites": "Список бажаних товарів",
