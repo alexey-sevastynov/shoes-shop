@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { selectTranslations } from "../../redux/slices/i18nSlice";
 import { setSearchValue } from "../../redux/slices/filterSlice";
+import { selectorShoesData } from "../../redux/slices/shoes";
+import { selectorBasket } from "../../redux/slices/basketSlice";
+import { selectorFavorite } from "../../redux/slices/favoriteSlice";
 
 type HeaderProps = {};
 
@@ -14,6 +17,10 @@ const Header: React.FC<HeaderProps> = () => {
   const [toggleSearch, setToggleSearch] = React.useState(false);
   const [value, setValue] = React.useState<string>("");
   const t = useAppSelector(selectTranslations);
+  const { itemsFavorite } = useAppSelector(selectorFavorite);
+  const { items, totalCount, totalPrice } = useAppSelector(selectorBasket);
+  const isMounted = React.useRef(false); // local storage
+  console.log(itemsFavorite);
 
   const updateSearchValue = React.useCallback((str: string): void => {
     dispatch(setSearchValue(str));
@@ -23,6 +30,21 @@ const Header: React.FC<HeaderProps> = () => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
   };
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      const count = JSON.stringify(totalCount);
+      const price = JSON.stringify(totalPrice);
+      const favorite = JSON.stringify(itemsFavorite);
+
+      localStorage.setItem("basket", json);
+      localStorage.setItem("count", count);
+      localStorage.setItem("price", price);
+      localStorage.setItem("favorite", favorite);
+    }
+    isMounted.current = true;
+  }, [items, itemsFavorite]);
 
   return (
     <header className={styles.root}>
